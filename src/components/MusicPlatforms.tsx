@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Music, Radio, Disc, PlayCircle, Headphones, Podcast } from "lucide-react";
 
@@ -6,72 +7,84 @@ const platforms = [
     {
         name: "Spotify",
         icon: (
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 group-hover:text-[#1DB954] transition-colors duration-500">
-                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 14.34 1.14.539.3.66 1.02.359 1.56-.24.36-.899.54-1.259.24z" />
+            <svg viewBox="0 0 168 168" fill="currentColor" className="w-8 h-8 md:w-10 md:h-10 group-hover:text-[#1ED760] transition-colors duration-500">
+                <path d="m83.996 0.277c-46.249 0-83.743 37.493-83.743 83.742 0 46.251 37.494 83.741 83.743 83.741 46.254 0 83.744-37.49 83.744-83.741 0-46.246-37.49-83.738-83.745-83.738l0.001-0.004zm38.404 120.78c-1.5 2.46-4.72 3.24-7.18 1.73-19.662-12.01-44.414-14.73-73.564-8.07-2.809 0.64-5.609-1.12-6.249-3.93-0.643-2.81 1.11-5.61 3.926-6.25 31.9-7.291 59.263-4.15 81.337 9.34 2.46 1.51 3.24 4.72 1.73 7.18zm10.25-22.805c-1.89 3.075-5.91 4.045-8.98 2.155-22.51-13.839-56.823-17.846-83.448-9.764-3.453 1.043-7.1-0.903-8.148-4.35-1.04-3.453 0.907-7.093 4.354-8.143 30.413-9.228 68.222-4.758 94.072 11.127 3.07 1.89 4.04 5.91 2.15 8.976v-0.001zm0.88-23.744c-26.99-16.031-71.52-17.505-97.289-9.684-4.138 1.255-8.514-1.081-9.768-5.219-1.254-4.14 1.08-8.513 5.221-9.771 29.581-8.98 78.756-7.245 109.83 11.202 3.73 2.209 4.95 7.016 2.74 10.733-2.2 3.722-7.02 4.949-10.73 2.739z" fill="#1ED760" />
             </svg>
         )
     },
     {
         name: "Apple Music",
         icon: (
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 group-hover:text-white transition-colors duration-500">
-                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.56-.84 1.5.09 2.63.63 3.31 1.62-3.15 1.87-2.66 6.01.27 7.23-.61 1.5-1.4 3.01-2.27 4.16zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+            <svg viewBox="0 0 361 361" fill="currentColor" className="w-10 h-10 group-hover:scale-110 transition-transform duration-500">
+                <path d="M360,112.61c0-4.3,0-8.6-0.02-12.9c-0.02-3.62-0.06-7.24-0.16-10.86c-0.21-7.89-0.68-15.84-2.08-23.64 c-1.42-7.92-3.75-15.29-7.41-22.49c-3.6-7.07-8.3-13.53-13.91-19.14c-5.61-5.61-12.08-10.31-19.15-13.91 c-7.19-3.66-14.56-5.98-22.47-7.41c-7.8-1.4-15.76-1.87-23.65-2.08c-3.62-0.1-7.24-0.14-10.86-0.16C255.99,0,251.69,0,247.39,0 H112.61c-4.3,0-8.6,0-12.9,0.02c-3.62,0.02-7.24,0.06-10.86,0.16C80.96,0.4,73,0.86,65.2,2.27c-7.92,1.42-15.28,3.75-22.47,7.41 c-7.07,3.6-13.54,8.3-19.15,13.91c-5.61,5.61-10.31,12.07-13.91,19.14c-3.66,7.2-5.99,14.57-7.41,22.49 c-1.4,7.8-1.87,15.76-2.08,23.64c-0.1,3.62-0.14,7.24-0.16,10.86C0,104.01,0,108.31,0,112.61v134.77c0,4.3,0,8.6,0.02,12.9 c0.02,3.62,0.06,7.24,0.16,10.86c0.21,7.89,0.68,15.84,2.08,23.64c1.42,7.92,3.75,15.29,7.41,22.49c3.6,7.07,8.3,13.53,13.91,19.14 c5.61,5.61,12.08,10.31,19.15,13.91c7.19,3.66,14.56,5.98,22.47,7.41c7.8,1.4,15.76,1.87,23.65,2.08c3.62,0.1,7.24,0.14,10.86,0.16 c4.3,0.03,8.6,0.02,12.9,0.02h134.77c4.3,0,8.6,0,12.9-0.02c3.62-0.02,7.24-0.06,10.86-0.16c7.89-0.21,15.85-0.68,23.65-2.08 c7.92-1.42,15.28-3.75,22.47-7.41c7.07-3.6,13.54-8.3,19.15-13.91c5.61-5.61,10.31-12.07,13.91-19.14 c3.66-7.2,5.99-14.57,7.41-22.49c1.4-7.8,1.87-15.76,2.08-23.64c0.1-3.62,0.14-7.24,0.16-10.86c0.03-4.3,0.02-8.6,0.02-12.9V112.61 z" fill="#FB5C74" />
+                <path d="M254.5,55c-0.87,0.08-8.6,1.45-9.53,1.64l-107,21.59l-0.04,0.01c-2.79,0.59-4.98,1.58-6.67,3 c-2.04,1.71-3.17,4.13-3.6,6.95c-0.09,0.6-0.24,1.82-0.24,3.62c0,0,0,109.32,0,133.92c0,3.13-0.25,6.17-2.37,8.76 c-2.12,2.59-4.74,3.37-7.81,3.99c-2.33,0.47-4.66,0.94-6.99,1.41c-8.84,1.78-14.59,2.99-19.8,5.01 c-4.98,1.93-8.71,4.39-11.68,7.51c-5.89,6.17-8.28,14.54-7.46,22.38c0.7,6.69,3.71,13.09,8.88,17.82 c3.49,3.2,7.85,5.63,12.99,6.66c5.33,1.07,11.01,0.7,19.31-0.98c4.42-0.89,8.56-2.28,12.5-4.61c3.9-2.3,7.24-5.37,9.85-9.11 c2.62-3.75,4.31-7.92,5.24-12.35c0.96-4.57,1.19-8.7,1.19-13.26l0-116.15c0-6.22,1.76-7.86,6.78-9.08c0,0,88.94-17.94,93.09-18.75 c5.79-1.11,8.52,0.54,8.52,6.61l0,79.29c0,3.14-0.03,6.32-2.17,8.92c-2.12,2.59-4.74,3.37-7.81,3.99 c-2.33,0.47-4.66,0.94-6.99,1.41c-8.84,1.78-14.59,2.99-19.8,5.01c-4.98,1.93-8.71,4.39-11.68,7.51 c-5.89,6.17-8.49,14.54-7.67,22.38c0.7,6.69,3.92,13.09,9.09,17.82c3.49,3.2,7.85,5.56,12.99,6.6c5.33,1.07,11.01,0.69,19.31-0.98 c4.42-0.89,8.56-2.22,12.5-4.55c3.9-2.3,7.24-5.37,9.85-9.11c2.62-3.75,4.31-7.92,5.24-12.35c0.96-4.57,1-8.7,1-13.26V64.46 C263.54,58.3,260.29,54.5,254.5,55z" fill="white" />
             </svg>
         )
     },
     {
         name: "YouTube Music",
         icon: (
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 group-hover:text-[#FF0000] transition-colors duration-500">
-                <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 19.45c-4.11 0-7.45-3.33-7.45-7.45S7.89 4.55 12 4.55s7.45 3.33 7.45 7.45-3.33 7.45-7.45 7.45zm3.6-7.45l-5.75 3.32v-6.64l5.75 3.32z" />
+            <svg viewBox="0 0 408.8 139.8" fill="currentColor" className="w-12 h-6 md:w-16 md:h-8 group-hover:scale-110 transition-transform duration-500">
+                <path d="M 2666.3,324.7 h -97.5 c -14.2,-68.1 -57.6,-113.8 -127.6,-113.8 -38.1,0 -70,14 -93.1,40.1 -31.9,35.4 -38.1,75.6 -38.1,207.1 0,131.5 6.2,171.6 38.1,207.1 23,26.1 54.9,40.1 93.1,40.1 70,0 113.4,-45.7 127.6,-113.8 h 97.5 c -22.2,131.5 -109.9,204.3 -225.1,204.3 -69.1,0 -122.3,-24.3 -163.1,-67.2 -61.2,-65.3 -63.8,-131.5 -63.8,-270.5 0,-139 2.7,-205.2 63.8,-270.5 40.8,-42.9 93.9,-67.2 163.1,-67.2 116.1,0 202.9,72.7 225.1,204.3 z" transform="scale(0.0699)" fill="#dc241f" />
+                <circle cx="69.9" cy="69.9" r="69.9" fill="#dc241f" />
+                <circle cx="69.9" cy="69.9" r="34.9" fill="#fff" />
+                <polygon points="62.9,52.4 83.9,69.9 62.9,87.4" fill="#dc241f" />
             </svg>
         )
     },
     {
         name: "JioSaavn",
         icon: (
-            <img
-                src="/jiosaavn-icon.png"
-                alt="JioSaavn"
-                className="w-10 h-10 object-contain"
-            />
+            <svg viewBox="0 0 32 32" fill="currentColor" className="w-8 h-8 md:w-10 md:h-10 group-hover:scale-110 transition-transform duration-500">
+                <path d="M0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16c0-8.8-7.2-16-16-16C7.2,0,0,7.2,0,16z" fill="#1ECCB0" />
+                <path d="M13.8,25.1c-0.6-1-1.4-1.9-2.4-2.5s-2-1.1-3.2-1.4H8.2c-0.1,0-0.2,0-0.3,0.1c-0.1,0.1-0.1,0.2-0.1,0.3c0,0.1,0,0.2,0.1,0.2c1.3,1.9,3.3,3.3,5.5,3.9h0.1c0.1,0,0.1,0,0.2,0c0,0,0.1,0,0.1-0.1c0,0,0.1-0.1,0.1-0.1c0,0,0-0.1,0-0.2C13.9,25.2,13.9,25.1,13.8,25.1L13.8,25.1z" fill="white" />
+                <path d="M25.6,13.3c0,0,0-0.1,0-0.1c-0.5-1.8-1.5-3.4-2.9-4.6c-1.4-1.2-3-2.1-4.8-2.4h-0.1c-0.1,0-0.2,0-0.3,0.1c-0.1,0.1-0.1,0.2-0.1,0.3v0.1c0.9,5.5,0.3,11.1-1.7,16.3c0,0.1-0.1,0.1-0.1,0.2s-0.1,0.1-0.2,0.1c-0.1,0-0.1,0-0.2,0c0,0-0.1,0-0.1-0.1c0,0-0.1-0.1-0.1-0.1c0,0,0-0.1,0-0.2c0,0-0.1-0.7-0.1-1c-0.6-4.8-2-9.4-4.3-13.7c0-0.1-0.1-0.1-0.1-0.1c0,0-0.1-0.1-0.1-0.1s-0.1,0-0.2,0C10.1,8,10.1,8,10,8l0,0c-1.4,1.1-2.5,2.5-3.2,4.2c0,0.1,0,0.2,0,0.3c0,0.1,0.1,0.2,0.2,0.2c2.2,1.4,4,3.2,5.3,5.5c1.3,2.2,2,4.8,2.1,7.3c0,0.1,0,0.2,0.1,0.3c0.1,0.1,0.2,0.1,0.2,0.1c0.2,0,0.5,0.1,0.7,0.1c0.1,0,0.2,0,0.3-0.1c0.1-0.1,0.1-0.1,0.1-0.2c0.5-2.6,1.6-5.1,3.3-7.2c1.7-2.1,3.8-3.7,6.3-4.8c0.1,0,0.1-0.1,0.2-0.1C25.6,13.4,25.6,13.4,25.6,13.3z" fill="white" />
+                <path d="M24.7,20.9c0-0.1,0-0.2-0.1-0.3c-0.1-0.1-0.2-0.1-0.3-0.1h-0.1c-3.1,0.7-5.9,2.4-7.9,4.8c-0.1,0.1-0.1,0.2-0.1,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.1,0.2,0.1,0.3,0.1l0,0c1.6-0.1,3.2-0.6,4.6-1.4s2.6-2,3.4-3.4C24.7,21.1,24.7,21,24.7,20.9L24.7,20.9z" fill="white" />
+            </svg>
         )
     },
     {
         name: "Amazon Music",
         icon: (
-            <img
-                src="/amazon-music-icon.png"
-                alt="Amazon Music"
-                className="w-10 h-10 object-contain"
-            />
+            <svg viewBox="0 0 89 52" fill="currentColor" className="w-12 h-8 group-hover:scale-110 transition-transform duration-500">
+                <path d="M59.7,40.5c-0.6,0.4-1.5,0.7-2.6,0.7-1.7,0-3.3-0.2-4.9-0.7c-0.4-0.1-0.7-0.2-0.9-0.2c-0.3,0-0.4,0.2-0.4,0.6v1 c0,0.3,0.1,0.5,0.2,0.7s0.3,0.3,0.6,0.4c1.6,0.7,3.4,1,5.4,1c2.1,0,3.7-0.5,5-1.5s1.9-2.3,1.9-4c0-1.2-0.3-2.1-0.9-2.9 s-1.6-1.4-3-1.9l-2.8-1.1c-1.1-0.4-1.9-0.8-2.2-1.2s-0.6-0.8-0.6-1.5c0-1.5,1.1-2.3,3.4-2.3c1.3,0,2.6,0.2,3.8,0.6 c0.4,0.1,0.7,0.2,0.8,0.2s0.5-0.2,0.5-0.6v-1c0-0.3-0.1-0.5-0.2-0.7s-0.3-0.3-0.6-0.4c-1.5-0.5-3-0.8-4.5-0.8c-1.9,0-3.5,0.5-4.7,1.4 s-1.8,2.2-1.8,3.7c0,2.3,1.3,4,3.9,5l3,1.1c1,0.4,1.6,0.7,2,1.1s0.5,0.8,0.5,1.4c0,0.8-0.3,1.5-0.9,1.9z" fill="#00A8E1" />
+                <path d="M44,26.1v13.3c-1.7,1.1-3.4,1.7-5.1,1.7c-1.1,0-1.9-0.3-2.4-0.9s-0.2-0.9-0.2-2.2V26.1c0-0.5-0.2-0.7-0.7-0.7H33 c-0.5,0-0.7,0.2-0.7,0.7v12.4c0,1.7,0.4,3.1,1.3,4c0.9,0.9,2.2,1.4,3.9,1.4c2.3,0,4.6-0.8,6.8-2.4l0.2,1.2c0,0.3,0.1,0.4,0.3,0.5 s0.3,0.1,0.6,0.1h1.5c0.5,0,0.7-0.2,0.7-0.7V26.1c0-0.5-0.2-0.7-0.7-0.7h-2.1c-0.6,0-0.8,0.3-0.8,0.7z" fill="white" />
+                <path d="M25,43.4h2.1c0.5,0,0.7-0.2,0.7-0.7V30.2c0-1.7-0.4-3-1.3-3.9s-2.1-1.4-3.8-1.4c-2.3,0-4.7,0.8-7,2.5 c-0.8-1.7-2.3-2.5-4.5-2.5s-4.4,0.8-6.6,2.3L4.4,26.1c0-0.3-0.1-0.4-0.3-0.5S3.8,25.5,3.6,25.5H2c-0.5,0-0.7,0.2-0.7,0.7v16.6 c0,0.5,0.2,0.7,0.7,0.7h2.1c0.5,0,0.7-0.2,0.7-0.7V29.3c1.7-1,3.4-1.6,5.2-1.6c1,0,1.7,0.3,2.1,0.9s0.7,1.4,0.7,2.6v11.5 c0,0.5,0.2,0.7,0.7,0.7h2.1c0.5,0,0.7-0.2,0.7-0.7V30.4v-0.6c0-0.2,0-0.4,0-0.5c1.8-1.1,3.5-1.6,5.2-1.6c1,0,1.7,0.3,2.1,0.9 s0.7,1.4,0.7,2.6v11.5c0,0.5,0.2,0.7,0.7,0.7z" fill="white" />
+                <path d="M79.5,56.7c-10.9,4.6-22.8,6.9-33.6,6.9c-16,0-31.5-4.4-44-11.7c-0.2-0.1-0.4-0.2-0.6-0.2c-0.7,0-1.1,0.8-0.4,1.5 c11.6,10.5,27,16.8,44,16.8c12.2,0,26.3-3.8,36-11c1.7-1.2,0.3-3-1.4-2.3z" fill="#00A8E1" />
+                <path d="M79.2,29.4c0.9-1,2.3-1.5,4.3-1.5c1,0,2,0.1,2.9,0.4s0.4,0.1,0.6,0.1c0.3,0,0.5-0.2,0.5-0.7v-1c0-0.3-0.1-0.6-0.2-0.7 s-0.2-0.4-0.4-0.5c-1.3-0.3-2.6-0.6-3.8-0.6c-2.8,0-4.9,0.8-6.5,2.5s-2.3,4-2.3,7c0,3,0.7,5.3,2.2,6.9s3.6,2.4,6.4,2.4 c1.5,0,2.9-0.2,4-0.7s0.5-0.2,0.6-0.4s0.1-0.4,0.1-0.7v-1c0-0.5-0.2-0.7-0.5-0.7s-0.3,0-0.5,0.1c-1.1,0.3-2.2,0.5-3.2,0.5 c-1.9,0-3.3-0.5-4.2-1.5s-1.3-2.6-1.3-4.7v-0.5c0.1-2.2,0.5-3.8,1.4-4.8z" fill="white" />
+                <path d="M69.8,25.4h-2.1c-0.5,0-0.7,0.2-0.7,0.7v16.6c0,0.5,0.2,0.7,0.7,0.7h2.1c0.5,0,0.7-0.2,0.7-0.7V26.1 c0-0.4-0.2-0.7-0.7-0.7z" fill="white" />
+                <path d="M70.4,18.6c-0.4-0.4-1-0.6-1.7-0.6s-1.2,0.2-1.6,0.6c-0.4,0.4-0.6,0.9-0.6,1.5s0.2,1.2,0.6,1.5s0.9,0.6,1.6,0.6 s1.2-0.2,1.6-0.6s0.6-0.9,0.6-1.5s-0.1-1.2-0.5-1.5z" fill="white" />
+            </svg>
         )
     },
     {
         name: "Wynk Music",
         icon: (
-            <img
-                src="/wynk-official.png"
-                alt="Wynk Music"
-                className="w-10 h-10 object-contain"
-            />
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 md:w-10 md:h-10 group-hover:scale-110 transition-transform duration-500">
+                <ellipse cx="26.5" cy="26.8" rx="5" ry="5.9" transform="rotate(-75.8 26.5 26.8)" stroke="#E11D48" />
+                <path d="M32.2,28.3L37.7,6.6c-0.9,3.6,6.4,1.8,5.5,5.3" stroke="#E11D48" />
+                <path d="M31.9,17.2c3.5,2.1,4.7,6.8,2.6,10.3c-2.1,3.5-6.8,4.7-10.3,2.6" stroke="#E11D48" opacity="0.6" />
+                <path d="M33.2,11.9c5,4.2,6,11.5,2,16.5c-4,5-11.3,6-16.3,2" stroke="#E11D48" opacity="0.4" />
+                <path d="M26.3,5.1c-11.9,0-21.5,9.6-21.5,21.5" stroke="#E11D48" opacity="0.2" />
+            </svg>
         )
     },
     {
         name: "Gaana",
         icon: (
-            <img
-                src="/gaana-icon.png"
-                alt="Gaana"
-                className="w-10 h-10 object-contain"
-            />
+            <svg viewBox="0 0 74.9 25.1" fill="currentColor" className="w-12 h-6 md:w-16 md:h-8 group-hover:scale-110 transition-transform duration-500">
+                <path d="m 54.7,17.9 c 0.2,-1 0.3,-2 0.5,-2.9 0.6,-3.2 1.1,-6.4 1.7,-9.6 0.2,-0.9 -0.4,-1.6 -1.4,-1.6 -0.6,0 -1.2,0 -1.9,0 -1.3,0 -2.1,0.8 -2.4,2 -0.7,3.9 -1.4,7.9 -2.1,11.8 0,0.1 -0.2,0.3 -0.3,0.3 -1.8,0 -3.5,0 -5.3,-0.2 -1.1,-0.1 -2.1,-0.6 -2.7,-1.6 0,0 -0.1,-0.1 -0.1,-0.2 -0.2,0.3 -0.5,0.5 -0.7,0.7 -0.8,0.8 -1.7,1.3 -2.9,1.2 -0.8,-0.1 -1.7,0 -2.5,-0.1 -1.4,-0.3 -2.6,-1 -3.3,-2.4 -0.1,0.5 -0.2,1 -0.3,1.4 -0.2,1.2 -0.2,1.1 -1.4,1.1 -0.9,0 -1.7,-0.2 -2.4,-0.6 -0.6,-0.3 -1,-0.8 -1.6,-1.3 -0.2,0.2 -0.4,0.4 -0.6,0.7 -0.8,0.8 -1.7,1.2 -2.9,1.2 -1.1,0 -2.2,0 -3.3,-0.4 -1.9,-0.7 -3,-2.4 -2.6,-4.4 0.4,-2.6 0.8,-5.3 1.4,-7.9 0.6,-2.6 2.2,-4.4 5,-5 0.4,-0.1 0.8,-0.1 1.2,-0.1 2.3,0 4.6,0 6.9,0 0.1,0 0.2,0 0.4,0 -0.2,1.3 -0.5,2.5 -0.7,3.8 -0.5,2.9 -1,5.7 -1.5,8.6 0,0.3 0.1,0.6 0.2,0.8 0.3,0.6 1.4,1 2.1,0.9 0.3,-3 0.9,-6 1.5,-9 0.6,-2.6 2.2,-4.5 5,-5 0.4,-0.1 0.8,-0.1 1.2,-0.1 2.3,0 4.6,0 6.9,0 0.1,0 0.2,0 0.4,0 -0.1,0.8 -0.3,1.5 -0.4,2.3 -0.6,3.4 -1.2,6.8 -1.9,10.2 -0.1,0.5 0.1,0.9 0.5,1.2 0.2,0.1 0.3,0.2 0.5,0.3 0.4,0.1 0.8,0.3 1.1,0.2 0.5,-0.1 0.3,-0.6 0.4,-1 0.7,-3.8 1.4,-7.7 2.1,-11.5 0.1,-0.5 0.2,-1.1 0.3,-1.6 0.1,0 0.3,0 0.4,0 2.3,0 4.5,0 6.8,0 0.9,0 1.7,0.2 2.5,0.6 1.4,0.7 2.1,1.7 2.1,3.2 0,1.3 -0.3,2.5 -0.5,3.7 -0.5,3.1 -1.1,6.3 -1.7,9.4 0,0.2 0,0.4 -0.1,0.5 0,0.1 -0.2,0.2 -0.2,0.2 -1.1,0.2 -2.2,0.2 -3.4,0.2 z" fill="#e72c30" />
+            </svg>
         )
     },
     {
         name: "Tidal",
         icon: (
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 group-hover:text-white transition-colors duration-500">
-                <path d="M12.012 0C5.385 0 .012 5.373.012 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.983 17.068a1.69 1.69 0 0 1-2.903-1.189 1.69 1.69 0 0 1 2.903-1.189zm3.504-3.504a1.69 1.69 0 0 1-2.903-1.19 1.69 1.69 0 0 1 2.903-1.19zm-7.008 0a1.69 1.69 0 0 1-2.903-1.19 1.69 1.69 0 0 1 2.903-1.19zm3.504-3.504a1.69 1.69 0 0 1-2.903-1.189 1.69 1.69 0 0 1 2.903-1.189z" />
+            <svg viewBox="0 0 12 12" fill="currentColor" className="w-8 h-8 md:w-10 md:h-10 group-hover:scale-110 transition-transform duration-500">
+                <path d="M6 2.1L3.9 4.2L1.8 2.1L3.9 0L6 2.1Z" />
+                <path d="M10.2 2.1L8.1 4.2L6 2.1L8.1 0L10.2 2.1Z" />
+                <path d="M6 6.3L3.9 8.4L1.8 6.3L3.9 4.2L6 6.3Z" />
+                <path d="M6 2.1L3.9 4.2L1.8 2.1L3.9 0L6 2.1Z" transform="translate(0, 4.2)" />
             </svg>
         )
     }
@@ -79,46 +92,51 @@ const platforms = [
 
 export default function MusicPlatforms() {
     return (
-        <section className="relative w-full bg-black py-20 overflow-hidden border-t border-white/5 border-b border-white/5">
-            {/* Premium Background Effects */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--color-maroon)_0%,_transparent_70%)] opacity-20" />
-
-            {/* Stardust/Noise Effect (CSS only) */}
-            <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none" />
+        <section className="relative w-full bg-black py-20 overflow-hidden border-t border-white/10 border-b border-white/10">
+            {/* Solid Background - No Gradients as requested */}
+            <div className="absolute inset-0 bg-black z-0" />
 
             <div className="relative z-10 flex flex-col items-center justify-center w-full">
-                {/* Floating 'Available On' Badge - Relative Layout to Prevent Cropping */}
-                {/* Floating 'Available On' Badge - Relative Layout to Prevent Cropping */}
-                <div className="mb-10 px-6 md:px-10 py-3 rounded-full border border-gold/30 bg-black/60 backdrop-blur-md shadow-[0_0_25px_rgba(212,175,55,0.25)] max-w-[90vw] text-center">
+                {/* Floating 'Available On' Badge */}
+                <div className="mb-10 px-6 md:px-10 py-3 rounded-full border border-gold/30 bg-zinc-900 shadow-[0_0_25px_rgba(212,175,55,0.1)] max-w-[90vw] text-center">
                     <span className="text-[10px] sm:text-xs md:text-base font-serif italic text-gold tracking-widest md:tracking-[0.2em] uppercase whitespace-normal md:whitespace-nowrap block">
                         Listen on All Major Platforms
                     </span>
                 </div>
 
-                {/* Marquee Wrapper */}
-                <div className="flex w-full overflow-hidden mask-linear-gradient">
+                {/* Marquee Wrapper - Desktop Only */}
+                <div className="hidden md:flex w-full overflow-hidden mask-linear-gradient">
                     {/* Double the list for infinite scroll */}
                     <TranslateWrapper>
                         {[...platforms, ...platforms, ...platforms].map((platform, index) => (
-                            <div
+                            <Link
+                                href="/music"
                                 key={index}
                                 className="flex items-center gap-6 mx-16 group cursor-pointer"
                             >
-                                <div className="text-white/50 transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-6 filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100">
+                                <div className="text-gold transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-6 drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">
                                     {platform.icon}
                                 </div>
-                                <span className="text-3xl md:text-5xl font-serif font-medium text-transparent bg-clip-text bg-gradient-to-br from-white/20 to-white/5 group-hover:from-gold group-hover:to-amber transition-all duration-500 tracking-widest uppercase">
+                                <span className="text-3xl md:text-5xl font-serif font-medium text-white/90 group-hover:text-gold transition-all duration-500 tracking-widest uppercase drop-shadow-md">
                                     {platform.name}
                                 </span>
-                            </div>
+                            </Link>
                         ))}
                     </TranslateWrapper>
                 </div>
+
+                {/* Mobile Grid Layout - Stacked & Solid */}
+                <div className="grid grid-cols-2 gap-4 w-full px-6 md:hidden">
+                    {platforms.map((platform, index) => (
+                        <Link href="/music" key={index} className="flex flex-col items-center justify-center p-6 bg-zinc-900 rounded-xl border border-white/10 hover:border-gold/30 transition-all shadow-md">
+                            <div className="mb-3 text-gold drop-shadow-sm scale-110">{platform.icon}</div>
+                            <span className="text-xs uppercase tracking-widest text-white font-medium group-hover:text-gold text-center transition-colors">{platform.name}</span>
+                        </Link>
+                    ))}
+                </div>
             </div>
 
-            {/* Cinematic Fade Edges */}
-            <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-black via-black/90 to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-black via-black/90 to-transparent z-10 pointer-events-none" />
+
         </section>
     );
 }

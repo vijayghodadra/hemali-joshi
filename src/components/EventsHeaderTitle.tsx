@@ -22,7 +22,7 @@ export default function EventsHeaderTitle() {
                 />
             </motion.div>
             <h1 className="font-serif text-5xl md:text-8xl text-center leading-tight">
-                EVENTS <span className="text-gold italic">&</span> TOURS
+                GLOBAL <span className="text-gold italic">TOURS</span>
             </h1>
         </div>
     );

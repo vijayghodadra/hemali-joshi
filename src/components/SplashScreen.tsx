@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
     const [isVisible, setIsVisible] = useState(true);
@@ -24,13 +25,13 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
                 >
                     {/* Full Screen Image Background */}
                     <div className="absolute inset-0 z-0">
-                        <motion.img
-                            initial={{ scale: 1.1 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 4, ease: "easeOut" }}
+                        <Image
                             src="/assets/splash-full.jpg"
                             alt="Himali Joshi Live"
-                            className="w-full h-full object-cover opacity-90"
+                            fill
+                            priority
+                            className="object-cover opacity-90"
+                            sizes="100vw"
                         />
                         {/* Gradient Overlay for Text Readability */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 mix-blend-multiply" />
@@ -45,24 +46,25 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
                     />
 
                     {/* Text Container */}
-                    <div className="absolute inset-0 flex flex-col justify-between p-8 md:p-16 z-20 pointer-events-none">
+                    <div className="absolute inset-0 flex flex-col justify-start items-start p-8 md:p-16 z-20 pointer-events-none">
+                        <div className="flex flex-col items-start mt-10 md:mt-0">
+                            {/* Himali */}
+                            <div className="transform -rotate-3">
+                                <StaggeredText
+                                    text="Himali"
+                                    className="text-[6rem] md:text-[10rem] text-gold font-cursive leading-none"
+                                    delay={0.5}
+                                />
+                            </div>
 
-                        {/* Himali - Top Left */}
-                        <div className="self-start mt-10 md:mt-0 transform -rotate-3 mix-blend-overlay">
-                            <StaggeredText
-                                text="Himali"
-                                className="text-[5rem] md:text-[9rem] text-gold font-cursive leading-none"
-                                delay={0.5}
-                            />
-                        </div>
-
-                        {/* Joshi - Bottom Right */}
-                        <div className="self-end mb-20 md:mb-0 transform -rotate-3 mix-blend-overlay">
-                            <StaggeredText
-                                text="Joshi"
-                                className="text-[5rem] md:text-[9rem] text-gold font-cursive leading-none"
-                                delay={1.2}
-                            />
+                            {/* Joshi */}
+                            <div className="transform -rotate-3 md:-mt-12 ml-[12rem] md:ml-[24rem]">
+                                <StaggeredText
+                                    text="Joshi"
+                                    className="text-[2.5rem] md:text-[4.5rem] text-gold font-cursive leading-none"
+                                    delay={1.2}
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -121,12 +123,12 @@ const StaggeredText = ({ text, className, delay = 0 }: { text: string, className
             variants={container}
             initial="hidden"
             animate="visible"
-            className={`flex overflow-visible ${className}`}
+            className={`flex overflow-visible ${className} will-change-transform`}
             style={{
                 textShadow: `
                     0 2px 0 #8a6d20,
                     0 4px 6px rgba(0,0,0,0.8),
-                    0 0 40px rgba(212,175,55,0.6)
+                    0 0 20px rgba(212,175,55,0.5)
                 `
             }}
         >

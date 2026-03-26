@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import HomeContent from "./HomeContent";
 
 export const metadata: Metadata = {
-  title: "Best Singer in Vadodara | Top Playback & Garba Singer in Gujarat | Himali Joshi",
-  description: "Himali Joshi is the best singer in Vadodara, Gujarat. Award-winning playback singer, top Garba artist, and voice performer. Book the best Gujarati & Bollywood singer for weddings and corporate events globally.",
-  keywords: ["Best Singer in Vadodara", "Top Singer in Gujarat", "Playback Singer India", "Garba Singer Vadodara", "Gujarati Singer", "Bollywood Playback Singer", "Voice Artist Gujarat", "Best Singer for Weddings"],
+  title: "Best Singer in Vadodara | Top 5 Playback & Garba Singer in Gujarat | Himali Joshi",
+  description: "Book Himali Joshi, the best singer in Vadodara and a top playback & Garba artist in Gujarat. Available for events, weddings, and international bookings across India and globally.",
+  keywords: ["Best Singer in Vadodara", "Top 5 Singer in Gujarat", "Playback Singer India", "Garba Singer Vadodara", "Event Singer in Gujarat", "International Booking Singer from India", "Top Singer in Gujarat"],
   alternates: {
     canonical: "https://himalijoshi.com",
   },

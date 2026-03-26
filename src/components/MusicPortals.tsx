@@ -1,224 +1,233 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Play, Disc, Pause } from "lucide-react";
+import { Play, Pause, ExternalLink } from "lucide-react";
+import ThreeDAlbum from "./ThreeDAlbum";
 
-const PORTALS = [
+const PORTAL_DATA = [
     {
+        id: "spotify",
         name: "Spotify",
-        url: "https://open.spotify.com/search/himali%20josh",
-        hex: "#1DB954",
-        color: "text-[#1DB954]",
-        border: "group-hover:border-[#1DB954]",
-        bg: "bg-[#1DB954]/10",
-        glow: "shadow-[#1DB954]/20",
+        title: "Mohan Morli Vagade",
+        year: "2023",
+        cover: "/assets/spotify.jpeg",
+        audio: "/assets/audio/Mohan Morli Vagade - Himali Joshi.mp3",
+        color: "#1DB954",
+        link: "https://open.spotify.com/artist/76Ne4HMMruHNaglAhCp8dT",
         icon: (
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-[#1DB954] drop-shadow-[0_0_10px_rgba(29,185,84,0.5)]">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                 <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 14.34 1.14.539.3.66 1.02.359 1.56-.24.36-.899.54-1.259.24z" />
             </svg>
         )
     },
     {
+        id: "apple",
         name: "Apple Music",
-        url: "https://music.apple.com/in/artist/himali-joshi/1544328313",
-        hex: "#FA243C",
-        color: "text-[#FA243C]",
-        border: "group-hover:border-[#FA243C]",
-        bg: "bg-[#FA243C]/10",
-        glow: "shadow-[#FA243C]/20",
+        title: "Chotile Dakla Vagya",
+        year: "2022",
+        cover: "/assets/apple.jpeg",
+        audio: "/assets/audio/ચોટીલે ડાકલા વાગ્યા I Chotile Dakla Vagya I Himali Joshi I Traditional Garba 2022 for Garba lover. - Himali Joshi.mp3",
+        color: "#FA243C",
+        link: "https://music.apple.com/in/artist/himali-joshi/1544328313",
         icon: (
-            <div className="bg-white p-2 rounded-lg shadow-lg">
-                <svg viewBox="0 0 24 24" fill="black" className="w-8 h-8">
-                    <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.56-.84 1.5.09 2.63.63 3.31 1.62-3.15 1.87-2.66 6.01.27 7.23-.61 1.5-1.4 3.01-2.27 4.16zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
-                </svg>
-            </div>
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.56-.84 1.5.09 2.63.63 3.31 1.62-3.15 1.87-2.66 6.01.27 7.23-.61 1.5-1.4 3.01-2.27 4.16zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+            </svg>
         )
     },
     {
+        id: "amazon",
         name: "Amazon Music",
-        url: "https://music.amazon.com/artists/B08T8Q24SV/himali-joshi",
-        hex: "#00A8E1",
-        color: "text-[#00A8E1]",
-        border: "group-hover:border-[#00A8E1]",
-        bg: "bg-[#00A8E1]/10",
-        glow: "shadow-[#00A8E1]/20",
+        title: "Jay Ambey Jai Ambey",
+        year: "2023",
+        cover: "/assets/amazon.jpeg",
+        audio: "/assets/audio/જય અંબે જય અંબે I Jay Ambey Jai Ambey I Himali Joshi I Traditional Garba for Garba Listener - Himali Joshi.mp3",
+        color: "#00A8E1",
+        link: "https://music.amazon.in/artists/B08T8Q24SV/himali-joshi?referrer=https%3A%2F%2Fmusic.amazon.in%2F",
         icon: (
-            <img src="/amazon-music-icon.png" alt="Amazon Music" className="w-12 h-12 object-contain invert drop-shadow-[0_0_10px_rgba(0,168,225,0.5)]" />
+            <svg viewBox="0 0 89 52" fill="currentColor" className="w-8 h-8">
+                <path d="M59.7,40.5c-0.6,0.4-1.5,0.7-2.6,0.7-1.7,0-3.3-0.2-4.9-0.7c-0.4-0.1-0.7-0.2-0.9-0.2c-0.3,0-0.4,0.2-0.4,0.6v1 c0,0.3,0.1,0.5,0.2,0.7s0.3,0.3,0.6,0.4c1.6,0.7,3.4,1,5.4,1c2.1,0,3.7-0.5,5-1.5s1.9-2.3,1.9-4c0-1.2-0.3-2.1-0.9-2.9 s-1.6-1.4-3-1.9l-2.8-1.1c-1.1-0.4-1.9-0.8-2.2-1.2s-0.6-0.8-0.6-1.5c0-1.5,1.1-2.3,3.4-2.3c1.3,0,2.6,0.2,3.8,0.6 c0.4,0.1,0.7,0.2,0.8,0.2s0.5-0.2,0.5-0.6v-1c0-0.3-0.1-0.5-0.2-0.7s-0.3-0.3-0.6-0.4c-1.5-0.5-3-0.8-4.5-0.8c-1.9,0-3.5,0.5-4.7,1.4 s-1.8,2.2-1.8,3.7c0,2.3,1.3,4,3.9,5l3,1.1c1,0.4,1.6,0.7,2,1.1s0.5,0.8,0.5,1.4c0,0.8-0.3,1.5-0.9,1.9z" />
+                <path d="M44,26.1v13.3c-1.7,1.1-3.4,1.7-5.1,1.7c-1.1,0-1.9-0.3-2.4-0.9s-0.2-0.9-0.2-2.2V26.1c0-0.5-0.2-0.7-0.7-0.7H33 c-0.5,0-0.7,0.2-0.7,0.7v12.4c0,1.7,0.4,3.1,1.3,4c0.9,0.9,2.2,1.4,3.9,1.4c2.3,0,4.6-0.8,6.8-2.4l0.2,1.2c0,0.3,0.1,0.4,0.3,0.5 s0.3,0.1,0.6,0.1h1.5c0.5,0,0.7-0.2,0.7-0.7V26.1c0-0.5-0.2-0.7-0.7-0.7h-2.1c-0.6,0-0.8,0.3-0.8,0.7z" />
+                <path d="M25,43.4h2.1c0.5,0,0.7-0.2,0.7-0.7V30.2c0-1.7-0.4-3-1.3-3.9s-2.1-1.4-3.8-1.4c-2.3,0-4.7,0.8-7,2.5 c-0.8-1.7-2.3-2.5-4.5-2.5s-4.4,0.8-6.6,2.3L4.4,26.1c0-0.3-0.1-0.4-0.3-0.5S3.8,25.5,3.6,25.5H2c-0.5,0-0.7,0.2-0.7,0.7v16.6 c0,0.5,0.2,0.7,0.7,0.7h2.1c0.5,0,0.7-0.2,0.7-0.7V29.3c1.7-1,3.4-1.6,5.2-1.6c1,0,1.7,0.3,2.1,0.9s0.7,1.4,0.7,2.6v11.5 c0,0.5,0.2,0.7,0.7,0.7h2.1c0.5,0,0.7-0.2,0.7-0.7V30.4v-0.6c0-0.2,0-0.4,0-0.5c1.8-1.1,3.5-1.6,5.2-1.6c1,0,1.7,0.3,2.1,0.9 s0.7,1.4,0.7,2.6v11.5c0,0.5,0.2,0.7,0.7,0.7z" />
+                <path d="M79.5,56.7c-10.9,4.6-22.8,6.9-33.6,6.9c-16,0-31.5-4.4-44-11.7c-0.2-0.1-0.4-0.2-0.6-0.2c-0.7,0-1.1,0.8-0.4,1.5 c11.6,10.5,27,16.8,44,16.8c12.2,0,26.3-3.8,36-11c1.7-1.2,0.3-3-1.4-2.3z" />
+                <path d="M79.2,29.4c0.9-1,2.3-1.5,4.3-1.5c1,0,2,0.1,2.9,0.4s0.4,0.1,0.6,0.1c0.3,0,0.5-0.2,0.5-0.7v-1c0-0.3-0.1-0.6-0.2-0.7 s-0.2-0.4-0.4-0.5c-1.3-0.3-2.6-0.6-3.8-0.6c-2.8,0-4.9,0.8-6.5,2.5s-2.3,4-2.3,7c0,3,0.7,5.3,2.2,6.9s3.6,2.4,6.4,2.4 c1.5,0,2.9-0.2,4-0.7s0.5-0.2,0.6-0.4s0.1-0.4,0.1-0.7v-1c0-0.5-0.2-0.7-0.5-0.7s-0.3,0-0.5,0.1c-1.1,0.3-2.2,0.5-3.2,0.5 c-1.9,0-3.3-0.5-4.2-1.5s-1.3-2.6-1.3-4.7v-0.5c0.1-2.2,0.5-3.8,1.4-4.8z" />
+                <path d="M69.8,25.4h-2.1c-0.5,0-0.7,0.2-0.7,0.7v16.6c0,0.5,0.2,0.7,0.7,0.7h2.1c0.5,0,0.7-0.2,0.7-0.7V26.1 c0-0.4-0.2-0.7-0.7-0.7z" />
+                <path d="M70.4,18.6c-0.4-0.4-1-0.6-1.7-0.6s-1.2,0.2-1.6,0.6c-0.4,0.4-0.6,0.9-0.6,1.5s0.2,1.2,0.6,1.5s0.9,0.6,1.6,0.6 s1.2-0.2,1.6-0.6s0.6-0.9,0.6-1.5s-0.1-1.2-0.5-1.5z" />
+            </svg>
         )
     },
     {
+        id: "jiosaavn",
         name: "JioSaavn",
-        url: "https://www.jiosaavn.com/artist/himali-joshi-songs/NeYXW5LVM6g_",
-        hex: "#2BC5B4",
-        color: "text-[#2BC5B4]",
-        border: "group-hover:border-[#2BC5B4]",
-        bg: "bg-[#2BC5B4]/10",
-        glow: "shadow-[#2BC5B4]/20",
+        title: "Tu Kali Ne Kalyani Re Maa",
+        year: "2022",
+        cover: "/assets/music_jiosavan.jpg",
+        audio: "/assets/audio/તુ કાળી ને કલ્યાણી રે માઁ. I Tu Kali Ne Kalyani Re Maa I Himali Joshi I Traditional Garba - Himali Joshi.mp3",
+        color: "#1ECCB0",
+        link: "https://www.jiosaavn.com/artist/himali-joshi-songs/NeYXW5LVM6g_",
         icon: (
-            <img src="/jiosaavn-icon.png" alt="JioSaavn" className="w-12 h-12 object-contain drop-shadow-[0_0_10px_rgba(43,197,180,0.5)]" />
+            <svg viewBox="0 0 32 32" fill="currentColor" className="w-6 h-6">
+                <path d="M0,16c0,8.8,7.2,16,16,16c8.8,0,16-7.2,16-16c0-8.8-7.2-16-16-16C7.2,0,0,7.2,0,16z" fill="#1ECCB0" />
+                <path d="M13.8,25.1c-0.6-1-1.4-1.9-2.4-2.5s-2-1.1-3.2-1.4H8.2c-0.1,0-0.2,0-0.3,0.1c-0.1,0.1-0.1,0.2-0.1,0.3c0,0.1,0,0.2,0.1,0.2c1.3,1.9,3.3,3.3,5.5,3.9h0.1c0.1,0,0.1,0,0.2,0c0,0,0.1,0,0.1-0.1c0,0,0.1-0.1,0.1-0.1c0,0,0-0.1,0-0.2C13.9,25.2,13.9,25.1,13.8,25.1L13.8,25.1z" fill="white" />
+                <path d="M25.6,13.3c0,0,0-0.1,0-0.1c-0.5-1.8-1.5-3.4-2.9-4.6c-1.4-1.2-3-2.1-4.8-2.4h-0.1c-0.1,0-0.2,0-0.3,0.1c-0.1,0.1-0.1,0.2-0.1,0.3v0.1c0.9,5.5,0.3,11.1-1.7,16.3c0,0.1-0.1,0.1-0.1,0.2s-0.1,0.1-0.2,0.1c-0.1,0-0.1,0-0.2,0c0,0-0.1,0-0.1-0.1c0,0-0.1-0.1-0.1-0.1c0,0,0-0.1,0-0.2c0,0-0.1-0.7-0.1-1c-0.6-4.8-2-9.4-4.3-13.7c0-0.1-0.1-0.1-0.1-0.1c0,0-0.1-0.1-0.1-0.1s-0.1,0-0.2,0C10.1,8,10.1,8,10,8l0,0c-1.4,1.1-2.5,2.5-3.2,4.2c0,0.1,0,0.2,0,0.3c0,0.1,0.1,0.2,0.2,0.2c2.2,1.4,4,3.2,5.3,5.5c1.3,2.2,2,4.8,2.1,7.3c0,0.1,0,0.2,0.1,0.3c0.1,0.1,0.2,0.1,0.2,0.1c0.2,0,0.5,0.1,0.7,0.1c0.1,0,0.2,0,0.3-0.1c0.1-0.1,0.1-0.1,0.1-0.2c0.5-2.6,1.6-5.1,3.3-7.2c1.7-2.1,3.8-3.7,6.3-4.8c0.1,0,0.1-0.1,0.2-0.1C25.6,13.4,25.6,13.4,25.6,13.3z" fill="white" />
+                <path d="M24.7,20.9c0-0.1,0-0.2-0.1-0.3c-0.1-0.1-0.2-0.1-0.3-0.1h-0.1c-3.1,0.7-5.9,2.4-7.9,4.8c-0.1,0.1-0.1,0.2-0.1,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.1,0.2,0.1,0.3,0.1l0,0c1.6-0.1,3.2-0.6,4.6-1.4s2.6-2,3.4-3.4C24.7,21.1,24.7,21,24.7,20.9L24.7,20.9z" fill="white" />
+            </svg>
         )
     }
 ];
 
 export default function MusicPortals() {
-    // Current active player index
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
-    // Is the audio actually playing?
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [playingId, setPlayingId] = useState<string | null>(null);
+    const [progress, setProgress] = useState<{ [key: string]: number }>({});
+    const audioRefs = useRef<{ [key: string]: HTMLAudioElement }>({});
 
-    // Audio ref (using state to keep track of the instance if needed, but simple ref is better for play controls)
-    const audioRef = React.useRef<HTMLAudioElement | null>(null);
-
-    React.useEffect(() => {
-        // Initialize audio object once
-        // Using one of the video files as audio source since user has no mp3s yet. 
-        // Ideally this should be a specific track.
-        audioRef.current = new Audio("/assets/hj1.MP4");
-
-        audioRef.current.addEventListener("ended", () => {
-            setIsPlaying(false);
-            setActiveIndex(null);
-        });
-
+    useEffect(() => {
+        // Cleanup on unmount
         return () => {
-            if (audioRef.current) {
-                audioRef.current.pause();
-                audioRef.current = null;
-            }
+            Object.values(audioRefs.current).forEach(audio => {
+                audio.pause();
+                audio.src = "";
+            });
         };
     }, []);
 
-    const togglePlay = (index: number) => {
-        if (!audioRef.current) return;
-
-        if (activeIndex === index && isPlaying) {
-            // Pause current
-            audioRef.current.pause();
-            setIsPlaying(false);
+    const togglePlay = (id: string, audioPath: string) => {
+        if (playingId === id) {
+            audioRefs.current[id]?.pause();
+            setPlayingId(null);
         } else {
-            // Play new or resume
-            if (activeIndex !== index) {
-                // Change track logic if we had multiple sources. 
-                // For now, "First Song" implies the same featured track or specific ones.
-                // Resetting time to simulate "starting" the track for that platform if switching?
-                // Or just continue playing. Let's restart to simulate "Play first song".
-                audioRef.current.currentTime = 0;
+            // Stop current playing
+            if (playingId) {
+                audioRefs.current[playingId]?.pause();
             }
-            audioRef.current.play();
-            setActiveIndex(index);
-            setIsPlaying(true);
+
+            // Create or play audio
+            if (!audioRefs.current[id]) {
+                const audio = new Audio(audioPath);
+                audio.addEventListener('timeupdate', () => {
+                    setProgress(prev => ({
+                        ...prev,
+                        [id]: (audio.currentTime / audio.duration) * 100
+                    }));
+                });
+                audio.addEventListener('ended', () => {
+                    setPlayingId(null);
+                    setProgress(prev => ({ ...prev, [id]: 0 }));
+                });
+                audioRefs.current[id] = audio;
+            }
+
+            audioRefs.current[id].play();
+            setPlayingId(id);
         }
     };
 
+    const formatTime = (time: number) => {
+        if (!time || isNaN(time)) return "0:00";
+        const mins = Math.floor(time / 60);
+        const secs = Math.floor(time % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
+
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl mx-auto px-6 py-12">
-            {PORTALS.map((portal, index) => {
-                const isCurrent = activeIndex === index;
-                const isCurrentPlaying = isCurrent && isPlaying;
+        <section className="py-20 bg-black relative overflow-hidden">
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {PORTAL_DATA.map((portal) => {
+                        const isCurrentPlaying = playingId === portal.id;
+                        const currentProgress = progress[portal.id] || 0;
+                        const audio = audioRefs.current[portal.id];
 
-                return (
-                    <motion.div
-                        key={portal.name}
-                        initial={{ opacity: 0, scale: 0.9, rotateX: 10 }}
-                        animate={{ opacity: 1, scale: 1, rotateX: 0 }}
-                        transition={{ delay: 0.2 + index * 0.1, duration: 0.8, type: "spring" }}
-                        className="group perspective-1000"
-                    >
-                        {/* 3D Glass Player Card */}
-                        <div className={`relative w-full aspect-[3/4] rounded-2xl bg-black/40 border border-white/10 overflow-hidden backdrop-blur-xl transition-all duration-500 transform group-hover:-translate-y-2 group-hover:scale-[1.02] group-hover:shadow-2xl ${portal.glow}`}>
-
-                            {/* Background Ambiance (Artist Image Blurry) */}
-                            <div className="absolute inset-0 opacity-40 pointer-events-none">
-                                <img
-                                    src="/assets/portrait-2.jpg"
-                                    alt="Ambience"
-                                    className="w-full h-full object-cover filter blur-xl scale-110 opacity-60"
-                                />
+                        return (
+                            <div key={portal.id} className="relative group">
+                                {/* Card Container - Removed overflow-hidden to let CD be visible */}
                                 <div
-                                    className="absolute inset-0 mix-blend-multiply opacity-50"
-                                    style={{ background: `linear-gradient(to top, #000, rgba(0,0,0,0.8), ${portal.hex}33)` }}
-                                />
-                            </div>
-
-                            {/* Spinning Vinyl (Top Half) */}
-                            <div className="relative h-1/2 flex items-center justify-center pt-6">
-                                <div
-                                    className={`w-36 h-36 rounded-full border-4 border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] relative flex items-center justify-center ${isCurrentPlaying ? 'animate-spin-slow' : 'group-hover:animate-spin-slow'}`}
-                                    style={{ animationDirection: 'normal' }}
+                                    className="relative bg-zinc-900/90 backdrop-blur-2xl rounded-[2rem] p-6 pt-10 border transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"
+                                    style={{
+                                        borderColor: `${portal.color}80`, // 50% opacity border of brand color
+                                        boxShadow: `0 0 20px -10px ${portal.color}80` // Glow of brand color
+                                    }}
                                 >
-                                    {/* Vinyl Texture */}
+
+                                    {/* Platform Icon - Top Right (Always visible) */}
+                                    <div className="absolute top-5 right-5 z-30 opacity-100">
+                                        <div style={{ color: portal.color }} className="filter drop-shadow-[0_0_8px_rgba(0,0,0,0.5)]">
+                                            {portal.icon}
+                                        </div>
+                                    </div>
+
+                                    {/* Vintage CD Player Centerpiece */}
+                                    <div className="mb-8 relative z-30 transform scale-95">
+                                        <ThreeDAlbum
+                                            coverImage={portal.cover}
+                                            compact
+                                            isSpinning={isCurrentPlaying}
+                                        />
+                                    </div>
+
+                                    {/* Platform Info */}
+                                    <div className="text-center relative z-40">
+                                        <h3 className="text-xl font-bold text-white mb-1 tracking-tight truncate px-2">
+                                            {portal.title}
+                                        </h3>
+                                        <p className="text-[11px] font-bold tracking-[0.2em] text-gold mb-2 uppercase opacity-90">
+                                            {portal.name} • {portal.year}
+                                        </p>
+
+                                        {/* Mock Player UI */}
+                                        <div className="mt-6 flex flex-col gap-5 p-4 rounded-xl bg-black/40 border border-white/5">
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-[10px] text-gray-300 tabular-nums w-[28px] text-left">
+                                                    {formatTime(audio?.currentTime || 0)}
+                                                </span>
+                                                <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                                    <motion.div
+                                                        className="h-full"
+                                                        style={{ backgroundColor: portal.color }}
+                                                        animate={{ width: `${currentProgress}%` }}
+                                                        transition={{ type: "spring", bounce: 0, duration: 0.1 }}
+                                                    />
+                                                </div>
+                                                <a
+                                                    href={portal.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-gray-300 hover:text-white transition-colors"
+                                                >
+                                                    <ExternalLink size={14} />
+                                                </a>
+                                            </div>
+
+                                            <div className="flex justify-center">
+                                                <button
+                                                    onClick={() => togglePlay(portal.id, portal.audio)}
+                                                    className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95 text-white shadow-lg"
+                                                    style={{
+                                                        backgroundColor: portal.color,
+                                                        boxShadow: `0 4px 14px 0 ${portal.color}66`
+                                                    }}
+                                                >
+                                                    {isCurrentPlaying ? (
+                                                        <Pause size={20} fill="white" />
+                                                    ) : (
+                                                        <Play size={20} fill="white" className="ml-1" />
+                                                    )}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Background Ambient Glow */}
                                     <div
-                                        className="absolute inset-0 rounded-full bg-[url('/assets/portrait-2.jpg')] bg-cover opacity-80"
-                                        style={{ backgroundPosition: 'center top' }}
-                                    />
-                                    <div className="absolute inset-0 rounded-full bg-[repeating-radial-gradient(#000_0,_transparent_2px)] opacity-40" />
-
-                                    {/* Center Spindle Hole (Small to show face) */}
-                                    <div className="absolute w-4 h-4 bg-black/60 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-sm">
-                                        <div className="w-1.5 h-1.5 bg-black rounded-full opacity-80" />
-                                    </div>
-                                </div>
-
-                                {/* Floating Platform Icon Badge */}
-                                <div className="absolute top-4 right-4 animate-pulse-slow">
-                                    {portal.icon}
-                                </div>
-                            </div>
-
-                            {/* Player UI (Bottom Half) */}
-                            <div className="relative h-1/2 p-6 flex flex-col justify-end space-y-4 bg-gradient-to-t from-black via-black/90 to-transparent">
-
-                                {/* Track Info */}
-                                <div className="text-center space-y-1">
-                                    <h3 className={`text-2xl font-serif font-bold text-white`}>{portal.name}</h3>
-                                    <p
-                                        className="text-[10px] uppercase tracking-[0.2em] font-medium"
-                                        style={{ color: portal.hex }}
-                                    >
-                                        Official Artist
-                                    </p>
-                                </div>
-
-                                {/* Progress Bar */}
-                                <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-                                    <motion.div
-                                        className="h-full"
-                                        style={{ backgroundColor: portal.hex }}
-                                        initial={{ width: "0%" }}
-                                        animate={isCurrentPlaying ? { width: "100%" } : { width: "0%" }}
-                                        transition={isCurrentPlaying ? { duration: 30, ease: "linear" } : { duration: 0 }}
+                                        className="absolute inset-0 opacity-20 pointer-events-none rounded-[2rem]"
+                                        style={{ background: `radial-gradient(circle at 50% 0%, ${portal.color} 0%, transparent 60%)` }}
                                     />
                                 </div>
-
-                                {/* Controls */}
-                                <div className="flex items-center justify-between pt-2">
-                                    <div className="text-[10px] text-gray-500 font-mono">
-                                        {isCurrentPlaying ? "Playing..." : "0:00"}
-                                    </div>
-
-                                    <button
-                                        onClick={() => togglePlay(index)}
-                                        className="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 active:scale-95 text-black shadow-[0_0_20px_currentColor] z-20 cursor-pointer"
-                                        style={{ backgroundColor: portal.hex, color: portal.hex }}
-                                    >
-                                        {isCurrentPlaying ? <Pause fill="black" size={24} className="text-black" /> : <Play fill="black" size={24} className="ml-1 text-black" />}
-                                    </button>
-
-                                    <a
-                                        href={portal.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="hover:text-white transition-colors z-20 p-2 opacity-80 hover:opacity-100"
-                                        style={{ color: portal.hex }}
-                                    >
-                                        <ExternalLink size={18} />
-                                    </a>
-                                </div>
                             </div>
-                        </div>
-                    </motion.div>
-                )
-            })}
-        </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
     );
 }

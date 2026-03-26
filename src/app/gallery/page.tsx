@@ -3,8 +3,9 @@ import Gallery from "@/components/Gallery";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-    title: "Photo & Video Gallery | Himali Joshi",
-    description: "Explore high-quality photos and videos from Himali Joshi's live concerts, studio sessions, and backstage moments.",
+    title: "Photo & Video Gallery | Professional Live Performer in Vadodara & Music Artist",
+    description: "Explore performance photos of Himali Joshi, an elite music artist in India and top Bollywood singer for events, capturing her vibrant live shows.",
+    keywords: ["Professional Live Performer in Vadodara", "Music Artist in India", "Bollywood Singer for Events", "Live Shows Photos", "Himali Joshi Gallery"],
 };
 
 export default function GalleryPage() {

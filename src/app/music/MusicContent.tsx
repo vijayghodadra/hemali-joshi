@@ -4,13 +4,47 @@ import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import ThreeDAlbum from "@/components/ThreeDAlbum";
 import MusicPortals from "@/components/MusicPortals";
+import ArtisticVideoScreens from "@/components/ArtisticVideoScreens";
+import MusicSection from "@/components/MusicSection";
 
 export default function MusicContent() {
+    const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
+
+    React.useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePos({
+                x: (e.clientX / window.innerWidth - 0.5) * 20,
+                y: (e.clientY / window.innerHeight - 0.5) * 20
+            });
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
     return (
         <main className="min-h-screen bg-black text-white selection:bg-gold selection:text-black overflow-x-hidden">
-            {/* Ambient Background */}
-            <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,_#1a1a1a_0%,_#000_100%)] -z-10" />
-            <div className="fixed inset-0 opacity-20 bg-[url('/assets/noise.png')] -z-10" />
+            {/* Ambient Background Base */}
+            <div className="fixed inset-0 bg-black -z-30" />
+
+            {/* Interactive Disco Background */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{
+                    opacity: 0.4,
+                    x: mousePos.x,
+                    y: mousePos.y,
+                    scale: 1.1
+                }}
+                transition={{
+                    opacity: { duration: 1 },
+                    x: { type: "spring", stiffness: 50, damping: 30 },
+                    y: { type: "spring", stiffness: 50, damping: 30 }
+                }}
+                className="fixed inset-0 w-full h-full -z-20 bg-cover bg-center pointer-events-none brightness-50"
+                style={{ backgroundImage: "url('/assets/disco1.jpeg')" }}
+            >
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
+            </motion.div>
 
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-24 pb-12">
@@ -39,15 +73,21 @@ export default function MusicContent() {
                         transition={{ duration: 1, delay: 0.2 }}
                         className="mb-20"
                     >
-                        <ThreeDAlbum coverImage="/assets/portrait-2.jpg" />
+                        <ThreeDAlbum coverImage="/assets/Discograohy.jpeg" fullImage />
 
                         <div className="mt-8 text-center opacity-60">
-                            <span className="text-xs uppercase tracking-[0.5em] text-gold">Latest Bollywood & Sufi Releases</span>
+                            <span className="text-xs uppercase tracking-[0.5em] text-gold">LATEST BOLLYWOOD,TRADITIONAL,DEVOTIONAL AND GARBA RELEASES</span>
                         </div>
                     </motion.div>
 
-                    {/* Portals */}
+                    {/* Portals Grid */}
                     <MusicPortals />
+
+                </div>
+
+                {/* Artistic Video Screens Section */}
+                <div className="relative z-20 w-full bg-black/50 backdrop-blur-sm border-t border-white/5">
+                    <ArtisticVideoScreens />
                 </div>
 
                 {/* Scroll Indicator */}

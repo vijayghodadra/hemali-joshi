@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -49,6 +50,9 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!isCenter) return;
+
+        // Disable 3D tilt on mobile/touch devices for performance
+        if (window.matchMedia("(pointer: coarse)").matches) return;
 
         const rect = e.currentTarget.getBoundingClientRect();
 
@@ -131,10 +135,12 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
                 }}
             >
                 {/* 1. Thumbnail Image (Placeholder) */}
-                <img
+                <Image
                     src={card.thumbnail}
                     alt={card.title}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100"}`}
+                    fill
+                    className={`object-cover transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100"}`}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                 />
 
                 {/* 2. Video Element (Plays on Hover) */}
@@ -145,6 +151,7 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
                     muted
                     playsInline
                     loop
+                    preload="none" // Optimize loading
                 />
 
                 {/* Spotlight/Sheen Effect on Hover */}
@@ -175,7 +182,7 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
                         {isCenter && (
                             <motion.div
                                 whileHover={{ scale: 1.1 }}
-                                className="w-20 h-20 rounded-full bg-gold/20 backdrop-blur-md border border-gold flex items-center justify-center text-gold shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+                                className="w-20 h-20 rounded-full bg-gold/20 md:backdrop-blur-md border border-gold flex items-center justify-center text-gold shadow-[0_0_30px_rgba(212,175,55,0.4)]"
                             >
                                 <Play fill="currentColor" size={32} className="ml-1" />
                             </motion.div>
@@ -213,7 +220,7 @@ export default function CinematicVideoCarousel() {
     };
 
     return (
-        <section className="relative py-24 px-6 perspective-1000 overflow-hidden">
+        <section className="relative py-24 px-6 md:perspective-1000 overflow-hidden">
             {/* Section Specific Artistic Background */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-30 mix-blend-overlay"

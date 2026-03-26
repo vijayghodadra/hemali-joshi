@@ -23,13 +23,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
-            url: `${baseUrl}/events`,
+            url: `${baseUrl}/tours`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.9,
         },
         {
-            url: `${baseUrl}/videos`,
+            url: `${baseUrl}/events`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.8,
@@ -41,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.7,
         },
         {
-            url: `${baseUrl}/news`,
+            url: `${baseUrl}/himalis-buzz`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.7,

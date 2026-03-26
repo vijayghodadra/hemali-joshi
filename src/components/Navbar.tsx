@@ -13,6 +13,14 @@ export default function Navbar() {
     const pathname = usePathname();
 
     useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
         };
@@ -22,13 +30,12 @@ export default function Navbar() {
 
     const navLinks = [
         { name: "Home", href: "/" },
-        { name: "About", href: "/about" },
-        { name: "Music", href: "/music" },
         { name: "Events", href: "/events" },
-        { name: "Awards", href: "/awards" },
-        { name: "News", href: "/news" },
-        { name: "Videos", href: "/videos" },
+        { name: "Music", href: "/music" },
         { name: "Gallery", href: "/gallery" },
+        { name: "Tours", href: "/tours" },
+        { name: "Himali’s Buzz", href: "/himalis-buzz" },
+        { name: "About", href: "/about" },
         { name: "Contact", href: "/contact" },
     ];
 
@@ -53,12 +60,12 @@ export default function Navbar() {
                         <img
                             src="/assets/logo-gold.png"
                             alt="Himali Joshi Logo"
-                            className="h-14 w-auto object-contain drop-shadow-md filter brightness-110 group-hover:brightness-125 transition-all"
+                            className="h-10 md:h-14 w-auto object-contain drop-shadow-md filter brightness-110 group-hover:brightness-125 transition-all"
                         />
                     </motion.div>
                     <div className="flex flex-col justify-center">
-                        <div className="font-serif italic text-2xl font-bold tracking-wide flex items-baseline whitespace-nowrap leading-none transition-all group-hover:drop-shadow-gold">
-                            <MusicalKeyText text="Himali" className="text-white mr-2" />
+                        <div className="font-serif italic text-base md:text-2xl font-bold tracking-wide flex items-baseline whitespace-nowrap leading-none transition-all group-hover:drop-shadow-gold">
+                            <MusicalKeyText text="Himali" className="text-white mr-1.5 md:mr-2" />
                             <MusicalKeyText text="Joshi" className="text-gold" goldHighlight={true} />
                         </div>
                     </div>
@@ -100,7 +107,7 @@ export default function Navbar() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: "100%" }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="fixed inset-0 bg-black/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 md:hidden z-40"
+                            className="fixed inset-0 h-[100dvh] bg-black/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 md:hidden z-[60] overscroll-none"
                         >
                             <div className="flex flex-col items-center gap-4">
                                 {navLinks.map((link, idx) => (

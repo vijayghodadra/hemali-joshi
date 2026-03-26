@@ -2,42 +2,46 @@
 import { motion, useSpring, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 
+import AudioContextManager from "@/utils/audio";
+
 const KineticGoldStrings = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
-    const [isMuted, setIsMuted] = useState(false); // Default to sound on, but requires user interaction to start AudioContext usually
-    const audioContextRef = useRef<AudioContext | null>(null);
+    const [isMuted, setIsMuted] = useState(false);
+    // Use responsive string count to save performance on mobile
+    const [stringCount, setStringCount] = useState(40); // Default to safer lower count
 
-    // Initialize AudioContext lazily
     useEffect(() => {
-        const initAudio = () => {
-            if (!audioContextRef.current) {
-                audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-            }
-            if (audioContextRef.current.state === 'suspended') {
-                audioContextRef.current.resume();
+        // Initialize global audio unlock listeners
+        AudioContextManager.getInstance().initializeAutoUnlock();
+
+        // Check screen width to determine string count
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setStringCount(30); // Mobile: Significantly fewer strings
+            } else {
+                setStringCount(80); // Desktop: Full visual fidelity
             }
         };
 
-        const handleInteraction = () => initAudio();
-        window.addEventListener('click', handleInteraction);
-        window.addEventListener('keydown', handleInteraction);
-        window.addEventListener('mousemove', handleInteraction); // Try to unlock on first move
-
-        return () => {
-            window.removeEventListener('click', handleInteraction);
-            window.removeEventListener('keydown', handleInteraction);
-            window.removeEventListener('mousemove', handleInteraction);
-            audioContextRef.current?.close();
-        };
+        handleResize(); // Initial check
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const playStringSound = (index: number) => {
-        if (isMuted || !audioContextRef.current) return;
+        if (isMuted) return;
 
         try {
-            const ctx = audioContextRef.current;
+            const manager = AudioContextManager.getInstance();
+            const ctx = manager.getContext();
+
+            // Should already be unlocked by global listener, but good to ensure
+            if (ctx.state === 'suspended') {
+                manager.resumeContext();
+            }
+
             const oscillator = ctx.createOscillator();
             const gainNode = ctx.createGain();
 
@@ -84,8 +88,8 @@ const KineticGoldStrings = () => {
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, [mouseX, mouseY]);
 
-    // Create 80 "strings" for a wider look
-    const strings = Array.from({ length: 80 });
+    // Dynamic string count for responsive performance
+    const strings = Array.from({ length: stringCount });
 
     return (
         <section
@@ -161,6 +165,7 @@ const StringElement = ({ index, mouseX, mouseY, xOffset, onHover }: { index: num
             }}
             className="w-[2px] md:w-[3px] rounded-full relative group"
             onMouseEnter={onHover} // Trigger sound on direct interaction
+            onTouchStart={onHover} // Trigger sound on mobile tap/slide
         >
             {/* High-end Glow Tip */}
             <motion.div

@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Instagram, Youtube, Mail, ArrowUp } from "lucide-react";
+import { Instagram, Youtube, Mail, ArrowUp, Facebook } from "lucide-react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
 export default function Footer() {
@@ -64,10 +64,13 @@ export default function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-gold uppercase tracking-widest text-xs font-bold">Connect</h3>
                         <div className="flex gap-4">
-                            <a href="https://www.instagram.com/singer_himali_joshi_14?igsh=cnAzMWJzeWhwanJq" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-gold hover:text-black transition-all">
+                            <a href="https://www.facebook.com/himali.joshi.2025" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-[#1877F2] bg-[#1877F2] text-white flex items-center justify-center hover:brightness-110 transition-all">
+                                <Facebook size={18} />
+                            </a>
+                            <a href="https://www.instagram.com/singer_himali_joshi_14?igsh=cnAzMWJzeWhwanJq" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-[#E1306C] bg-[#E1306C] text-white flex items-center justify-center hover:brightness-110 transition-all">
                                 <Instagram size={18} />
                             </a>
-                            <a href="https://www.youtube.com/channel/UCvyI4RHfXex8nchIYopXLOQ" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-gold hover:text-black transition-all">
+                            <a href="https://www.youtube.com/channel/UCvyI4RHfXex8nchIYopXLOQ" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-[#FF0000] bg-[#FF0000] text-white flex items-center justify-center hover:brightness-110 transition-all">
                                 <Youtube size={18} />
                             </a>
                             <Link

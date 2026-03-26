@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
-import { Award, Music, Star, User, Mic, Heart, Globe, Quote } from "lucide-react";
+import { Award, Music, Star, User, Mic, Heart, Globe, Quote, Trophy, Crown } from "lucide-react";
 import Footer from "@/components/Footer";
 import DynamicPortrait from "@/components/DynamicPortrait";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import ArtisticRoleText from "@/components/ArtisticRoleText";
+import MusicalKeyText from "@/components/MusicalKeyText";
+import ThreeDAwardCard from "@/components/ThreeDAwardCard";
 
 export const metadata: Metadata = {
-    title: "About Himali Joshi | Best Singer in Vadodara | Top Performer in Gujarat",
-    description: "Learn about Himali Joshi, the best playback and Garba singer in Vadodara, Gujarat. Award-winning Indian artist and voice performer recognized globally.",
-    keywords: ["About Himali Joshi", "Best Singer in Vadodara", "Top Singer in Gujarat", "Playback Singer Vadodara", "Garba Artist Gujarat", "Professional Voice Artist India"],
+    title: "About Himali Joshi | Top Music Artist in India & Professional Performer in Vadodara",
+    description: "Learn about Himali Joshi, a top music artist in India and professional live performer in Vadodara. Renowned for Bollywood covers, Garba, and devotional singing. Available globally.",
+    keywords: ["About Himali Joshi", "Top Music Artist in India", "Professional Performer in Vadodara", "Garba Singer Gujarat", "Playback Singer Vadodara", "Devotional Singer", "Best Singer in Vadodara"],
 };
 
 const STATS = [
@@ -15,6 +18,50 @@ const STATS = [
     { label: "Listeners", value: 65, suffix: "K+" },
     { label: "Video Albums", value: 8, suffix: "+" },
     { label: "Music Videos", value: 125, suffix: "+" },
+];
+
+const AWARDS = [
+    {
+        year: "2025",
+        org: "Vadodara Got Talent",
+        title: "Best Singer",
+        desc: "Awarded Best Singer for outstanding vocal performance and artistic expression in 2025.",
+        image: "/assets/Gal/IMG_7083.JPG",
+        icon: Crown,
+        isFeatured: true
+    },
+    {
+        year: "2024",
+        org: "Parul University",
+        title: "Singing Competition Judge",
+        desc: "Honoring Excellence in Judging Singing Competitions, mentoring the next generation of talent.",
+        image: "/assets/Gal/IMG_7092.JPG",
+        icon: Award
+    },
+    {
+        year: "2023",
+        org: "Patidar Navratri Morbi",
+        title: "Best Garba Performer",
+        desc: "Recognized as the Best Garba Performer of the season for energetic and soulful performances.",
+        image: "/assets/Gal/IMG_7071.JPG",
+        icon: Trophy
+    },
+    {
+        year: "2022",
+        org: "Bajkhedaval Brahman Samaj",
+        title: "Best Female Anchorage Icon",
+        desc: "Celebrates excellence in hosting and acknowledges remarkable contributions to the community.",
+        image: "/assets/Gal/IMG_7088.JPG",
+        icon: Mic
+    },
+    {
+        year: "2010",
+        org: "Maa Krishna Ashram",
+        title: "Devotional Singing Excellence",
+        desc: "Recognizing excellence in devotional singing, celebrating the divine through music.",
+        image: "/assets/Gal/IMG_7093.JPG",
+        icon: Star
+    },
 ];
 
 const TESTIMONIALS = [
@@ -52,10 +99,19 @@ export default function AboutPage() {
             <section className="relative py-12 md:py-20 px-6 text-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-maroon/20 via-black to-black -z-10" />
                 <div className="container mx-auto">
-                    <h1 className="font-serif text-[clamp(2.5rem,8vw,5rem)] md:text-7xl mb-6 drop-shadow-lg leading-tight">
-                        Himali <span className="text-gold">Joshi</span>
-                        <span className="block text-xs md:text-xl uppercase tracking-[0.2em] md:tracking-[0.4em] text-gold/60 mt-2 md:mt-4">Best Singer in Vadodara, Gujarat</span>
+                    <h1 className="flex flex-wrap justify-center gap-x-2 md:gap-x-8 mb-6 drop-shadow-lg leading-tight w-full">
+                        <div className="flex items-baseline justify-center flex-wrap gap-2 w-full">
+                            <MusicalKeyText text="Himali" className="text-[clamp(2.5rem,10vw,5rem)] md:text-7xl font-serif text-white" />
+                            <MusicalKeyText text="Joshi" className="text-[clamp(2.5rem,10vw,5rem)] md:text-7xl font-serif text-gold" goldHighlight={true} />
+                        </div>
                     </h1>
+                    <div className="mt-2 md:mt-4 w-full flex justify-center px-2">
+                        <ArtisticRoleText
+                            text="Singer | Performer | Musician"
+                            className="text-[10px] sm:text-sm md:text-2xl uppercase tracking-[0.1em] md:tracking-[0.2em] text-white/90 whitespace-nowrap"
+                        />
+                    </div>
+                    <span className="block text-xs md:text-xl uppercase tracking-[0.2em] md:tracking-[0.4em] text-gold/60 mt-1 md:mt-2">Best Singer in Vadodara, Gujarat</span>
                     <p className="text-base md:text-2xl text-gray-300 max-w-3xl mx-auto italic font-light leading-relaxed">
                         "Music is the <span className="text-gold">divine way</span> to tell beautiful, poetic things to the <span className="text-gold">heart</span>. Experience the magic of the top playback & Garba singer in Gujarat."
                     </p>
@@ -68,13 +124,13 @@ export default function AboutPage() {
                     <h2 className="text-2xl md:text-3xl font-serif text-white mb-4 md:mb-6 border-l-4 border-gold pl-4">Biography</h2>
                     <p>
                         <span className="text-gold font-serif text-4xl float-left mr-2 leading-none">H</span>
-                        imali Joshi, born on 14th March 1984, is a versatile Indian artist celebrated for her talents as a writer, composer, singer, video director, and actor. Her musical odyssey began during her school years, where she cultivated a profound passion for classical dance and vocal music. This early enthusiasm propelled her to pursue formal education in dance and vocal training.
+                        imali Joshi, born on 14th March 1984, is a versatile Indian artist celebrated for her talents as a writer, composer, singer, video director, and actor. As a <strong>top music artist in India</strong>, her musical odyssey began during her school years, where she cultivated a profound passion for classical dance and vocal music. This early enthusiasm propelled her to pursue formal education in dance and vocal training.
                     </p>
                     <p>
-                        Despite a flourishing career spanning nine years in various industries—including real estate, pharmaceuticals, and manufacturing—where she excelled as an admin and marketing planner, Himali's unwavering love for music remained her true calling.
+                        Despite a flourishing career spanning nine years in various industries—including real estate, pharmaceuticals, and manufacturing—where she excelled as an admin and marketing planner, Himali's unwavering love for music remained her true calling. Today, she is widely recognized as the <strong>best singer in Vadodara</strong> and a highly sought-after <strong>professional live performer</strong> for events locally and internationally.
                     </p>
                     <p>
-                        Renowned especially for her <strong className="text-white">Garba performances</strong>, Himali has earned a stellar reputation as one of Gujarat's most prolific singers. Her performances are highly acclaimed, particularly in Mataji's Temples across Gujarat, including Pavagadh, Chotila, Ambaji, and Bhadrakali.
+                        Renowned especially for her <strong className="text-white">vibrant Garba performances</strong>, Himali has earned a stellar reputation as one of Gujarat's most prolific singers. Her performances are highly acclaimed, particularly in Mataji's Temples across Gujarat, including Pavagadh, Chotila, Ambaji, and Bhadrakali.
                     </p>
                 </div>
                 <div className="order-1 lg:order-2 w-full max-w-sm mx-auto lg:max-w-none">
@@ -156,6 +212,41 @@ export default function AboutPage() {
                 </div>
             </section>
 
+            {/* Awards Section (Moved from Awards Page) */}
+            <section className="relative py-16 md:py-24 px-6 bg-black/40">
+                <div className="container mx-auto">
+                    <div className="text-center mb-16">
+                        <div className="inline-block p-1 px-3 rounded-full border border-gold/30 bg-gold/10 text-gold text-xs uppercase tracking-[0.2em] mb-4 backdrop-blur-md">
+                            The Trophy Room
+                        </div>
+                        <h2 className="font-serif text-4xl md:text-5xl mb-6">
+                            Awards & <span className="text-gold italic">Recognition</span>
+                        </h2>
+                        <p className="text-lg text-gray-400 max-w-2xl mx-auto font-light italic">
+                            "A legacy of excellence, carved in melody and gold."
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 xl:gap-16 max-w-7xl mx-auto">
+                        {AWARDS.map((award, index) => (
+                            <div key={index} className={`${index % 2 !== 0 ? "lg:mt-24" : ""} ${award.isFeatured ? "md:col-span-2 lg:col-span-2 lg:mt-0 flex justify-center mb-12" : ""}`}>
+                                <div className={award.isFeatured ? "w-full max-w-2xl" : "w-full"}>
+                                    <ThreeDAwardCard
+                                        title={award.title}
+                                        year={award.year}
+                                        org={award.org}
+                                        desc={award.desc}
+                                        image={award.image}
+                                        icon={<award.icon className="text-gold w-8 h-8" />}
+                                        isFeatured={award.isFeatured}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* 5. Music Style & Genres - IMAGE CARDS */}
             <section className="py-16 md:py-24 relative overflow-hidden">
                 {/* Background wash */}
@@ -221,7 +312,7 @@ export default function AboutPage() {
                     <p className="text-gray-400 mb-8 font-light italic">"Music is the soundtrack of your life!"</p>
 
                     <div className="flex flex-col md:flex-row gap-8 text-xl">
-                        <a href="mailto:joshihimali14@gmail.com" className="hover:text-gold transition-colors">joshihimali14@gmail.com</a>
+                        <a href="mailto:whitedoorproductionhouse14@gmail.com" className="hover:text-gold transition-colors">whitedoorproductionhouse14@gmail.com</a>
                         <span className="hidden md:block text-gold">•</span>
                         <a href="tel:+916359012805" className="hover:text-gold transition-colors">+91 6359 012 805</a>
                     </div>
@@ -230,6 +321,6 @@ export default function AboutPage() {
             </section>
 
             <Footer />
-        </main>
+        </main >
     );
 }

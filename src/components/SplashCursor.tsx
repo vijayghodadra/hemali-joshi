@@ -17,6 +17,11 @@ export default function SplashCursor() {
             cursorY.set(e.clientY - 4);
         };
 
+        // Strictly disable on mobile/touch devices to prevent "hangs"
+        if (typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches) {
+            return;
+        }
+
         window.addEventListener("mousemove", moveCursor);
         return () => {
             window.removeEventListener("mousemove", moveCursor);
