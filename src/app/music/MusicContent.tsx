@@ -62,6 +62,27 @@ export default function MusicContent() {
                 title: "Ujjala"
             };
         }
+        if (index === 1) {
+            return {
+                ...item,
+                audio: "/assets/audio/rang_lagyo.m4a",
+                title: "Rang Lagyo"
+            };
+        }
+        if (index === 2) {
+            return {
+                ...item,
+                audio: "/assets/audio/pehla_nasha.m4a",
+                title: "Pehla Nasha"
+            };
+        }
+        if (index === 3) {
+            return {
+                ...item,
+                audio: "/assets/audio/mein_teri_behna_hoon.m4a",
+                title: "Mein Teri Behna Hoon"
+            };
+        }
         return item;
     });
 
