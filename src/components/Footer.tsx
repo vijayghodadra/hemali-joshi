@@ -106,7 +106,7 @@ export default function Footer() {
 
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
                     <div className="flex flex-col md:flex-row items-center gap-4">
-                        <p>© 2024 Himali Joshi. All rights reserved.</p>
+                        <p>© 2026 Himali Joshi. All rights reserved.</p>
                         <span className="hidden md:block">|</span>
                         <p className="flex items-center gap-2">
                             Powered by -
