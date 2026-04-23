@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Volume2, VolumeX } from "lucide-react";
+import { getDevicePower } from "@/utils/devicePower";
 
 interface ArtisticVideoCardProps {
     src: string;
@@ -17,6 +18,17 @@ export default function ArtisticVideoCard({ src, title, description, onClick, ye
     const [isHovered, setIsHovered] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(true);
+    const [actualSrc, setActualSrc] = useState(src);
+
+    useEffect(() => {
+        if (getDevicePower() === "low") {
+            // Check for both .MP4 and .mp4 and handle the _low suffix
+            if (src.toLowerCase().endsWith(".mp4")) {
+                const ext = src.slice(-4);
+                setActualSrc(src.slice(0, -4) + "_low.mp4");
+            }
+        }
+    }, [src]);
 
     // Auto-play logic with delay on hover
     useEffect(() => {
@@ -85,7 +97,7 @@ export default function ArtisticVideoCard({ src, title, description, onClick, ye
 
                 {/* Static Placeholder */}
                 <video
-                    src={`${src}#t=1.0`}
+                    src={`${actualSrc}#t=1.0`}
                     className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${isPlaying ? "opacity-0" : "opacity-100"}`}
                     preload="metadata"
                 />
@@ -93,7 +105,7 @@ export default function ArtisticVideoCard({ src, title, description, onClick, ye
                 {/* Hover Auto-play Video */}
                 <video
                     ref={videoRef}
-                    src={src}
+                    src={actualSrc}
                     className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${isPlaying ? "opacity-100" : "opacity-0"}`}
                     muted={isMuted}
                     playsInline

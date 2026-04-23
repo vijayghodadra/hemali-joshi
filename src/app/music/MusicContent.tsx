@@ -3,8 +3,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import ThreeDAlbum from "@/components/ThreeDAlbum";
-import MusicPortals from "@/components/MusicPortals";
+import MusicPortals, { PORTAL_DATA } from "@/components/MusicPortals";
 import ArtisticVideoScreens from "@/components/ArtisticVideoScreens";
+import ArtisticScrollTitle from "@/components/ArtisticScrollTitle";
 import MusicSection from "@/components/MusicSection";
 
 export default function MusicContent() {
@@ -20,6 +21,49 @@ export default function MusicContent() {
         window.addEventListener('mousemove', handleMouseMove);
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
+
+    const devotionalData = PORTAL_DATA.map((item, index) => {
+        if (index === 0) {
+            return {
+                ...item,
+                audio: "/assets/audio/jay_adhya_sakti.m4a",
+                title: "Jay Adhya Sakti" // Updated title as requested
+            };
+        }
+        if (index === 1) {
+            return {
+                ...item,
+                audio: "/assets/audio/harsidhi_mata.m4a",
+                title: "Harsidhi mata"
+            };
+        }
+        if (index === 2) {
+            return {
+                ...item,
+                audio: "/assets/audio/sukh_karta.m4a",
+                title: "Sukh Karta"
+            };
+        }
+        if (index === 3) {
+            return {
+                ...item,
+                audio: "/assets/audio/maha_mrityunjaya.m4a",
+                title: "Maha Mrityunjaya"
+            };
+        }
+        return item;
+    });
+
+    const bollywoodData = PORTAL_DATA.map((item, index) => {
+        if (index === 0) {
+            return {
+                ...item,
+                audio: "/assets/audio/ujjala.m4a",
+                title: "Ujjala"
+            };
+        }
+        return item;
+    });
 
     return (
         <main className="min-h-screen bg-black text-white selection:bg-gold selection:text-black overflow-x-hidden">
@@ -80,8 +124,29 @@ export default function MusicContent() {
                         </div>
                     </motion.div>
 
+                    {/* Garba Music Title with Artistic Writing Effect */}
+                    <div className="mt-12 -mb-8">
+                        <ArtisticScrollTitle text="Garba Music" />
+                    </div>
+
                     {/* Portals Grid */}
                     <MusicPortals />
+
+                    {/* Bollywood Vibes Title */}
+                    <div className="mt-20 -mb-8">
+                        <ArtisticScrollTitle text="Bollywood Vibes" />
+                    </div>
+
+                    {/* Portals Grid */}
+                    <MusicPortals data={bollywoodData} />
+
+                    {/* Devotional Peace Title */}
+                    <div className="mt-20 -mb-8">
+                        <ArtisticScrollTitle text="Devotional Peace" />
+                    </div>
+
+                    {/* Portals Grid (Duplicate for now as requested) */}
+                    <MusicPortals data={devotionalData} />
 
                 </div>
 

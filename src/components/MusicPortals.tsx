@@ -4,14 +4,26 @@ import { motion } from "framer-motion";
 import { Play, Pause, ExternalLink } from "lucide-react";
 import ThreeDAlbum from "./ThreeDAlbum";
 
-const PORTAL_DATA = [
+export interface PortalData {
+    id: string;
+    name: string;
+    title: string;
+    year: string;
+    cover: string;
+    audio: string;
+    color: string;
+    link: string;
+    icon: React.ReactNode;
+}
+
+export const PORTAL_DATA: PortalData[] = [
     {
         id: "spotify",
         name: "Spotify",
         title: "Mohan Morli Vagade",
         year: "2023",
         cover: "/assets/spotify.jpeg",
-        audio: "/assets/audio/Mohan Morli Vagade - Himali Joshi.mp3",
+        audio: "/assets/audio/mohan_morli_vagade.mp3",
         color: "#1DB954",
         link: "https://open.spotify.com/artist/76Ne4HMMruHNaglAhCp8dT",
         icon: (
@@ -26,7 +38,7 @@ const PORTAL_DATA = [
         title: "Chotile Dakla Vagya",
         year: "2022",
         cover: "/assets/apple.jpeg",
-        audio: "/assets/audio/ચોટીલે ડાકલા વાગ્યા I Chotile Dakla Vagya I Himali Joshi I Traditional Garba 2022 for Garba lover. - Himali Joshi.mp3",
+        audio: "/assets/audio/chotile_dakla_vagya.mp3",
         color: "#FA243C",
         link: "https://music.apple.com/in/artist/himali-joshi/1544328313",
         icon: (
@@ -41,7 +53,7 @@ const PORTAL_DATA = [
         title: "Jay Ambey Jai Ambey",
         year: "2023",
         cover: "/assets/amazon.jpeg",
-        audio: "/assets/audio/જય અંબે જય અંબે I Jay Ambey Jai Ambey I Himali Joshi I Traditional Garba for Garba Listener - Himali Joshi.mp3",
+        audio: "/assets/audio/jay_ambey.mp3",
         color: "#00A8E1",
         link: "https://music.amazon.in/artists/B08T8Q24SV/himali-joshi?referrer=https%3A%2F%2Fmusic.amazon.in%2F",
         icon: (
@@ -62,7 +74,7 @@ const PORTAL_DATA = [
         title: "Tu Kali Ne Kalyani Re Maa",
         year: "2022",
         cover: "/assets/music_jiosavan.jpg",
-        audio: "/assets/audio/તુ કાળી ને કલ્યાણી રે માઁ. I Tu Kali Ne Kalyani Re Maa I Himali Joshi I Traditional Garba - Himali Joshi.mp3",
+        audio: "/assets/audio/tu_kali_ne_kalyani.mp3",
         color: "#1ECCB0",
         link: "https://www.jiosaavn.com/artist/himali-joshi-songs/NeYXW5LVM6g_",
         icon: (
@@ -76,7 +88,11 @@ const PORTAL_DATA = [
     }
 ];
 
-export default function MusicPortals() {
+interface MusicPortalsProps {
+    data?: PortalData[];
+}
+
+export default function MusicPortals({ data = PORTAL_DATA }: MusicPortalsProps) {
     const [playingId, setPlayingId] = useState<string | null>(null);
     const [progress, setProgress] = useState<{ [key: string]: number }>({});
     const audioRefs = useRef<{ [key: string]: HTMLAudioElement }>({});
@@ -103,7 +119,7 @@ export default function MusicPortals() {
 
             // Create or play audio
             if (!audioRefs.current[id]) {
-                const audio = new Audio(audioPath);
+                const audio = new Audio(encodeURI(audioPath));
                 audio.addEventListener('timeupdate', () => {
                     setProgress(prev => ({
                         ...prev,
@@ -114,10 +130,17 @@ export default function MusicPortals() {
                     setPlayingId(null);
                     setProgress(prev => ({ ...prev, [id]: 0 }));
                 });
+                audio.addEventListener('error', (e) => {
+                    console.error("Audio playback error:", e);
+                    setPlayingId(null);
+                });
                 audioRefs.current[id] = audio;
             }
 
-            audioRefs.current[id].play();
+            audioRefs.current[id].play().catch(error => {
+                console.error("Playback failed:", error);
+                setPlayingId(null);
+            });
             setPlayingId(id);
         }
     };
@@ -133,7 +156,7 @@ export default function MusicPortals() {
         <section className="py-20 bg-black relative overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {PORTAL_DATA.map((portal) => {
+                    {data.map((portal) => {
                         const isCurrentPlaying = playingId === portal.id;
                         const currentProgress = progress[portal.id] || 0;
                         const audio = audioRefs.current[portal.id];

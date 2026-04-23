@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { getDevicePower } from "@/utils/devicePower";
 
 const VIDEOS = [
     {
@@ -29,6 +30,13 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isHovered, setIsHovered] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [actualUrl, setActualUrl] = useState(card.videoUrl);
+
+    useEffect(() => {
+        if (getDevicePower() === "low") {
+            setActualUrl(card.videoUrl.replace(".MP4", "_low.mp4").replace(".mp4", "_low.mp4"));
+        }
+    }, [card.videoUrl]);
 
     const isCenter = position === "center";
     const isLeft = position === "left";
@@ -146,7 +154,7 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
                 {/* 2. Video Element (Plays on Hover) */}
                 <video
                     ref={videoRef}
-                    src={card.videoUrl}
+                    src={actualUrl}
                     className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? "opacity-100" : "opacity-0"}`}
                     muted
                     playsInline

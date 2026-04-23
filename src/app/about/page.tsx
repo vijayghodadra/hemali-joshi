@@ -126,6 +126,9 @@ export default function AboutPage() {
                         <span className="text-gold font-serif text-4xl float-left mr-2 leading-none">H</span>
                         imali Joshi, born on 14th March 1984, is a versatile Indian artist celebrated for her talents as a writer, composer, singer, video director, and actor. As a <strong>top music artist in India</strong>, her musical odyssey began during her school years, where she cultivated a profound passion for classical dance and vocal music. This early enthusiasm propelled her to pursue formal education in dance and vocal training.
                     </p>
+                    <p className="text-gold italic border-l-2 border-gold/30 pl-4 py-2 bg-gold/5">
+                        Recognized as <strong>Hemali</strong> and <strong>Himani</strong>, the <strong>“Dakla Fame Girl”</strong> and <strong>Garba artist</strong>, she embodies a timeless rhythm that resonates with millions.
+                    </p>
                     <p>
                         Despite a flourishing career spanning nine years in various industries—including real estate, pharmaceuticals, and manufacturing—where she excelled as an admin and marketing planner, Himali's unwavering love for music remained her true calling. Today, she is widely recognized as the <strong>best singer in Vadodara</strong> and a highly sought-after <strong>professional live performer</strong> for events locally and internationally.
                     </p>

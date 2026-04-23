@@ -1,18 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Play, Volume2, VolumeX } from "lucide-react";
 import Link from "next/link";
 import MusicalKeyText from "./MusicalKeyText";
+import { getDevicePower } from "@/utils/devicePower";
 
 export default function Hero() {
     const [isMuted, setIsMuted] = useState(true);
+    const [videoSrc, setVideoSrc] = useState("/assets/hj2.mp4");
+
+    useEffect(() => {
+        if (getDevicePower() === "low") {
+            setVideoSrc("/assets/hj2_low.mp4");
+        }
+    }, []);
 
     return (
         <section className="relative h-screen w-full overflow-hidden">
             {/* Artistic Video Background - hj2.mp4 */}
             <div className="absolute inset-0 z-0 bg-black flex items-center justify-center">
                 <video
+                    key={videoSrc}
                     autoPlay
                     loop
                     muted={isMuted}
@@ -22,7 +31,7 @@ export default function Hero() {
                     className="w-full h-full object-cover md:object-contain pointer-events-none"
                     style={{ WebkitTransform: "translateZ(0)", transform: "translateZ(0)", willChange: "transform, opacity" }}
                 >
-                    <source src="/assets/hj2.mp4" type="video/mp4" />
+                    <source src={videoSrc} type="video/mp4" />
                 </video>
 
                 {/* Performance optimized blur overlay instead of filtering the video directly */}

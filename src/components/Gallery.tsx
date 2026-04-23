@@ -1,126 +1,289 @@
 "use client";
+
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { X } from "lucide-react";
 import ArtisticGalleryCard from "./ArtisticGalleryCard";
-
-
 import { galleryImages } from "@/data/galleryData";
 
-export default function Gallery() {
+// 💎 HUB PANEL COMPONENT
+function HubPanel({ section, index, onClick }: { section: any, index: number, onClick: () => void }) {
+    const mouseX = useMotionValue(0.5);
+    const mouseY = useMotionValue(0.5);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        mouseX.set((e.clientX - rect.left) / rect.width);
+        mouseY.set((e.clientY - rect.top) / rect.height);
+    };
+
+    const imgX = useTransform(mouseX, [0, 1], ["2%", "-2%"]);
+    const imgY = useTransform(mouseY, [0, 1], ["2%", "-2%"]);
+
+    return (
+        <motion.div
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: (index % 4) * 0.1, duration: 0.8, ease: "circOut" }}
+            onClick={onClick}
+            onMouseMove={handleMouseMove}
+            className="group relative flex-1 flex items-center justify-center cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-white/5 last:border-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:flex-[2.5]"
+        >
+            {/* Background Image with Parallax & Zoom */}
+            <motion.img
+                src={section.image}
+                alt={section.title}
+                style={{ x: imgX, y: imgY }}
+                className="absolute inset-0 w-[110%] h-[110%] -left-[5%] -top-[5%] object-cover grayscale brightness-[0.4] group-hover:grayscale-0 group-hover:brightness-110 group-hover:scale-105 transition-all duration-1000 ease-out"
+            />
+
+            {/* Overlays: Vignette & Glass Blur */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 opacity-100 group-hover:opacity-40 transition-opacity duration-700" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-opacity duration-700 pointer-events-none" />
+
+            {/* Content: Vertical Text & Gold Line */}
+            <div className="relative z-10 flex flex-col items-center justify-center h-full w-full pointer-events-none">
+                <div className="md:transform md:-rotate-90 md:origin-center whitespace-nowrap overflow-visible">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl tracking-[0.4em] font-sans font-black text-white/90 group-hover:text-gold group-hover:drop-shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-700 uppercase">
+                        {section.title}
+                    </h2>
+                </div>
+                <div className="hidden md:block absolute bottom-12 w-px h-0 group-hover:h-32 bg-gold shadow-[0_0_15px_rgba(212,175,55,0.8)] transition-all duration-1000 ease-in-out" />
+            </div>
+        </motion.div>
+    );
+}
+
+export default function Gallery({ initialCategory = null }: { initialCategory?: string | null }) {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [activeCategory, setActiveCategory] = useState<string | null>(initialCategory);
 
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // Parallax Effect Values
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+    const gMouseX = useMotionValue(0);
+    const gMouseY = useMotionValue(0);
 
-    // Background moves slightly opposite to cursor for depth
-    const moveX = useTransform(mouseX, [-0.5, 0.5], ["5%", "-5%"]);
-    const moveY = useTransform(mouseY, [-0.5, 0.5], ["5%", "-5%"]);
+    const moveX = useTransform(gMouseX, [-0.5, 0.5], ["5%", "-5%"]);
+    const moveY = useTransform(gMouseY, [-0.5, 0.5], ["5%", "-5%"]);
 
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleGlobalMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!containerRef.current) return;
         const rect = containerRef.current.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        mouseX.set((x / width) - 0.5);
-        mouseY.set((y / height) - 0.5);
+        gMouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+        gMouseY.set((e.clientY - rect.top) / rect.height - 0.5);
     };
 
+    // ✅ Filter images based on category
+    const filteredImages = activeCategory
+        ? galleryImages.filter((img) => img.category === activeCategory)
+        : galleryImages;
+
+    // 🎯 SECTION DATA
+    const ROW1 = [
+        { id: "wedding", title: "WEDDINGS", image: "/assets/gallery/wedding.png" },
+        { id: "concerts", title: "CONCERTS", image: "/assets/gallery/prewedding.png" },
+        { id: "celebrities", title: "CELEBRITIES", image: "/assets/gallery/bw_noir.png" },
+        { id: "albums", title: "OWN ALBUMS", image: "/assets/gallery/events.png" },
+    ];
+
+    const ROW2 = [
+        { id: "navratri", title: "NAVRATRI", image: "/assets/portrait-1.jpg" },
+        { id: "judge", title: "JUDGE", image: "/assets/portrait-2.jpg" },
+        { id: "modelling", title: "MODELLING", image: "/assets/splash-full.jpg" },
+        { id: "brands", title: "BRAND COLLAB", image: "/assets/splash-poster.jpg" },
+    ];
+
+    const ALL_SECTIONS = [...ROW1, ...ROW2];
 
     return (
-        <section id="gallery" className="w-full py-20 px-6 bg-transparent text-white">
-            <div className="container mx-auto">
-                <div className="flex flex-col items-center text-center mb-16">
-                    <h1 className="font-serif text-5xl md:text-6xl mb-6">Visual <span className="text-gold">Stories</span></h1>
-                    <p className="text-gray-400 max-w-2xl text-lg opacity-80">
-                        Moments frozen in time—where every frame sings a melody of its own.
-                        Hover to interact with the memories.
-                    </p>
-                    <div className="mt-8 h-1 w-24 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-                </div>
+        <section id="gallery" className="w-full min-h-screen bg-black text-white selection:bg-gold selection:text-black">
 
-                {/* Desktop "H & J" Monogram Layout */}
-                <div
-                    ref={containerRef}
-                    onMouseMove={handleMouseMove}
-                    className="hidden lg:grid relative grid-cols-12 gap-6 mb-24 p-12 rounded-3xl overflow-hidden border border-white/10 group"
-                >
-                    {/* Background Image - Parallax Motion */}
-                    <motion.div
-                        className="absolute inset-0 z-0 bg-cover bg-center opacity-60"
-                        style={{
-                            backgroundImage: "url('/assets/gallery-bg.jpg')",
-                            x: moveX,
-                            y: moveY,
-                            scale: 1.1 // Checked to ensure no white edges when moving
-                        }}
-                    />
-                    <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/90 via-black/40 to-black/90" />
-
-                    {/* The "H" - Spans columns 1-5 */}
-                    <div className="col-span-6 grid grid-cols-3 gap-6 relative z-10">
-                        {/* Left Pillar */}
-                        <div className="flex flex-col gap-6">
-                            {galleryImages.slice(0, 2).map((img) => (
-                                <ArtisticGalleryCard key={img.id} src={img.src} onClick={() => setSelectedImage(img.src)} />
-                            ))}
-                        </div>
-                        {/* Center Bridge - Centered vertically */}
-                        <div className="flex flex-col justify-center">
-                            <ArtisticGalleryCard src={galleryImages[2].src} onClick={() => setSelectedImage(galleryImages[2].src)} />
-                        </div>
-                        {/* Right Pillar */}
-                        <div className="flex flex-col gap-6">
-                            {galleryImages.slice(3, 5).map((img) => (
-                                <ArtisticGalleryCard key={img.id} src={img.src} onClick={() => setSelectedImage(img.src)} />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Spacer / Divider */}
-                    <div className="col-span-1 relative z-10" />
-
-                    {/* The "J" - Spans columns 7-11 */}
-                    <div className="col-span-5 grid grid-cols-3 gap-6 relative z-10">
-                        {/* Left helper (Empty except for hook bottom?) */}
-                        <div className="flex flex-col justify-end">
-                            <ArtisticGalleryCard src={galleryImages[5].src} onClick={() => setSelectedImage(galleryImages[5].src)} />
-                        </div>
-                        {/* Center Stem (The main J body) */}
-                        <div className="col-span-1 flex flex-col gap-6">
-                            {galleryImages.slice(6, 9).map((img) => (
-                                <ArtisticGalleryCard key={img.id} src={img.src} onClick={() => setSelectedImage(img.src)} />
-                            ))}
-                        </div>
-                        {/* Col 3 is empty */}
-                    </div>
-                </div>
-
-                {/* Mobile/Tablet & Remaining Images Grid */}
-                {/* On Desktop, we show images starting from index 9. On Mobile, show ALL images using standard layout. */}
-                {/* Mobile/Tablet & Remaining Images Grid - Unified Responsive Layout */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
-                    {galleryImages.map((img, idx) => (
-                        <div key={img.id} className={idx < 9 ? "lg:hidden contents" : ""}>
-                            {/* Show all on mobile, but on Desktop hide the first 9 (as they are in the H & J layout) */}
-                            <div className={(idx < 9 ? "block lg:hidden" : "block")}>
-                                <ArtisticGalleryCard
-                                    src={img.src}
-                                    onClick={() => setSelectedImage(img.src)}
+            {/* ========================= */}
+            {/* 🔥 STEP 1: SECTION HUB */}
+            {/* ========================= */}
+            <AnimatePresence mode="wait">
+                {!activeCategory && (
+                    <div key="hub" className="flex flex-col bg-black">
+                        {/* FIRST ROW */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            className="h-screen flex flex-col md:flex-row overflow-hidden sticky top-0"
+                        >
+                            {ROW1.map((sec, idx) => (
+                                <HubPanel
+                                    key={sec.id}
+                                    section={sec}
+                                    index={idx}
+                                    onClick={() => setActiveCategory(sec.id)}
                                 />
+                            ))}
+                        </motion.div>
+
+                        {/* SECOND ROW - SCROLL REVEAL */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 100 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-10%" }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                            className="h-screen flex flex-col md:flex-row overflow-hidden"
+                        >
+                            {ROW2.map((sec, idx) => (
+                                <HubPanel
+                                    key={sec.id}
+                                    section={sec}
+                                    index={idx + 4}
+                                    onClick={() => setActiveCategory(sec.id)}
+                                />
+                            ))}
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
+            {/* ========================= */}
+            {/* 🔥 STEP 2: GALLERY VIEW */}
+            {/* ========================= */}
+            <AnimatePresence>
+                {activeCategory && (
+                    <motion.div
+                        key="gallery-view"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.6 }}
+                        className="py-24 px-6 container mx-auto"
+                    >
+                        {/* Header & Back Button */}
+                        <div className="flex flex-col items-center text-center mb-20 relative">
+                            <motion.button
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: 0.3 }}
+                                onClick={() => setActiveCategory(null)}
+                                className="absolute left-0 top-0 text-gold/60 hover:text-gold tracking-widest text-sm font-bold transition-all flex items-center gap-2 group"
+                            >
+                                <span className="group-hover:-translate-x-1 transition-transform">←</span> BACK TO HUB
+                            </motion.button>
+
+                            <motion.h1
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="font-serif text-4xl md:text-6xl mb-8 tracking-tighter uppercase"
+                            >
+                                {activeCategory === "concerts" ? (
+                                    <>
+                                        LIVE <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Concerts</span>
+                                    </>
+                                ) : activeCategory === "wedding" ? (
+                                    <>
+                                        WEDDING <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Stories</span>
+                                    </>
+                                ) : activeCategory === "celebrities" ? (
+                                    <>
+                                        CELEBRITY <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Moments</span>
+                                    </>
+                                ) : activeCategory === "navratri" ? (
+                                    <>
+                                        NAVRATRI <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Utsav</span>
+                                    </>
+                                ) : activeCategory === "judge" ? (
+                                    <>
+                                        THE <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Judge</span>
+                                    </>
+                                ) : activeCategory === "modelling" ? (
+                                    <>
+                                        MODELLING <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Portfolio</span>
+                                    </>
+                                ) : activeCategory === "brands" ? (
+                                    <>
+                                        BRAND <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Collabs</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        OWN <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Albums</span>
+                                    </>
+                                )}
+                            </motion.h1>
+                            <motion.div
+                                initial={{ width: 0 }}
+                                animate={{ width: 100 }}
+                                transition={{ delay: 0.5, duration: 1 }}
+                                className="h-px bg-gradient-to-r from-transparent via-gold to-transparent"
+                            />
+                        </div>
+
+                        {/* Desktop "H & J" Monogram Layout */}
+                        <div
+                            ref={containerRef}
+                            onMouseMove={handleGlobalMouseMove}
+                            className="hidden lg:grid relative grid-cols-12 gap-8 mb-32 p-16 rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl shadow-gold/5"
+                        >
+                            {/* Parallax Background */}
+                            <motion.div
+                                className="absolute inset-0 z-0 bg-cover bg-center opacity-40 scale-110"
+                                style={{
+                                    backgroundImage: "url('/assets/gallery-bg.jpg')",
+                                    x: moveX,
+                                    y: moveY,
+                                }}
+                            />
+                            <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-black/80 to-black" />
+
+                            {/* The "H" - Proportional grid */}
+                            <div className="col-span-6 grid grid-cols-3 gap-8 relative z-10">
+                                <div className="flex flex-col gap-8">
+                                    {filteredImages.slice(0, 2).map((img) => (
+                                        <ArtisticGalleryCard key={img.id} src={img.src} onClick={() => setSelectedImage(img.src)} />
+                                    ))}
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                    {filteredImages[2] && (
+                                        <ArtisticGalleryCard src={filteredImages[2].src} onClick={() => setSelectedImage(filteredImages[2].src)} />
+                                    )}
+                                </div>
+                                <div className="flex flex-col gap-8">
+                                    {filteredImages.slice(3, 5).map((img) => (
+                                        <ArtisticGalleryCard key={img.id} src={img.src} onClick={() => setSelectedImage(img.src)} />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Elegant Spacer */}
+                            <div className="col-span-1 flex items-center justify-center relative z-10">
+                                <div className="w-[1px] h-32 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+                            </div>
+
+                            {/* The "J" - Defined by negative space */}
+                            <div className="col-span-5 grid grid-cols-3 gap-8 relative z-10">
+                                <div className="flex flex-col justify-end">
+                                    {filteredImages[5] && (
+                                        <ArtisticGalleryCard src={filteredImages[5].src} onClick={() => setSelectedImage(filteredImages[5].src)} />
+                                    )}
+                                </div>
+                                <div className="col-span-1 flex flex-col gap-8">
+                                    {filteredImages.slice(6, 9).map((img) => (
+                                        <ArtisticGalleryCard key={img.id} src={img.src} onClick={() => setSelectedImage(img.src)} />
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    ))}
-                </div>
 
-
-            </div>
+                        {/* Secondary Grid - Premium Masonry Layout */}
+                        <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+                            {filteredImages.map((img, idx) => (
+                                <div key={img.id} className={idx < 9 ? "lg:hidden" : "block"}>
+                                    <ArtisticGalleryCard
+                                        src={img.src}
+                                        onClick={() => setSelectedImage(img.src)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Image Lightbox */}
             <AnimatePresence>
@@ -147,8 +310,6 @@ export default function Gallery() {
                     </motion.div>
                 )}
             </AnimatePresence>
-
-
         </section>
     );
 }
