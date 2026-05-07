@@ -9,13 +9,10 @@ export const metadata: Metadata = {
 };
 
 const weddingImages = [
-    "/Wedding/DSC05776.jpg",
-    "/Wedding/DSC05804.jpg",
-    "/Wedding/DSC06003.jpg",
-    "/Wedding/DSC06016.jpg",
-    "/Wedding/DSC06530.jpg",
-    "/Wedding/DSC06588.jpg",
-    "/Wedding/DSC06658.jpg",
+    "/Wedding/Wed 1.jpeg",
+    "/Wedding/wed 2.jpeg",
+    "/Wedding/wed 3.jpeg",
+    "/Wedding/wed 4.jpeg"
 ];
 
 export default function WeddingGalleryPage() {
@@ -44,8 +41,9 @@ export default function WeddingGalleryPage() {
                                 alt={`Wedding performance by Himali Joshi - ${index + 1}`}
                                 width={800}
                                 height={1200}
-                                className="w-full h-auto object-cover filter contrast-[1.05] group-hover:scale-[1.03] group-hover:contrast-125 transition-all duration-700"
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                                unoptimized
+                                style={{ width: '100%', height: 'auto' }}
+                                className="rounded-2xl transition-all duration-700 group-hover:scale-[1.02] shadow-lg"
                             />
                             {/* Premium Glass Overlay on Hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none">

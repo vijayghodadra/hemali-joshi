@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Brand Collaborations | Himali Joshi",
+    title: "Brand Shoot | Himali Joshi",
     description: "Explore the brand collaborations and partnerships of Himali Joshi.",
 };
 
@@ -35,7 +35,7 @@ export default function BrandsGalleryPage() {
                     </Link>
                     
                     <h1 className="font-serif text-4xl md:text-6xl mb-6 tracking-tighter uppercase">
-                        BRAND <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Collabs</span>
+                        BRAND <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Shoot</span>
                     </h1>
                     <div className="h-px w-24 bg-gradient-to-r from-transparent via-gold to-transparent" />
                 </div>

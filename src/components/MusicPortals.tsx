@@ -37,7 +37,7 @@ export const PORTAL_DATA: PortalData[] = [
         name: "Apple Music",
         title: "Chotile Dakla Vagya",
         year: "2022",
-        cover: "/assets/apple.jpeg",
+        cover: "/Own Album/DSC05804.jpg",
         audio: "/assets/audio/chotile_dakla_vagya.mp3",
         color: "#FA243C",
         link: "https://music.apple.com/in/artist/himali-joshi/1544328313",
@@ -121,24 +121,27 @@ export default function MusicPortals({ data = PORTAL_DATA }: MusicPortalsProps) 
             if (!audioRefs.current[id]) {
                 const audio = new Audio(encodeURI(audioPath));
                 audio.addEventListener('timeupdate', () => {
-                    setProgress(prev => ({
-                        ...prev,
-                        [id]: (audio.currentTime / audio.duration) * 100
-                    }));
+                    if (!isNaN(audio.duration)) {
+                        setProgress(prev => ({
+                            ...prev,
+                            [id]: (audio.currentTime / audio.duration) * 100
+                        }));
+                    }
                 });
                 audio.addEventListener('ended', () => {
                     setPlayingId(null);
                     setProgress(prev => ({ ...prev, [id]: 0 }));
                 });
                 audio.addEventListener('error', (e) => {
-                    console.error("Audio playback error:", e);
+                    const target = e.target as HTMLAudioElement;
+                    console.error("Audio playback error:", target.error?.message || "Unknown error", "Path:", audioPath);
                     setPlayingId(null);
                 });
                 audioRefs.current[id] = audio;
             }
 
             audioRefs.current[id].play().catch(error => {
-                console.error("Playback failed:", error);
+                console.error("Playback failed (User interaction might be required or path is invalid):", error.message);
                 setPlayingId(null);
             });
             setPlayingId(id);

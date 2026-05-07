@@ -9,32 +9,12 @@ export const metadata: Metadata = {
 };
 
 const concertImages = [
-    "/Concert/DSC04529.jpg",
-    "/Concert/DSC04537.jpg",
-    "/Concert/DSC04563.jpg",
-    "/Concert/DSC04653.jpg",
-    "/Concert/DSC04684.jpg",
-    "/Concert/DSC04697.jpg",
-    "/Concert/DSC04859.jpg",
-    "/Concert/DSC05859.jpg",
-    "/Concert/DSC06658.jpg",
-    "/Concert/IMG_7069 2.JPG",
-    "/Concert/IMG_7069.JPG",
-    "/Concert/IMG_7070.JPG",
-    "/Concert/IMG_7071.JPG",
-    "/Concert/IMG_7072.JPG",
-    "/Concert/IMG_7074.JPG",
-    "/Concert/IMG_7077 2.JPG",
-    "/Concert/IMG_7077.JPG",
-    "/Concert/IMG_7078 2.JPG",
-    "/Concert/IMG_7092.JPG",
-    "/Concert/IMG_7093.JPG",
-    "/Concert/IMG_7094.JPG",
-    "/Concert/IMG_7095.JPG",
-    "/Concert/IMG_7096.JPG",
-    "/Concert/IMG_7097.JPG",
-    "/Concert/IMG_7098.JPG",
-    "/Concert/music1.jpg"
+    "/Concert/con 1.jpeg",
+    "/Concert/con 2.jpeg",
+    "/Concert/con 3.jpeg",
+    "/Concert/con 4.jpeg",
+    "/Concert/con 5.jpeg",
+    "/Concert/con 6.jpeg"
 ];
 
 export default function ConcertsGalleryPage() {
@@ -63,8 +43,9 @@ export default function ConcertsGalleryPage() {
                                 alt={`Live Concert by Himali Joshi - ${index + 1}`}
                                 width={800}
                                 height={1200}
-                                className="w-full h-auto object-cover filter contrast-[1.05] group-hover:scale-[1.03] group-hover:contrast-125 transition-all duration-700"
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                                unoptimized
+                                style={{ width: '100%', height: 'auto' }}
+                                className="rounded-2xl transition-all duration-700 group-hover:scale-[1.02] shadow-lg"
                             />
                             {/* Premium Glass Overlay on Hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none">

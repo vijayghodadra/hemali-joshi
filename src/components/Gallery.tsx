@@ -80,21 +80,13 @@ export default function Gallery({ initialCategory = null }: { initialCategory?: 
         : galleryImages;
 
     // 🎯 SECTION DATA
-    const ROW1 = [
+    const ALL_SECTIONS = [
+        { id: "navratri", title: "NAVRATRI", image: "/assets/portrait-1.jpg" },
         { id: "wedding", title: "WEDDINGS", image: "/assets/gallery/wedding.png" },
         { id: "concerts", title: "CONCERTS", image: "/assets/gallery/prewedding.png" },
-        { id: "celebrities", title: "CELEBRITIES", image: "/assets/gallery/bw_noir.png" },
-        { id: "albums", title: "OWN ALBUMS", image: "/assets/gallery/events.png" },
+        { id: "brands", title: "BRAND SHOOT", image: "/assets/splash-poster.jpg" },
+        { id: "albums", title: "ALBUMS", image: "/assets/gallery/events.png" },
     ];
-
-    const ROW2 = [
-        { id: "navratri", title: "NAVRATRI", image: "/assets/portrait-1.jpg" },
-        { id: "judge", title: "JUDGE", image: "/assets/portrait-2.jpg" },
-        { id: "modelling", title: "MODELLING", image: "/assets/splash-full.jpg" },
-        { id: "brands", title: "BRAND COLLAB", image: "/assets/splash-poster.jpg" },
-    ];
-
-    const ALL_SECTIONS = [...ROW1, ...ROW2];
 
     return (
         <section id="gallery" className="w-full min-h-screen bg-black text-white selection:bg-gold selection:text-black">
@@ -105,76 +97,20 @@ export default function Gallery({ initialCategory = null }: { initialCategory?: 
             <AnimatePresence mode="wait">
                 {!activeCategory && (
                     <div key="hub" className="flex flex-col bg-black">
-                        {/* FIRST ROW */}
+                        {/* GALLERY HUB SECTION */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0, y: -20 }}
                             className="h-screen flex flex-col md:flex-row overflow-hidden sticky top-0"
                         >
-                            {ROW1.map((sec, idx) => (
+                            {ALL_SECTIONS.map((sec, idx) => (
                                 <HubPanel
                                     key={sec.id}
                                     section={sec}
                                     index={idx}
                                     onClick={() => {
-                                        if (sec.id === "wedding") {
-                                            router.push('/gallery/wedding');
-                                        } else if (sec.id === "navratri") {
-                                            router.push('/gallery/navratri');
-                                        } else if (sec.id === "albums") {
-                                            router.push('/gallery/albums');
-                                        } else if (sec.id === "modelling") {
-                                            router.push('/gallery/modelling');
-                                        } else if (sec.id === "brands") {
-                                            router.push('/gallery/brands');
-                                        } else if (sec.id === "celebrities") {
-                                            router.push('/gallery/celebrities');
-                                        } else if (sec.id === "concerts") {
-                                            router.push('/gallery/concerts');
-                                        } else if (sec.id === "judge") {
-                                            router.push('/gallery/judge');
-                                        } else {
-                                            setActiveCategory(sec.id);
-                                        }
-                                    }}
-                                />
-                            ))}
-                        </motion.div>
-
-                        {/* SECOND ROW - SCROLL REVEAL */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 100 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-10%" }}
-                            transition={{ duration: 1, ease: "easeOut" }}
-                            className="h-screen flex flex-col md:flex-row overflow-hidden"
-                        >
-                            {ROW2.map((sec, idx) => (
-                                <HubPanel
-                                    key={sec.id}
-                                    section={sec}
-                                    index={idx + 4}
-                                    onClick={() => {
-                                        if (sec.id === "wedding") {
-                                            router.push('/gallery/wedding');
-                                        } else if (sec.id === "navratri") {
-                                            router.push('/gallery/navratri');
-                                        } else if (sec.id === "albums") {
-                                            router.push('/gallery/albums');
-                                        } else if (sec.id === "modelling") {
-                                            router.push('/gallery/modelling');
-                                        } else if (sec.id === "brands") {
-                                            router.push('/gallery/brands');
-                                        } else if (sec.id === "celebrities") {
-                                            router.push('/gallery/celebrities');
-                                        } else if (sec.id === "concerts") {
-                                            router.push('/gallery/concerts');
-                                        } else if (sec.id === "judge") {
-                                            router.push('/gallery/judge');
-                                        } else {
-                                            setActiveCategory(sec.id);
-                                        }
+                                        router.push(`/gallery/${sec.id}`);
                                     }}
                                 />
                             ))}
@@ -213,37 +149,25 @@ export default function Gallery({ initialCategory = null }: { initialCategory?: 
                                 animate={{ opacity: 1, y: 0 }}
                                 className="font-serif text-4xl md:text-6xl mb-8 tracking-tighter uppercase"
                             >
-                                {activeCategory === "concerts" ? (
+                                {activeCategory === "navratri" ? (
                                     <>
-                                        LIVE <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Concerts</span>
+                                        NAVRATRI <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Utsav</span>
                                     </>
                                 ) : activeCategory === "wedding" ? (
                                     <>
                                         WEDDING <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Stories</span>
                                     </>
-                                ) : activeCategory === "celebrities" ? (
+                                ) : activeCategory === "concerts" ? (
                                     <>
-                                        CELEBRITY <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Moments</span>
-                                    </>
-                                ) : activeCategory === "navratri" ? (
-                                    <>
-                                        NAVRATRI <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Utsav</span>
-                                    </>
-                                ) : activeCategory === "judge" ? (
-                                    <>
-                                        THE <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Judge</span>
-                                    </>
-                                ) : activeCategory === "modelling" ? (
-                                    <>
-                                        MODELLING <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Portfolio</span>
+                                        LIVE <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Concerts</span>
                                     </>
                                 ) : activeCategory === "brands" ? (
                                     <>
-                                        BRAND <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Collabs</span>
+                                        BRAND <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Shoot</span>
                                     </>
                                 ) : (
                                     <>
-                                        OWN <span className="text-gold italic ml-4 font-allura normal-case tracking-normal">Albums</span>
+                                        ALBUMS
                                     </>
                                 )}
                             </motion.h1>

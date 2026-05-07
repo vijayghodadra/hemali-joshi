@@ -9,15 +9,12 @@ export const metadata: Metadata = {
 };
 
 const navratriImages = [
-    "/Navratri/DSC04529.jpg",
-    "/Navratri/DSC04537.jpg",
-    "/Navratri/DSC04563.jpg",
-    "/Navratri/DSC04653.jpg",
-    "/Navratri/DSC04684.jpg",
-    "/Navratri/DSC04697.jpg",
-    "/Navratri/DSC04859.jpg",
-    "/Navratri/DSC05859.jpg",
-    "/Navratri/music1.jpg"
+    "/Navratri/Nav 1.jpeg",
+    "/Navratri/Nav 2.jpeg",
+    "/Navratri/Nav 3.jpeg",
+    "/Navratri/Nav 4.jpeg",
+    "/Navratri/Nav 5.jpeg",
+    "/Navratri/Nav 6.jpeg"
 ];
 
 export default function NavratriGalleryPage() {
@@ -46,8 +43,9 @@ export default function NavratriGalleryPage() {
                                 alt={`Navratri performance by Himali Joshi - ${index + 1}`}
                                 width={800}
                                 height={1200}
-                                className="w-full h-auto object-cover filter contrast-[1.05] group-hover:scale-[1.03] group-hover:contrast-125 transition-all duration-700"
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                                unoptimized
+                                style={{ width: '100%', height: 'auto' }}
+                                className="rounded-2xl transition-all duration-700 group-hover:scale-[1.02] shadow-lg"
                             />
                             {/* Premium Glass Overlay on Hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none">
