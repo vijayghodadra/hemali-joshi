@@ -10,20 +10,9 @@ const GENERAL_NEWS = [
     { id: 4, src: "/assets/News/article_interview.jpg", title: "Press Clipping", source: "Times Of India", date: "Interview", span: "md:col-span-2 md:row-span-2" },
     { id: 2, src: "/assets/News/Spark news .jpeg", title: "Media Spotlight", source: "Spark News", date: "Coverage", span: "col-span-1" },
     { id: 1, src: "/assets/News/sandesh.jpeg", title: "Cultural Achievements", source: "Sandesh News", date: "Feature", span: "col-span-1" },
-    { id: 3, src: "/assets/News/media_collage_2.jpg", title: "Live Performance Highlights", source: "Press Coverage", date: "2024", span: "col-span-1" },
 ];
 
-const PATAN_NEWS = [
-    { id: 7, src: "/assets/News/IMG_7113.JPG", title: "Musical Journey", source: "Lifestyle Magazine", date: "Profile", span: "col-span-1" },
-    { id: 4, src: "/assets/News/IMG_7110.JPG", title: "Navratri Special Feature", source: "Gujarat Samachar", date: "2024", span: "col-span-1" },
-    { id: 5, src: "/assets/News/IMG_7112.JPG", title: "Cultural Excellence Award", source: "Divya Bhaskar", date: "2024", span: "col-span-1" },
-    { id: 6, src: "/assets/News/IMG_7109.JPG", title: "Voice of Gujarat", source: "City News", date: "Exclusive", span: "col-span-1" },
-    { id: 8, src: "/assets/News/IMG_7111.JPG", title: "Live Performance", source: "Event Coverage", date: "2023", span: "col-span-1" },
-    { id: 10, src: "/assets/News/f86147fd-8ba6-4252-bad6-b677022ab066.JPG", title: "Community Recognition", source: "Local Press", date: "Award", span: "col-span-1" },
-    { id: 11, src: "/assets/News/cc5b3716-4fef-4d05-94c5-11ac1a560463.JPG", title: "The Art of Garba", source: "Culture Beat", date: "Review", span: "col-span-1" },
-];
-
-const ALL_NEWS_ITEMS = [...GENERAL_NEWS, ...PATAN_NEWS];
+const ALL_NEWS_ITEMS = [...GENERAL_NEWS];
 
 export default function NewsContent() {
     const [showIntro, setShowIntro] = useState(true);
@@ -93,13 +82,9 @@ export default function NewsContent() {
                                         {/* Cinematic Overlay */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-6 flex flex-col justify-end">
                                             <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                                <div className="flex items-center gap-2 text-gold text-[10px] tracking-widest uppercase mb-3">
-                                                    <span className="px-2 py-0.5 border border-gold/30 rounded-full bg-black/40 backdrop-blur-sm">{item.source}</span>
-                                                    <span className="text-white/40">{item.date}</span>
+                                                <div className="mb-4">
+                                                    <span className="text-white text-2xl md:text-4xl font-serif italic tracking-tight drop-shadow-lg">{item.source}</span>
                                                 </div>
-                                                <h3 className="text-xl md:text-2xl font-serif text-white group-hover:text-gold transition-colors leading-tight mb-2">
-                                                    {item.title}
-                                                </h3>
                                                 <div className="w-0 group-hover:w-12 h-px bg-gold transition-all duration-500" />
                                             </div>
                                         </div>
@@ -109,61 +94,7 @@ export default function NewsContent() {
                         </div>
                     </section>
 
-                    {/* 2. THANK YOU PATAN SECTION */}
-                    <section className="relative overflow-hidden bg-[#050505] py-16 md:py-20 border-y border-white/5">
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-20">
-                            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/10 rounded-full blur-[120px]" />
-                            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-red-900/10 rounded-full blur-[120px]" />
-                        </div>
 
-                        <div className="container mx-auto px-6 relative z-10">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1 }}
-                                className="text-center mb-20"
-                            >
-                                <div className="inline-flex items-center gap-4 mb-6">
-                                    <div className="h-[1px] w-12 md:w-24 bg-gradient-to-r from-transparent to-gold" />
-                                    <span className="font-serif text-gold text-lg md:text-xl italic tracking-widest">Special Appreciation</span>
-                                    <div className="h-[1px] w-12 md:w-24 bg-gradient-to-l from-transparent to-gold" />
-                                </div>
-                                <h2 className="font-serif text-5xl md:text-8xl text-white mb-8 leading-none tracking-tighter">
-                                    Thank You <span className="italic block text-gold mt-2">Patan</span>
-                                </h2>
-                                <p className="text-gray-400 max-w-xl mx-auto font-light italic leading-relaxed text-sm md:text-base">
-                                    Honored by the overwhelming love and recognition from the historic city of Patan. These memories remain etched in gold.
-                                </p>
-                            </motion.div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                                {PATAN_NEWS.map((item, index) => (
-                                    <motion.div
-                                        key={item.id}
-                                        initial={{ opacity: 0, rotate: index % 2 === 0 ? -5 : 5, y: 50 }}
-                                        whileInView={{ opacity: 1, rotate: index % 3 === 0 ? -2 : 2, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: index * 0.15, duration: 1, type: "spring" }}
-                                        whileHover={{ scale: 1.05, rotate: 0, zIndex: 30 }}
-                                        className="relative group"
-                                        onClick={() => setSelectedArticle(item)}
-                                    >
-                                        <div className="bg-white p-3 md:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5 transition-all duration-700 group-hover:shadow-gold/20">
-                                            <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f5f5]">
-                                                <Image src={item.src} alt={item.title} fill className="object-contain filter contrast-[1.02] sepia-[0.1]" />
-                                            </div>
-                                            <div className="mt-4 flex flex-col items-center">
-                                                <div className="h-px w-8 bg-black/10 mb-2" />
-                                                <span className="text-[10px] uppercase tracking-widest text-gray-500 font-serif">City News Coverage</span>
-                                                <h4 className="text-sm font-serif text-gray-800 mt-1 italic text-center">{item.title}</h4>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
 
                     {/* 3. PODCAST SECTION */}
                     <section className="container mx-auto px-6 py-16">

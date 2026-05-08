@@ -136,7 +136,7 @@ export default function MusicContent() {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="mb-20"
+                        className="mb-10"
                     >
                         <ThreeDAlbum coverImage="/assets/Discograohy.jpeg" fullImage />
 
@@ -146,7 +146,7 @@ export default function MusicContent() {
                     </motion.div>
 
                     {/* Garba Music Title with Artistic Writing Effect */}
-                    <div className="mt-12 -mb-8">
+                    <div className="mt-8 -mb-6">
                         <ArtisticScrollTitle text="Garba Music" />
                     </div>
 
@@ -154,7 +154,7 @@ export default function MusicContent() {
                     <MusicPortals />
 
                     {/* Bollywood Vibes Title */}
-                    <div className="mt-20 -mb-8">
+                    <div className="mt-12 -mb-6">
                         <ArtisticScrollTitle text="Bollywood Vibes" />
                     </div>
 
@@ -162,7 +162,7 @@ export default function MusicContent() {
                     <MusicPortals data={bollywoodData} />
 
                     {/* Devotional Peace Title */}
-                    <div className="mt-20 -mb-8">
+                    <div className="mt-12 -mb-6">
                         <ArtisticScrollTitle text="Devotional Peace" />
                     </div>
 
