@@ -8,6 +8,7 @@ interface ArtisticVideoCardProps {
     src: string;
     title: string;
     description?: string;
+    onClick: () => void;
     year?: string;
     tag?: string;
     poster?: string;
