@@ -17,8 +17,7 @@ const brandImages = [
     "/Brand Collabration/DSC04684.jpg",
     "/Brand Collabration/DSC05859.jpg",
     "/Brand Collabration/DSC06658.jpg",
-    "/Brand Collabration/DSC06010.jpg",
-    "/Brand Collabration/DSC04581.jpg"
+    "/Brand Collabration/DSC06010.jpg"
 ];
 
 export default function BrandsGalleryPage() {

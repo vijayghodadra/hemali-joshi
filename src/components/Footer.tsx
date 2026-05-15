@@ -56,7 +56,7 @@ export default function Footer() {
                     <div className="space-y-4">
                         <h2 className="font-serif text-3xl text-gold">Himali Joshi</h2>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-                            The <strong>best singer in Vadodara</strong> and the top <strong>playback & Garba singer in Gujarat</strong>. Experience world-class live performances for weddings and events.
+                            The <strong>best singer in Vadodara</strong> and the top <strong>playback & Garba singer in Gujarat</strong>. Experience world-class live performances for weddings, events, and corporate events.
                         </p>
                     </div>
 

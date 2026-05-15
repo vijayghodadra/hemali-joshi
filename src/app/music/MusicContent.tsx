@@ -27,28 +27,32 @@ export default function MusicContent() {
             return {
                 ...item,
                 audio: "/assets/audio/jay_adhya_sakti.m4a",
-                title: "Jay Adhya Sakti" // Updated title as requested
+                title: "Jay Adhya Sakti",
+                cover: "/assets/aarati.png"
             };
         }
         if (index === 1) {
             return {
                 ...item,
                 audio: "/assets/audio/harsidhi_mata.m4a",
-                title: "Harsidhi mata"
+                title: "Harsidhi mata",
+                cover: "/assets/mantra.png"
             };
         }
         if (index === 2) {
             return {
                 ...item,
                 audio: "/assets/audio/sukh_karta.m4a",
-                title: "Sukh Karta"
+                title: "Sukh Karta",
+                cover: "/assets/sukh.png"
             };
         }
         if (index === 3) {
             return {
                 ...item,
                 audio: "/assets/audio/maha_mrityunjaya.m4a",
-                title: "Maha Mrityunjaya"
+                title: "Maha Mrityunjaya",
+                cover: "/assets/maha.png"
             };
         }
         return item;
@@ -59,28 +63,32 @@ export default function MusicContent() {
             return {
                 ...item,
                 audio: "/assets/audio/ujjala.m4a",
-                title: "Ujjala"
+                title: "Ujjala",
+                cover: "/assets/ujjala.png"
             };
         }
         if (index === 1) {
             return {
                 ...item,
                 audio: "/assets/audio/rang_lagyo.m4a",
-                title: "Rang Lagyo"
+                title: "Rang Lagyo",
+                cover: "/assets/rang.png"
             };
         }
         if (index === 2) {
             return {
                 ...item,
                 audio: "/assets/audio/pehla_nasha.m4a",
-                title: "Pehla Nasha"
+                title: "Pehla Nasha",
+                cover: "/assets/pehlanasha.png"
             };
         }
         if (index === 3) {
             return {
                 ...item,
                 audio: "/assets/audio/mein_teri_behna_hoon.m4a",
-                title: "Mein Teri Behna Hoon"
+                title: "Mein Teri Behna Hoon",
+                cover: "/assets/behna.png"
             };
         }
         return item;
@@ -127,7 +135,7 @@ export default function MusicContent() {
                             The <span className="text-gold italic">Discography</span>
                         </h1>
                         <p className="text-gray-400 max-w-xl mx-auto text-lg">
-                            Experience the journey through sound with the <strong>best singer in India</strong>. Available on Spotify, Apple Music, and more.
+                            Dive into inspiring music albums created for every mood and celebration.
                         </p>
                     </motion.div>
 

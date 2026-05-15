@@ -10,6 +10,9 @@ const GENERAL_NEWS = [
     { id: 4, src: "/assets/News/article_interview.jpg", title: "Press Clipping", source: "Times Of India", date: "Interview", span: "md:col-span-2 md:row-span-2" },
     { id: 2, src: "/assets/News/Spark news .jpeg", title: "Media Spotlight", source: "Spark News", date: "Coverage", span: "col-span-1" },
     { id: 1, src: "/assets/News/sandesh.jpeg", title: "Cultural Achievements", source: "Sandesh News", date: "Feature", span: "col-span-1" },
+    { id: 5, src: "/assets/patan.png", title: "Theatrical Performance", source: "Patan News", date: "Feature", span: "col-span-1" },
+    { id: 6, src: "/assets/patan1.png", title: "Gujarati Natak", source: "Patan News", date: "Feature", span: "col-span-1" },
+    { id: 7, src: "/assets/patan2.png", title: "Theatrical Performance", source: "Dainik News", date: "Feature", span: "col-span-1" },
 ];
 
 const ALL_NEWS_ITEMS = [...GENERAL_NEWS];
@@ -101,49 +104,80 @@ export default function NewsContent() {
                         <div className="relative rounded-3xl overflow-hidden border border-gold/20 bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] shadow-[0_30px_80px_rgba(0,0,0,0.8)]">
                             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
                             
-                            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 p-6 md:p-12 lg:p-14">
-                                <div className="w-full lg:w-1/3 flex justify-center">
-                                    <motion.div 
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        whileHover={{ scale: 1.05, rotate: 2 }}
-                                        viewport={{ once: true }}
-                                        className="relative w-full max-w-md aspect-video rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/10 group cursor-pointer"
-                                    >
-                                        <Image src="/podcast.jpeg" alt="Podcast Cover" fill className="object-cover filter contrast-[1.1] saturate-50 group-hover:saturate-100 transition-all duration-700" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex items-end p-6">
-                                            <div>
-                                                <div className="text-gold font-serif tracking-widest text-xs uppercase mb-1">Episode 1</div>
-                                                <div className="text-white font-serif text-lg leading-none">Himali's Voice</div>
-                                            </div>
+                            <div className="relative z-10 flex flex-col gap-16 p-6 md:p-12 lg:p-14">
+                                {[
+                                    {
+                                        id: 1,
+                                        image: "/assets/podcast.png",
+                                        episode: "Episode 2",
+                                        title: "Gujarati Garba",
+                                        desc: "Join Himali as she discusses the journey of remastering traditional Gujarati folk music for the modern generation and the vibrant energy of global live performances.",
+                                        embed: "https://www.youtube.com/embed/BmN-jXZu3Rw"
+                                    },
+                                    {
+                                        id: 2,
+                                        image: "/podcast.jpeg",
+                                        episode: "Episode 1",
+                                        title: "Himali's Voice",
+                                        desc: "Join Himali as she discusses the journey of remastering traditional Gujarati folk music for the modern generation and the vibrant energy of global live performances.",
+                                        embed: "https://www.youtube.com/embed/DrXeWuPPYGc"
+                                    }
+                                ].map((podcast, idx) => (
+                                    <div key={podcast.id} className="flex flex-col lg:flex-row items-center gap-8 pb-12 border-b border-white/10 last:border-0 last:pb-0">
+                                        <div className="w-full lg:w-1/3 flex justify-center">
+                                            <motion.div 
+                                                initial={{ opacity: 0, scale: 0.9 }}
+                                                whileInView={{ opacity: 1, scale: 1 }}
+                                                whileHover={{ scale: 1.05, rotate: 2 }}
+                                                viewport={{ once: true }}
+                                                className="relative w-full max-w-md aspect-video rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/10 group cursor-pointer"
+                                            >
+                                                <Image src={podcast.image} alt={podcast.title} fill className="object-cover filter contrast-[1.1] saturate-50 group-hover:saturate-100 transition-all duration-700" />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex items-end p-6">
+                                                    <div>
+                                                        <div className="text-gold font-serif tracking-widest text-xs uppercase mb-1">{podcast.episode}</div>
+                                                        <div className="text-white font-serif text-lg leading-none">{podcast.title}</div>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
                                         </div>
-                                    </motion.div>
-                                </div>
 
-                                <div className="w-full lg:w-2/3 text-center lg:text-left">
-                                    <div className="inline-block px-4 py-1.5 border border-gold/30 rounded-full text-xs uppercase tracking-[0.2em] text-gold mb-6 bg-gold/5 backdrop-blur-sm">
-                                        Featured Podcast
-                                    </div>
-                                    <h2 className="font-serif text-3xl md:text-5xl text-white mb-6 leading-tight">
-                                        The Rhythm of <span className="text-gold italic">Roots</span>
-                                    </h2>
-                                    <p className="text-gray-400 text-lg mb-10 max-w-2xl font-light italic leading-relaxed">
-                                        Join Himali as she discusses the journey of remastering traditional Gujarati folk music for the modern generation and the vibrant energy of global live performances.
-                                    </p>
+                                        <div className="w-full lg:w-2/3 text-center lg:text-left">
+                                            {idx === 0 && (
+                                                <>
+                                                    <div className="inline-block px-4 py-1.5 border border-gold/30 rounded-full text-xs uppercase tracking-[0.2em] text-gold mb-6 bg-gold/5 backdrop-blur-sm">
+                                                        Featured Podcast
+                                                    </div>
+                                                    <h2 className="font-serif text-3xl md:text-5xl text-white mb-6 leading-tight">
+                                                        PODCAST
+                                                    </h2>
+                                                </>
+                                            )}
+                                            <p className="text-gray-400 text-lg mb-10 max-w-2xl font-light italic leading-relaxed">
+                                                {podcast.desc}
+                                            </p>
 
-                                    <div className="w-full max-w-xl aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl mx-auto lg:mx-0 bg-black">
-                                        <iframe
-                                            width="100%"
-                                            height="100%"
-                                            src="https://www.youtube.com/embed/DrXeWuPPYGc"
-                                            title="YouTube video player"
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            allowFullScreen
-                                            className="opacity-80 hover:opacity-100 transition-opacity duration-500"
-                                        ></iframe>
+                                            {podcast.embed ? (
+                                                <div className="w-full max-w-xl aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl mx-auto lg:mx-0 bg-black">
+                                                    <iframe
+                                                        width="100%"
+                                                        height="100%"
+                                                        src={podcast.embed}
+                                                        title="YouTube video player"
+                                                        frameBorder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                        allowFullScreen
+                                                        className="opacity-80 hover:opacity-100 transition-opacity duration-500"
+                                                    ></iframe>
+                                                </div>
+                                            ) : (
+                                                <div className="w-full max-w-xl aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl mx-auto lg:mx-0 bg-white/5 flex items-center justify-center">
+                                                    <span className="text-gray-500 font-serif italic">Video link coming soon...</span>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
                     </section>
@@ -178,6 +212,15 @@ export default function NewsContent() {
                                                 <p className="text-xs text-gray-500">Providing technical insights to elevate vocal performances.</p>
                                             </div>
                                         </div>
+                                        <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 group">
+                                            <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-black transition-all">
+                                                <Star size={20} />
+                                            </div>
+                                            <div>
+                                                <h4 className="text-white font-medium">Parul University</h4>
+                                                <p className="text-xs text-gray-500">Guest Judge and Mentor</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </motion.div>
                             </div>
@@ -188,29 +231,48 @@ export default function NewsContent() {
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
+                                        className="relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl col-span-2 md:col-span-1 group"
+                                    >
+                                        <Image src="/Judge/jud 1.jpeg" alt="Judge Moment 1" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent flex justify-center">
+                                            <div className="bg-white text-black px-4 py-1.5 rounded-lg text-xs md:text-sm font-bold shadow-xl">
+                                                <span className="text-pink-600 mr-1">📍</span> PARUL UNIVERSITY
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                    <motion.div
+                                        initial={{ opacity: 0, x: 20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
                                         className="relative aspect-[3/4] rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl col-span-2 md:col-span-1"
                                     >
-                                        <Image src="/Judge/jud 1.jpeg" alt="Judge Moment 1" fill className="object-cover" />
+                                        <Image src="/Judge/jud 2.jpeg" alt="Judge Moment 2" fill className="object-cover" />
                                     </motion.div>
-                                    <div className="grid grid-rows-2 gap-4 col-span-2 md:col-span-1">
-                                        <motion.div
-                                            initial={{ opacity: 0, x: 20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            className="relative aspect-[3/4] rounded-xl overflow-hidden border border-white/10 shadow-xl"
-                                        >
-                                            <Image src="/Judge/jud 2.jpeg" alt="Judge Moment 2" fill className="object-cover" />
-                                        </motion.div>
-                                        <motion.div
-                                            initial={{ opacity: 0, x: 20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: 0.2 }}
-                                            className="relative aspect-video rounded-xl overflow-hidden border border-white/10 shadow-xl"
-                                        >
-                                            <Image src="/Judge/jud 3.jpeg" alt="Judge Moment 3" fill className="object-cover" />
-                                        </motion.div>
-                                    </div>
+
+                                    {/* Vadodara Got Talent Image */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        className="relative aspect-[16/9] rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl col-span-2 group"
+                                    >
+                                        <Image src="/assets/vadodara.png" alt="Vadodara Got Talent" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent flex justify-center">
+                                            <div className="bg-white text-black px-4 py-1.5 rounded-lg text-xs md:text-sm font-bold shadow-xl uppercase tracking-wider">
+                                                <span className="text-pink-600 mr-1">📍</span> VADODARA GOT TALENT
+                                            </div>
+                                        </div>
+                                    </motion.div>
+
+                                    {/* Additional Judge Image */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        className="relative aspect-video rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl col-span-2 group mt-2 bg-black/40 flex items-center justify-center"
+                                    >
+                                        <Image src="/assets/judge.png" alt="Judge Moment" fill className="object-contain p-2 group-hover:scale-[1.02] transition-transform duration-700" />
+                                    </motion.div>
                                 </div>
                             </div>
                         </div>

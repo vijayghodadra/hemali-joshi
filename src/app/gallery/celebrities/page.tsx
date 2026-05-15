@@ -9,11 +9,12 @@ export const metadata: Metadata = {
 };
 
 const celebrityImages = [
-    "/Celebrites/cel 1.jpeg",
     "/Celebrites/cel 2.jpeg",
+    "/Celebrites/cel 1.jpeg",
+    "/Celebrites/cel 5.jpeg",
+    "/Celebrites/cel 4.jpeg",
     "/Celebrites/cel 3.jpeg",
-    "/Celebrites/IMG_7083.JPG",
-    "/Celebrites/WhatsApp Image 2026-04-22 at 12.09.14 PM.jpeg"
+    "/assets/komal.png"
 ];
 
 export default function CelebritiesGalleryPage() {

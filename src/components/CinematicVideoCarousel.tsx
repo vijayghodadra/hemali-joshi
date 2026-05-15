@@ -8,21 +8,27 @@ import { getDevicePower } from "@/utils/devicePower";
 const VIDEOS = [
     {
         id: 1,
-        title: "Live at Symphony Hall",
-        thumbnail: "/assets/splash-full.jpg",
-        videoUrl: "/assets/hj2.mp4",
+        title: "Wedding Event Review",
+        thumbnail: "/assets/Client.png",
+        videoUrl: "",
     },
     {
         id: 2,
-        title: "The Soulful Journey",
-        thumbnail: "/assets/splash-full.jpg",
-        videoUrl: "/assets/hj2.mp4",
+        title: "Wedding Event Review",
+        thumbnail: "/assets/Client1.png",
+        videoUrl: "",
     },
     {
         id: 3,
-        title: "Folk Fusion Nights",
+        title: "Audience Review",
         thumbnail: "/assets/splash-full.jpg",
-        videoUrl: "/assets/hj2.mp4",
+        videoUrl: "/assets/Audience.mp4",
+    },
+    {
+        id: 4,
+        title: "Wedding Event Review",
+        thumbnail: "",
+        videoUrl: "/assets/News.mp4",
     },
 ];
 
@@ -32,11 +38,20 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
     const [isPlaying, setIsPlaying] = useState(false);
     const [actualUrl, setActualUrl] = useState(card.videoUrl);
 
+    const hasVideo = Boolean(card.videoUrl);
+
     useEffect(() => {
-        if (getDevicePower() === "low") {
-            setActualUrl(card.videoUrl.replace(".MP4", "_low.mp4").replace(".mp4", "_low.mp4"));
+        if (hasVideo && getDevicePower() === "low") {
+            // Only apply low-res fallback for hj2.mp4 since Audience_low.mp4 doesn't exist
+            if (card.videoUrl.includes("hj2.mp4")) {
+                setActualUrl(card.videoUrl.replace(".MP4", "_low.mp4").replace(".mp4", "_low.mp4"));
+            } else {
+                setActualUrl(card.videoUrl);
+            }
+        } else {
+            setActualUrl(card.videoUrl);
         }
-    }, [card.videoUrl]);
+    }, [card.videoUrl, hasVideo]);
 
     const isCenter = position === "center";
     const isLeft = position === "left";
@@ -85,7 +100,7 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        if (isCenter && isHovered && videoRef.current) {
+        if (isCenter && isHovered && videoRef.current && hasVideo) {
             timeout = setTimeout(() => {
                 videoRef.current?.play()
                     .then(() => setIsPlaying(true))
@@ -99,7 +114,7 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
             }
         }
         return () => clearTimeout(timeout);
-    }, [isCenter, isHovered]);
+    }, [isCenter, isHovered, hasVideo]);
 
     return (
         <motion.div
@@ -143,24 +158,34 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
                 }}
             >
                 {/* 1. Thumbnail Image (Placeholder) */}
-                <Image
-                    src={card.thumbnail}
-                    alt={card.title}
-                    fill
-                    className={`object-cover transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100"}`}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                />
+                {card.thumbnail ? (
+                    <Image
+                        src={card.thumbnail}
+                        alt={card.title}
+                        fill
+                        className={`object-cover transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100"}`}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                ) : hasVideo ? (
+                    <video
+                        src={`${actualUrl}#t=1.0`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100"}`}
+                        preload="metadata"
+                    />
+                ) : null}
 
                 {/* 2. Video Element (Plays on Hover) */}
-                <video
-                    ref={videoRef}
-                    src={actualUrl}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? "opacity-100" : "opacity-0"}`}
-                    muted
-                    playsInline
-                    loop
-                    preload="none" // Optimize loading
-                />
+                {hasVideo && (
+                    <video
+                        ref={videoRef}
+                        src={actualUrl}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? "opacity-100" : "opacity-0"}`}
+                        muted
+                        playsInline
+                        loop
+                        preload="none" // Optimize loading
+                    />
+                )}
 
                 {/* Spotlight/Sheen Effect on Hover */}
                 {isCenter && (
@@ -187,7 +212,7 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
                     style={{ transform: "translateZ(30px)" }}
                 >
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors">
-                        {isCenter && (
+                        {isCenter && hasVideo && (
                             <motion.div
                                 whileHover={{ scale: 1.1 }}
                                 className="w-20 h-20 rounded-full bg-gold/20 md:backdrop-blur-md border border-gold flex items-center justify-center text-gold shadow-[0_0_30px_rgba(212,175,55,0.4)]"
@@ -238,7 +263,7 @@ export default function CinematicVideoCarousel() {
 
             <div className="container mx-auto max-w-6xl relative z-10">
                 <div className="flex flex-col items-center mb-12">
-                    <h2 className="font-serif text-5xl mb-4 text-center">Cinematic <span className="text-gold">Moments</span></h2>
+                    <h2 className="font-serif text-5xl mb-4 text-center">Client <span className="text-gold">Reviews</span></h2>
                     <div className="h-1 w-24 bg-gradient-to-r from-transparent via-gold to-transparent" />
                 </div>
 

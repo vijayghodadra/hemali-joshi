@@ -6,6 +6,7 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import ArtisticRoleText from "@/components/ArtisticRoleText";
 import MusicalKeyText from "@/components/MusicalKeyText";
 import ThreeDAwardCard from "@/components/ThreeDAwardCard";
+import ZoomableImage from "@/components/ZoomableImage";
 
 export const metadata: Metadata = {
     title: "About Himali Joshi | Top Music Artist in India & Professional Performer in Vadodara",
@@ -149,7 +150,7 @@ export default function AboutPage() {
                             <h3 className="text-3xl md:text-5xl font-serif text-gold mb-1 md:mb-2">
                                 <AnimatedCounter to={stat.value} suffix={stat.suffix} />
                             </h3>
-                            <p className="text-[10px] md:text-sm uppercase tracking-widest text-gray-400">{stat.label}</p>
+                            <p className="text-[10px] md:text-sm uppercase tracking-widest text-white font-semibold">{stat.label}</p>
                         </div>
                     ))}
                 </div>
@@ -160,7 +161,7 @@ export default function AboutPage() {
                 <h2 className="text-center font-serif text-4xl md:text-5xl mb-4 leading-tight">Musical <span className="text-gold">Background</span></h2>
                 <p className="text-center text-gray-400 text-sm md:text-base italic mb-10 md:mb-16">"The music that I create is a reflection of my soul."</p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto auto-rows-[250px] md:auto-rows-[300px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto auto-rows-[250px] md:auto-rows-[300px]">
 
                     {/* Card 1: Born Info (Text) */}
                     <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 flex flex-col justify-center relative overflow-hidden group">
@@ -172,23 +173,8 @@ export default function AboutPage() {
                         <p className="text-sm text-gray-400">Vadodara, Gujarat</p>
                     </div>
 
-                    {/* Card 2: Image Tile */}
-                    <div className="sm:col-span-2 md:col-span-2 relative rounded-2xl overflow-hidden group">
-                        <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: "url('/assets/Gal/IMG_7098.JPG')" }} />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                        <div className="absolute bottom-4 md:bottom-6 left-4 md:left-6">
-                            <p className="text-sm md:text-base text-white/80 font-serif italic">"Every stage is a new chapter."</p>
-                        </div>
-                    </div>
-
-                    {/* Card 3: Image Tile */}
-                    <div className="relative rounded-2xl overflow-hidden group">
-                        <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: "url('/assets/Gal/IMG_7092.JPG')" }} />
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
-                    </div>
-
-                    {/* Card 4: Education (Text) */}
-                    <div className="sm:col-span-2 md:col-span-2 bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 flex flex-col justify-center relative overflow-hidden group">
+                    {/* Card 2: Education (Text) */}
+                    <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 flex flex-col justify-center relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
                             <Music className="w-10 h-10 md:w-12 md:h-12 text-gold" />
                         </div>
@@ -200,113 +186,94 @@ export default function AboutPage() {
                             </div>
                             <div>
                                 <p className="text-base md:text-lg font-serif text-white mb-1">Trinity College London</p>
-                                <p className="text-xs text-gray-400">Theory of Music & Instrument</p>
+                                <p className="text-xs text-gray-400 mb-3">Theory of Music & Instrument</p>
+                                <ZoomableImage 
+                                    src="/assets/certi.png" 
+                                    alt="Trinity College Certificate" 
+                                    className="h-40 md:h-52 w-auto object-contain rounded-md border border-white/10 opacity-90 hover:opacity-100 transition-transform duration-300 hover:scale-[1.03] cursor-zoom-in" 
+                                />
                             </div>
                         </div>
                     </div>
 
-                    {/* Card 5: Roles (Text) */}
-                    <div className="sm:col-span-full md:col-span-1 bg-gradient-to-br from-gold/10 to-black p-6 md:p-8 rounded-2xl border border-gold/20 flex flex-col justify-center text-center">
+                    {/* Card 3: Roles (Text) */}
+                    <div className="md:col-span-2 bg-gradient-to-br from-gold/10 to-black p-6 md:p-8 rounded-2xl border border-gold/20 flex flex-col justify-center text-center">
                         <Mic className="w-8 h-8 md:w-10 md:h-10 text-gold mx-auto mb-3 md:mb-4" />
                         <h4 className="text-xs text-gray-400 uppercase tracking-widest mb-1 md:mb-2">Roles</h4>
                         <p className="text-lg md:text-xl font-serif text-white leading-relaxed">Writer • Singer • Composer • Performer</p>
                     </div>
 
                 </div>
-            </section>
 
-            {/* Awards Section (Moved from Awards Page) */}
-            <section className="relative py-16 md:py-24 px-6 bg-black/40">
-                <div className="container mx-auto">
-                    <div className="text-center mb-16">
-                        <div className="inline-block p-1 px-3 rounded-full border border-gold/30 bg-gold/10 text-gold text-xs uppercase tracking-[0.2em] mb-4 backdrop-blur-md">
-                            The Trophy Room
+                {/* Infographic / Data Section */}
+                <div className="mt-12 md:mt-16 max-w-4xl mx-auto px-4 md:px-0 space-y-6">
+                    {/* Award Card */}
+                    <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Trophy className="w-20 h-20 text-gold" />
                         </div>
-                        <h2 className="font-serif text-4xl md:text-5xl mb-6">
-                            Awards & <span className="text-gold italic">Recognition</span>
-                        </h2>
-                        <p className="text-lg text-gray-400 max-w-2xl mx-auto font-light italic">
-                            "A legacy of excellence, carved in melody and gold."
-                        </p>
+                        <h4 className="text-sm text-gold uppercase tracking-widest mb-6 flex items-center gap-3">
+                            <Trophy size={18} /> Awards
+                        </h4>
+                        <div className="flex flex-col gap-4 relative z-10">
+                            {[
+                                { title: "Maa Krishna Ashram", year: "2010" },
+                                { title: "Bajkehdavad Brahman Samaj", year: "2022" },
+                                { title: "Patidar Navratri Mahotsav", year: "2023" },
+                                { title: "Parul University", year: "2024" },
+                                { title: "Vadodara Got Talent", year: "2025" }
+                            ].map((award, i) => (
+                                <div key={i} className="flex justify-between items-center border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                                    <span className="text-white font-serif md:text-lg">{award.title}</span>
+                                    <span className="text-gray-500 font-mono text-sm">{award.year}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 xl:gap-16 max-w-7xl mx-auto">
-                        {AWARDS.map((award, index) => (
-                            <div key={index} className={`${index % 2 !== 0 ? "lg:mt-24" : ""} ${award.isFeatured ? "md:col-span-2 lg:col-span-2 lg:mt-0 flex justify-center mb-12" : ""}`}>
-                                <div className={award.isFeatured ? "w-full max-w-2xl" : "w-full"}>
-                                    <ThreeDAwardCard
-                                        title={award.title}
-                                        year={award.year}
-                                        org={award.org}
-                                        desc={award.desc}
-                                        image={award.image}
-                                        icon={<award.icon className="text-gold w-8 h-8" />}
-                                        isFeatured={award.isFeatured}
-                                    />
+                    {/* Education Card */}
+                    <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Award className="w-20 h-20 text-gold" />
+                        </div>
+                        <h4 className="text-sm text-gold uppercase tracking-widest mb-6 flex items-center gap-3">
+                            <Award size={18} /> Education
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 relative z-10">
+                            {[
+                                { degree: "B. Com Graduate", inst: "M. S. University" },
+                                { degree: "Classical Dance", inst: "Bruhad Vidhyalay" },
+                                { degree: "Diploma in Vocal", inst: "M. S. University" },
+                                { degree: "Light Music Vocal", inst: "M. S. University" },
+                                { degree: "Theory of Music", inst: "Trinity College London" }
+                            ].map((edu, i) => (
+                                <div key={i}>
+                                    <p className="text-lg md:text-xl font-serif text-white mb-1">{edu.degree}</p>
+                                    <p className="text-sm text-gray-400">{edu.inst}</p>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Verified Artist Card */}
+                    <div className="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Star className="w-20 h-20 text-gold" />
+                        </div>
+                        <h4 className="text-sm text-gold uppercase tracking-widest mb-6 flex items-center gap-3">
+                            <Star size={18} /> Verified Artist
+                        </h4>
+                        <div className="flex flex-wrap gap-3 relative z-10">
+                            {["Jio Saavan", "Wynk Music", "Amazon Music", "Hungama", "Spotify", "iTunes"].map((platform, i) => (
+                                <div key={i} className="px-5 py-2.5 rounded-full border border-white/10 bg-white/5 text-white text-sm hover:border-gold/50 hover:text-gold transition-colors cursor-default">
+                                    {platform}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* 5. Music Style & Genres - IMAGE CARDS */}
-            <section className="py-16 md:py-24 relative overflow-hidden">
-                {/* Background wash */}
-                <div className="absolute inset-0 bg-maroon/5 -z-10" />
-
-                <div className="container mx-auto px-6">
-                    <h2 className="text-center font-serif text-4xl md:text-5xl mb-8 md:mb-12">Styles & <span className="text-gold">Genres</span></h2>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 h-auto md:h-[500px]">
-                        {[
-                            { title: "Traditional", desc: "Timeless culture", img: "/assets/Gal/IMG_7088.JPG" },
-                            { title: "Devotional", desc: "Soothing Arti", img: "/assets/Gal/IMG_7093.JPG" },
-                            { title: "Bollywood", desc: "Modern Fusion", img: "/assets/Gal/IMG_7074.JPG" },
-                            { title: "Garba", desc: "Rhythmic Navratri", img: "/assets/Gal/IMG_7071.JPG" },
-                        ].map((genre, idx) => (
-                            <div key={idx} className="relative rounded-2xl overflow-hidden group border border-white/10 cursor-pointer aspect-square md:aspect-auto">
-                                {/* Background Image */}
-                                <div
-                                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                                    style={{ backgroundImage: `url('${genre.img}')` }}
-                                />
-                                {/* Overlay */}
-                                <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-500" />
-
-                                {/* Content */}
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-                                    <h3 className="text-2xl font-serif text-white mb-2 translate-y-4 md:group-hover:translate-y-0 transition-transform duration-500">{genre.title}</h3>
-                                    <p className="text-gold text-sm uppercase tracking-widest opacity-100 md:opacity-0 md:group-hover:opacity-100 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-500 delay-75">{genre.desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-
-
-            {/* 7. Happy Clients / Testimonials */}
-            <section className="py-24 bg-maroon/5 relative overflow-hidden">
-                <div className="container mx-auto px-6 relative z-10">
-                    <h2 className="text-center font-serif text-4xl mb-12">Happy <span className="text-gold">Clients</span></h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {TESTIMONIALS.map((t, idx) => (
-                            <div key={idx} className="bg-black/40 backdrop-blur-sm p-8 rounded-2xl border border-white/5 relative">
-                                <Quote className="absolute top-4 right-4 text-gold/20 w-10 h-10" />
-                                <Heart className="text-maroon w-8 h-8 mb-6" />
-                                <p className="text-gray-300 italic mb-6 leading-relaxed">"{t.text}"</p>
-                                <div>
-                                    <h4 className="text-gold font-serif text-lg">{t.name}</h4>
-                                    <p className="text-xs uppercase tracking-wider text-gray-500">{t.role}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* 8. Contact / Footer CTA */}
             <section className="py-24 text-center">
@@ -314,10 +281,10 @@ export default function AboutPage() {
                     <h2 className="font-serif text-5xl mb-6">Let's Create <span className="text-gold">Magic</span></h2>
                     <p className="text-gray-400 mb-8 font-light italic">"Music is the soundtrack of your life!"</p>
 
-                    <div className="flex flex-col md:flex-row gap-8 text-xl">
-                        <a href="mailto:whitedoorproductionhouse14@gmail.com" className="hover:text-gold transition-colors">whitedoorproductionhouse14@gmail.com</a>
+                    <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-xl w-full px-4">
+                        <a href="mailto:whitedoorproductionhouse14@gmail.com" className="hover:text-gold transition-colors text-sm sm:text-base md:text-xl break-all text-center">whitedoorproductionhouse14@gmail.com</a>
                         <span className="hidden md:block text-gold">•</span>
-                        <a href="tel:+916359012805" className="hover:text-gold transition-colors">+91 6359 012 805</a>
+                        <a href="tel:+916359012805" className="hover:text-gold transition-colors text-base md:text-xl">+91 6359 012 805</a>
                     </div>
                     <p className="mt-4 text-gray-500">Vadodara, Gujarat - India</p>
                 </div>

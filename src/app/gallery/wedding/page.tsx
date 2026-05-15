@@ -10,9 +10,12 @@ export const metadata: Metadata = {
 
 const weddingImages = [
     "/Wedding/Wed 1.jpeg",
-    "/Wedding/wed 2.jpeg",
     "/Wedding/wed 3.jpeg",
-    "/Wedding/wed 4.jpeg"
+    "/assets/wedding1.png",
+    "/assets/wedding2.png",
+    "/assets/wedding3.png",
+    "/assets/wedding4.png",
+    "/assets/wedding5.png"
 ];
 
 export default function WeddingGalleryPage() {

@@ -15,8 +15,14 @@ interface NewsIntroProps {
 
 export default function NewsIntro({ onComplete }: NewsIntroProps) {
     const [visibleCount, setVisibleCount] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+        // Check if mobile on mount and window resize
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
         const interval = setInterval(() => {
             setVisibleCount((prev) => {
                 if (prev < NEWSPAPERS.length) {
@@ -28,7 +34,10 @@ export default function NewsIntro({ onComplete }: NewsIntroProps) {
             });
         }, 600);
 
-        return () => clearInterval(interval);
+        return () => {
+            clearInterval(interval);
+            window.removeEventListener('resize', checkMobile);
+        };
     }, [onComplete]);
 
     return (
@@ -86,17 +95,17 @@ export default function NewsIntro({ onComplete }: NewsIntroProps) {
                             key={paper.id}
                             initial={{
                                 y: -1200,
-                                x: paper.x + (Math.random() * 50 - 25), // Slight randomness in entrance
+                                x: (isMobile ? paper.x * 0.3 : paper.x) + (Math.random() * (isMobile ? 20 : 50) - (isMobile ? 10 : 25)),
                                 opacity: 0,
                                 rotate: Math.random() * 60 - 30,
                                 scale: 1.5
                             }}
                             animate={{
-                                y: paper.y,
-                                x: paper.x,
+                                y: isMobile ? paper.y * 0.4 : paper.y,
+                                x: isMobile ? paper.x * 0.3 : paper.x,
                                 opacity: 1,
                                 rotate: paper.rotate,
-                                scale: paper.scale
+                                scale: isMobile ? paper.scale * 0.8 : paper.scale
                             }}
                             transition={{
                                 type: "spring",

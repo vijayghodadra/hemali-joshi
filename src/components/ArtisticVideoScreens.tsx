@@ -96,7 +96,7 @@ export default function ArtisticVideoScreens() {
 
                     {/* 1. Projector Screen (Left - Hanging) */}
                     <motion.a
-                        href={CHANNEL_SUBSCRIBE_LINK}
+                        href="https://www.youtube.com/watch?v=ESR-dgpVeMQ"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ y: -10 }}
@@ -117,7 +117,7 @@ export default function ArtisticVideoScreens() {
                             {/* Content */}
                             <motion.div style={{ opacity: projectorOpacity }} className="absolute inset-2 bg-black overflow-hidden">
                                 <img
-                                    src={`https://img.youtube.com/vi/${VIDEOS[1].id}/maxresdefault.jpg`}
+                                    src="/assets/Garba1.png"
                                     alt="Projector Video"
                                     className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                                 />
@@ -131,6 +131,9 @@ export default function ArtisticVideoScreens() {
 
                         {/* Projection Light source ray */}
                         <motion.div style={{ opacity: projectorOpacity }} className="absolute -top-20 left-1/2 -translate-x-1/2 w-4 h-32 bg-gradient-to-b from-white/5 to-transparent blur-xl -z-10" />
+                        <div className="mt-8 text-center font-serif text-2xl text-gold italic tracking-wide">
+                            Non Stop Garba
+                        </div>
                     </motion.a>
 
                     {/* 2. Smart TV (Center - Dominant) */}
@@ -181,11 +184,14 @@ export default function ArtisticVideoScreens() {
                                 <div className="w-full h-2 bg-gradient-to-b from-neutral-700 to-neutral-900 rounded-b-md border border-white/10 border-t-0 shadow-lg" />
                             </div>
                         </motion.div>
+                        <div className="mt-8 text-center font-serif text-2xl text-gold italic tracking-wide">
+                            Kacchi song
+                        </div>
                     </motion.a>
 
                     {/* 3. Vintage TV (Right - Seated) */}
                     <motion.a
-                        href={CHANNEL_SUBSCRIBE_LINK}
+                        href="https://www.youtube.com/watch?v=JwYavPirAuE"
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{ x: vintageTvX, rotate: vintageTvRotate, willChange: "transform" }}
@@ -211,7 +217,7 @@ export default function ArtisticVideoScreens() {
                                                 filter: useTransform(vintageTvSepia, s => `contrast(1.25) sepia(${s}) brightness(${vintageTvBrightness.get()}) opacity(${vintageTvOpacity.get()})`),
                                                 willChange: "filter"
                                             }}
-                                            src={`https://img.youtube.com/vi/${VIDEOS[2].id}/maxresdefault.jpg`}
+                                            src="/assets/img1.png"
                                             alt="Vintage TV Video"
                                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 group-hover:!sepia-0 transition-all duration-700"
                                         />
@@ -250,6 +256,9 @@ export default function ArtisticVideoScreens() {
                             <div className="absolute -top-12 left-12 w-1 h-16 bg-gray-400 rotate-[30deg] origin-bottom shadow-sm hidden md:block">
                                 <div className="absolute -top-1 -left-1 w-3 h-3 rounded-full bg-gray-300" />
                             </div>
+                        </div>
+                        <div className="mt-8 text-center font-serif text-2xl text-gold italic tracking-wide">
+                            Raja na Kunvar
                         </div>
                     </motion.a>
 

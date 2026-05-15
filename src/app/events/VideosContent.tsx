@@ -12,9 +12,9 @@ export default function VideosContent() {
 
     const videos = [
         { id: 1, src: "/assets/Gal/videos/319267f0-a223-4356-b981-c6d6cd42cedf.MP4", title: "Live Concert Highlight", desc: "Experience the energy of the live stage performance." },
-        { id: 2, src: "/assets/Gal/videos/cbbb1f8b-f7fa-4624-9382-f8d163932229.MP4", title: "Unplugged Session", desc: "A raw, acoustic rendition of classic hits." },
-        { id: 3, src: "/assets/Gal/videos/VID_20250106_221156_831.MP4", title: "Backstage Moments", desc: "Behind the scenes access to the artist's life." },
-        { id: 4, src: "/assets/Gal/videos/WEDDING REEL (19-12-2024)-1.MP4", title: "Wedding Performance", desc: "Magical musical moments from recent weddings." },
+        { id: 2, src: "/assets/Gal/videos/cbbb1f8b-f7fa-4624-9382-f8d163932229.MP4", title: "Music You Can Feel", desc: "A raw, acoustic rendition of classic hits." },
+        { id: 3, src: "/assets/Rehearsal.mp4", poster: "/assets/Poster10.png", title: "Rehearsal", desc: "Behind the scenes access to the artist's life." },
+        { id: 4, src: "/assets/Gal/videos/WEDDING REEL (19-12-2024)-1.MP4", title: "Vibes", desc: "Magical musical moments from recent weddings." },
         { id: 5, src: "/assets/Gal/videos/Himali Joshi-1.MP4", title: "Classical Fusion", desc: "Blending traditional classical notes with modern beats." },
         { id: 6, src: "/assets/Gal/videos/3ea16fb3-b9e3-4bf2-a14c-55e5eb3dcc3b.MP4", title: "Soulful Rendition", desc: "Deep, emotional vocals that touch the soul." },
         { id: 7, src: "/assets/Gal/videos/DRFT 4 .MP4", title: "Cinematic Journey", desc: "A visual masterpiece capturing the essence of music." },
@@ -116,8 +116,8 @@ export default function VideosContent() {
                         <h3 className="text-3xl md:text-4xl font-serif text-white">Event <span className="italic text-gold">Performances</span></h3>
                         <span className="text-xs uppercase tracking-widest text-white/40 hidden md:block">Highlights from Live Shows</span>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {videos.filter((_, i) => i < 3).map((vid) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {videos.filter((_, i) => i < 4).map((vid) => (
                             <ArtisticVideoCard
                                 key={vid.id}
                                 src={vid.src}
@@ -126,6 +126,26 @@ export default function VideosContent() {
                                 onClick={() => setSelectedVideo(getOptimalSrc(vid.src))}
                                 year="2024"
                                 tag="Cinematic"
+                                poster={(vid as any).poster}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <div className="space-y-8 pt-12">
+                    <div className="flex items-end justify-between border-b border-white/10 pb-4">
+                        <h3 className="text-3xl md:text-4xl font-serif text-white">What People <span className="italic text-gold">Say</span></h3>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {videos.filter((_, i) => i >= 4 && i < 7).map((vid) => (
+                            <ArtisticVideoCard
+                                key={vid.id}
+                                src={vid.src}
+                                title={vid.title}
+                                description={vid.desc}
+                                onClick={() => setSelectedVideo(getOptimalSrc(vid.src))}
+                                year="2024"
+                                tag="Review"
                             />
                         ))}
                     </div>

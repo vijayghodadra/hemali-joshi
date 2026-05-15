@@ -91,6 +91,18 @@ export default function Hero() {
                             </motion.button>
                         </Link>
 
+                        <Link href="/events">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="group px-8 py-4 border border-white/30 rounded-full font-light uppercase tracking-wider text-white backdrop-blur-sm hover:bg-white/10 transition-all"
+                            >
+                                <span className="flex items-center gap-2">
+                                    Live Events <Play size={18} fill="currentColor" />
+                                </span>
+                            </motion.button>
+                        </Link>
+
                         <Link href="/music">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
@@ -98,7 +110,7 @@ export default function Hero() {
                                 className="group px-8 py-4 border border-white/30 rounded-full font-light uppercase tracking-wider text-white backdrop-blur-sm hover:bg-white/10 transition-all"
                             >
                                 <span className="flex items-center gap-2">
-                                    Explore Music <Play size={18} fill="currentColor" />
+                                    Our Albums <Play size={18} fill="currentColor" />
                                 </span>
                             </motion.button>
                         </Link>

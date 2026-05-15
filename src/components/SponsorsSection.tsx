@@ -34,7 +34,7 @@ export default function SponsorsSection() {
                         viewport={{ once: true }}
                         className="font-serif text-4xl md:text-5xl text-white mb-6"
                     >
-                        Proudly <span className="text-gold italic">Supported By</span>
+                        Trusted <span className="text-gold italic">Entertainment Partner</span>
                     </motion.h2>
 
                     <motion.div

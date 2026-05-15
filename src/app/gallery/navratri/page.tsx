@@ -11,10 +11,12 @@ export const metadata: Metadata = {
 const navratriImages = [
     "/Navratri/Nav 1.jpeg",
     "/Navratri/Nav 2.jpeg",
-    "/Navratri/Nav 3.jpeg",
+    "/assets/garba3.png",
     "/Navratri/Nav 4.jpeg",
     "/Navratri/Nav 5.jpeg",
-    "/Navratri/Nav 6.jpeg"
+    "/Navratri/Nav 6.jpeg",
+    "/assets/garba4.png",
+    "/assets/garba6.png"
 ];
 
 export default function NavratriGalleryPage() {

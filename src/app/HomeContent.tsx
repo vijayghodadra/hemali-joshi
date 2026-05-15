@@ -32,11 +32,10 @@ export default function HomeContent() {
             {/* Main Website Content */}
             <div className="min-h-screen">
                 <Hero />
-                <MusicPlatforms />
-                <SponsorsSection />
                 <YoutubeCinematicGallery />
-
                 <CinematicVideoCarousel />
+                <SponsorsSection />
+                <MusicPlatforms />
                 <ConcertMap />
 
                 {/* Intro / About Teaser */}
@@ -58,7 +57,7 @@ export default function HomeContent() {
                         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
                             <Music className="w-12 h-12 text-gold mb-4 group-hover:scale-110 transition-transform" />
                             <h3 className="font-serif text-3xl mb-2">Music Discography</h3>
-                            <p className="text-gray-400 opacity-80 group-hover:opacity-100">Listen to the Best of Himali Joshi</p>
+                            <p className="text-white font-medium">Listen to the Best of Himali Joshi</p>
                         </div>
                     </Link>
                     <Link href="/tours" className="relative group overflow-hidden border-r border-white/10">
@@ -66,7 +65,7 @@ export default function HomeContent() {
                         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
                             <Calendar className="w-12 h-12 text-gold mb-4 group-hover:scale-110 transition-transform" />
                             <h3 className="font-serif text-3xl mb-2">Live Tours</h3>
-                            <p className="text-gray-400 opacity-80 group-hover:opacity-100">Book for Events, Weddings & Tours</p>
+                            <p className="text-white font-medium">Book for Events, Weddings & Tours</p>
                         </div>
                     </Link>
                     <Link href="/gallery" className="relative group overflow-hidden">
@@ -74,7 +73,7 @@ export default function HomeContent() {
                         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
                             <ImageIcon className="w-12 h-12 text-gold mb-4 group-hover:scale-110 transition-transform" />
                             <h3 className="font-serif text-3xl mb-2">Visual Gallery</h3>
-                            <p className="text-gray-400 opacity-80 group-hover:opacity-100">Live Stages & Professional Shoots</p>
+                            <p className="text-white font-medium">Live Stages & Professional Shoots</p>
                         </div>
                     </Link>
                 </section>

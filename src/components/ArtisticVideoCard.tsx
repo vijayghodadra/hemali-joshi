@@ -8,12 +8,12 @@ interface ArtisticVideoCardProps {
     src: string;
     title: string;
     description?: string;
-    onClick: () => void;
     year?: string;
     tag?: string;
+    poster?: string;
 }
 
-export default function ArtisticVideoCard({ src, title, description, onClick, year = "2024", tag = "Performance" }: ArtisticVideoCardProps) {
+export default function ArtisticVideoCard({ src, title, description, onClick, year = "2024", tag = "Performance", poster }: ArtisticVideoCardProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isHovered, setIsHovered] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -96,11 +96,19 @@ export default function ArtisticVideoCard({ src, title, description, onClick, ye
                 </AnimatePresence>
 
                 {/* Static Placeholder */}
-                <video
-                    src={`${actualSrc}#t=1.0`}
-                    className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${isPlaying ? "opacity-0" : "opacity-100"}`}
-                    preload="metadata"
-                />
+                {poster ? (
+                    <img 
+                        src={poster}
+                        alt={title}
+                        className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${isPlaying ? "opacity-0" : "opacity-100"}`}
+                    />
+                ) : (
+                    <video
+                        src={`${actualSrc}#t=1.0`}
+                        className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${isPlaying ? "opacity-0" : "opacity-100"}`}
+                        preload="metadata"
+                    />
+                )}
 
                 {/* Hover Auto-play Video */}
                 <video

@@ -31,9 +31,9 @@ export default function YoutubeCinematicGallery() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
-                        className="font-serif text-4xl md:text-7xl text-white mb-8 leading-tight tracking-tight uppercase text-glow"
+                        className="font-serif text-4xl md:text-7xl text-white mb-8 leading-tight tracking-tight text-glow"
                     >
-                        Visual <span className="text-gold italic font-light lowercase">Dynamics</span>
+                        Take a <span className="text-gold italic font-light">Look</span>
                     </motion.h2>
 
                     <div className="h-px w-24 bg-gradient-to-r from-transparent via-red-600 to-transparent mx-auto mb-8" />
@@ -143,7 +143,7 @@ function ScreenContent({ poster }: { poster: any }) {
                                 }}
                                 style={{ filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.5))' }}
                             >
-                                Himali Joshi
+                                {poster.topText || 'Himali Joshi'}
                             </motion.text>
                         </svg>
                     </div>
