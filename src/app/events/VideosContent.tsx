@@ -18,6 +18,10 @@ export default function VideosContent() {
         { id: 5, src: "/assets/Gal/videos/Himali Joshi-1.MP4", title: "Classical Fusion", desc: "Blending traditional classical notes with modern beats." },
         { id: 6, src: "/assets/Gal/videos/3ea16fb3-b9e3-4bf2-a14c-55e5eb3dcc3b.MP4", title: "Soulful Rendition", desc: "Deep, emotional vocals that touch the soul." },
         { id: 7, src: "/assets/Gal/videos/DRFT 4 .MP4", title: "Cinematic Journey", desc: "A visual masterpiece capturing the essence of music." },
+        { id: 8, src: "/assets/Audience.mp4", title: "Crowd Energy", desc: "Fans lighting up the arena with their energy." },
+        { id: 9, src: "/assets/Audience.mp4", title: "Singing Along", desc: "A beautiful moment where the audience takes over." },
+        { id: 10, src: "/assets/Audience.mp4", title: "Unforgettable Vibes", desc: "The pure joy of a live musical connection." },
+        { id: 11, src: "/assets/Audience.mp4", title: "Fan Moments", desc: "A glimpse of the love and support from amazing fans." },
     ];
 
     // Featured video logic
@@ -146,6 +150,25 @@ export default function VideosContent() {
                                 onClick={() => setSelectedVideo(getOptimalSrc(vid.src))}
                                 year="2024"
                                 tag="Review"
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <div className="space-y-8 pt-12">
+                    <div className="flex items-end justify-between border-b border-white/10 pb-4">
+                        <h3 className="text-3xl md:text-4xl font-serif text-white">Audience <span className="italic text-gold">Love</span></h3>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {videos.filter((_, i) => i >= 7).map((vid) => (
+                            <ArtisticVideoCard
+                                key={vid.id}
+                                src={vid.src}
+                                title={vid.title}
+                                description={vid.desc}
+                                onClick={() => setSelectedVideo(getOptimalSrc(vid.src))}
+                                year="2024"
+                                tag="Audience"
                             />
                         ))}
                     </div>
