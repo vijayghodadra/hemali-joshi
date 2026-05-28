@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { Play, ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { getDevicePower } from "@/utils/devicePower";
@@ -19,21 +20,10 @@ const VIDEOS = [
         thumbnail: "/assets/Client1.png",
         videoUrl: "",
     },
-    {
-        id: 3,
-        title: "Audience Review",
-        thumbnail: "/assets/splash-full.jpg",
-        videoUrl: "/assets/Audience.mp4",
-    },
-    {
-        id: 4,
-        title: "Media spot in UK",
-        thumbnail: "/assets/News/sandesh.jpeg",
-        videoUrl: "/assets/News.mp4",
-    },
 ];
 
 const CinematicCard = ({ card, position, onPrev, onNext, onSelectVideo, isModalOpen }: { card: any, position: string, onPrev: () => void, onNext: () => void, onSelectVideo: (videoUrl: string, title: string) => void, isModalOpen: boolean }) => {
+    const router = useRouter();
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isHovered, setIsHovered] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -132,8 +122,8 @@ const CinematicCard = ({ card, position, onPrev, onNext, onSelectVideo, isModalO
     return (
         <motion.div
             layoutId={`card-${card.id}`}
-            className={`absolute rounded-2xl transition-all duration-500
-                ${isCenter ? "z-30 w-[80%] md:w-[60%] h-full border-2 border-gold/30 shadow-[0_0_50px_rgba(212,175,55,0.2)]" : "z-10 w-[60%] md:w-[40%] h-[80%] opacity-60 brightness-50 grayscale hover:grayscale-0 cursor-pointer"}
+            className={`absolute rounded-2xl transition-all duration-500 cursor-pointer
+                ${isCenter ? "z-30 w-[80%] md:w-[60%] h-full border-2 border-gold/30 shadow-[0_0_50px_rgba(212,175,55,0.2)]" : "z-10 w-[60%] md:w-[40%] h-[80%] opacity-60 brightness-50 grayscale hover:grayscale-0"}
             `}
             initial={{
                 x: isCenter ? 0 : isLeft ? "-60%" : "60%",
@@ -156,11 +146,7 @@ const CinematicCard = ({ card, position, onPrev, onNext, onSelectVideo, isModalO
             exit={{ opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
             onClick={() => {
-                if (!isCenter) {
-                    isLeft ? onPrev() : onNext();
-                } else if (hasVideo) {
-                    onSelectVideo(actualUrl, card.title);
-                }
+                router.push("/events#what-celebrities-say");
             }}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
@@ -284,6 +270,17 @@ export default function CinematicVideoCarousel() {
 
     const getVisibleCards = () => {
         const total = VIDEOS.length;
+        if (total === 0) return [];
+        if (total === 1) {
+            return [{ ...VIDEOS[0], position: "center", index: 0 }];
+        }
+        if (total === 2) {
+            const otherIndex = (activeIndex + 1) % 2;
+            return [
+                { ...VIDEOS[otherIndex], position: "left", index: otherIndex },
+                { ...VIDEOS[activeIndex], position: "center", index: activeIndex },
+            ];
+        }
         const prevIndex = (activeIndex - 1 + total) % total;
         const nextIndex = (activeIndex + 1) % total;
         return [

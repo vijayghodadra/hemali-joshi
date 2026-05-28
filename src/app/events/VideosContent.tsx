@@ -11,12 +11,13 @@ export default function VideosContent() {
     const [isMuted, setIsMuted] = useState(true);
 
     const videos = [
-        { id: 1, src: "/assets/Gal/videos/319267f0-a223-4356-b981-c6d6cd42cedf.MP4", poster: "/assets/concert.png", title: "Live Concert Highlight", desc: "Experience the energy of the live stage performance." },
-        { id: 2, src: "/assets/Gal/videos/cbbb1f8b-f7fa-4624-9382-f8d163932229.MP4", poster: "/assets/splash-poster.jpg", title: "Music You Can Feel", desc: "A raw, acoustic rendition of classic hits." },
-        { id: 3, src: "/assets/Rehearsal.mp4", poster: "/assets/Poster10.png", title: "Rehearsal", desc: "Behind the scenes access to the artist's life." },
-        { id: 4, src: "/assets/Gal/videos/WEDDING REEL (19-12-2024)-1.MP4", poster: "/assets/Wedding.png", title: "Vibes", desc: "Magical musical moments from recent weddings." },
-        { id: 7, src: "/assets/Gal/videos/DRFT 4 .MP4", poster: "/assets/Poster11.png", title: "Cinematic Journey", desc: "A visual masterpiece capturing the essence of music." },
+        { id: 1, src: "/assets/Gal/videos/319267f0-a223-4356-b981-c6d6cd42cedf.MP4", poster: "/assets/concert.jpg", title: "Live Concert in UK", desc: "Experience the energy of the live stage performance." },
+        { id: 2, src: "/assets/Gal/videos/cbbb1f8b-f7fa-4624-9382-f8d163932229.MP4", poster: "/assets/splash-poster.jpg", title: "Bollywood Night", desc: "A raw, acoustic rendition of classic hits." },
+        { id: 3, src: "/assets/Rehearsal.mp4", poster: "/assets/Poster10.png", title: "Album Launch", desc: "Behind the scenes access to the artist's life." },
+        { id: 4, src: "/assets/Gal/videos/WEDDING REEL (19-12-2024)-1.MP4", poster: "/assets/Wedding.png", title: "Wedding Vibes", desc: "Magical musical moments from recent weddings." },
+        { id: 7, src: "/assets/Gal/videos/DRFT 4 .MP4", poster: "/assets/Poster11.png", title: "Musical Journey", desc: "Our mission is simple: to transform every event into a unique musical journey that leaves lasting impressions and cherished memories." },
         { id: 13, src: "/assets/kanodia.mp4", poster: "/assets/Client.png", title: "Mona Thiba Kanodia", desc: "A beautiful review and appreciation from the renowned actress." },
+        { id: 14, src: "/assets/News.mp4", poster: "/assets/News/sandesh.jpeg", title: "Media spot in UK", desc: "Featured in news media for her unique garba releases and musical achievements." },
         { id: 11, src: "/assets/Audience.mp4", poster: "/assets/Client1.png", title: "Fan Moments", desc: "A glimpse of the love and support from amazing fans." },
         { id: 12, src: "/assets/vid2.mp4", poster: "/assets/splash-full.jpg", title: "Fan Moments", desc: "Pure joy and unmatched support from our lovely audience during the live show." },
     ];
@@ -59,15 +60,15 @@ export default function VideosContent() {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
                 </div>
 
-                <div className="relative z-10 w-full h-full flex items-center container mx-auto px-6 md:px-12">
-                    <div className="max-w-3xl space-y-8 pt-20">
+                <div className="relative z-10 w-full h-full flex items-start pt-24 md:pt-28 container mx-auto px-6 md:px-12">
+                    <div className="max-w-3xl space-y-6">
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1.2, ease: "easeOut" }}
-                            className="text-7xl md:text-9xl font-serif text-white tracking-tight leading-none"
+                            className="text-5xl md:text-7xl font-serif text-white tracking-tight leading-none"
                         >
-                            <span className="block text-gold italic text-5xl md:text-7xl mb-4 font-light">Best Singer in India</span>
+                            <span className="block text-gold italic text-3xl md:text-4xl mb-2 font-light">Best Singer in India</span>
                             {featuredVideo.title}
                         </motion.h1>
 
@@ -75,11 +76,11 @@ export default function VideosContent() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 1 }}
-                            className="flex flex-col gap-6"
+                            className="flex flex-col gap-4"
                         >
                             <div className="w-24 h-[1px] bg-gold/50" />
-                            <p className="text-lg md:text-xl text-gray-300 font-light max-w-lg leading-relaxed">
-                                {featuredVideo.desc} Experience the vocal depth of Gujarat's finest performer.
+                            <p className="text-base md:text-lg text-gray-300 font-light max-w-xl leading-relaxed">
+                                {featuredVideo.desc}
                             </p>
                         </motion.div>
 
@@ -140,7 +141,7 @@ export default function VideosContent() {
                         <h3 className="text-3xl md:text-4xl font-serif text-white">What Celebrities <span className="italic text-gold">Say</span></h3>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {videos.filter((_, i) => i === 5).map((vid) => (
+                        {videos.filter((_, i) => i === 5 || i === 6).map((vid) => (
                             <ArtisticVideoCard
                                 key={vid.id}
                                 src={vid.src}
@@ -160,7 +161,7 @@ export default function VideosContent() {
                         <h3 className="text-3xl md:text-4xl font-serif text-white">Audience <span className="italic text-gold">Love</span></h3>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {videos.filter((_, i) => i >= 6).map((vid) => (
+                        {videos.filter((_, i) => i >= 7).map((vid) => (
                             <ArtisticVideoCard
                                 key={vid.id}
                                 src={vid.src}

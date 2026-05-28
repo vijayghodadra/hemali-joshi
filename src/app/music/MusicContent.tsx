@@ -22,41 +22,32 @@ export default function MusicContent() {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
-    const devotionalData = PORTAL_DATA.map((item, index) => {
-        if (index === 0) {
-            return {
-                ...item,
-                audio: "/assets/audio/jay_adhya_sakti.m4a",
-                title: "Jay Adhya Sakti",
-                cover: "/assets/aarati.png"
-            };
+    const devotionalData = [
+        {
+            ...PORTAL_DATA[0],
+            audio: "/assets/audio/jay_adhya_sakti.m4a",
+            title: "Jay Adhya Sakti",
+            cover: "/assets/aarati.jpg"
+        },
+        {
+            ...PORTAL_DATA[2],
+            audio: "/assets/audio/sukh_karta.m4a",
+            title: "Sukh Karta",
+            cover: "/assets/sukh.png"
+        },
+        {
+            ...PORTAL_DATA[3],
+            audio: "/assets/audio/maha_mrityunjaya.m4a",
+            title: "Maha Mrityunjaya",
+            cover: "/assets/maha.png"
+        },
+        {
+            ...PORTAL_DATA[1],
+            audio: "/assets/audio/harsidhi_mata.m4a",
+            title: "Harsidhi mata",
+            cover: "/assets/mantra.png"
         }
-        if (index === 1) {
-            return {
-                ...item,
-                audio: "/assets/audio/harsidhi_mata.m4a",
-                title: "Harsidhi mata",
-                cover: "/assets/mantra.png"
-            };
-        }
-        if (index === 2) {
-            return {
-                ...item,
-                audio: "/assets/audio/sukh_karta.m4a",
-                title: "Sukh Karta",
-                cover: "/assets/sukh.png"
-            };
-        }
-        if (index === 3) {
-            return {
-                ...item,
-                audio: "/assets/audio/maha_mrityunjaya.m4a",
-                title: "Maha Mrityunjaya",
-                cover: "/assets/maha.png"
-            };
-        }
-        return item;
-    });
+    ];
 
     const bollywoodData = PORTAL_DATA.map((item, index) => {
         if (index === 0) {
