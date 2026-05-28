@@ -14,7 +14,7 @@ export default function VideosContent() {
         { id: 1, src: "/assets/Gal/videos/319267f0-a223-4356-b981-c6d6cd42cedf.MP4", poster: "/assets/concert.jpg", title: "Live Concert in UK", desc: "Experience the energy of the live stage performance." },
         { id: 2, src: "/assets/Gal/videos/cbbb1f8b-f7fa-4624-9382-f8d163932229.MP4", poster: "/assets/splash-poster.jpg", title: "Bollywood Night", desc: "A raw, acoustic rendition of classic hits." },
         { id: 3, src: "/assets/Rehearsal.mp4", poster: "/assets/Poster10.png", title: "Album Launch", desc: "Behind the scenes access to the artist's life." },
-        { id: 4, src: "/assets/Gal/videos/WEDDING REEL (19-12-2024)-1.MP4", poster: "/assets/wedding_vibes.jpg", title: "Wedding Vibes", desc: "Magical musical moments from recent weddings." },
+        { id: 4, src: "/assets/Gal/videos/WEDDING REEL (19-12-2024)-1.MP4", poster: "/assets/wedding_vibes.jpg", title: "Wedding Vibes", desc: "Magical musical moments from recent weddings.", objectFit: "contain" },
         { id: 7, src: "/assets/Gal/videos/DRFT 4 .MP4", poster: "/assets/Poster11.png", title: "Musical Journey", desc: "Our mission is simple: to transform every event into a unique musical journey that leaves lasting impressions and cherished memories." },
         { id: 13, src: "/assets/kanodia.mp4", poster: "/assets/Client.png", title: "Mona Thiba Kanodia", desc: "A beautiful review and appreciation from the renowned actress." },
         { id: 14, src: "/assets/News.mp4", poster: "/assets/News/sandesh.jpeg", title: "Media spot in UK", desc: "Featured in news media for her unique garba releases and musical achievements." },
@@ -131,6 +131,7 @@ export default function VideosContent() {
                                 year="2024"
                                 tag="Cinematic"
                                 poster={(vid as any).poster}
+                                objectFit={(vid as any).objectFit}
                             />
                         ))}
                     </div>
@@ -151,6 +152,7 @@ export default function VideosContent() {
                                 year="2024"
                                 tag="Review"
                                 poster={(vid as any).poster}
+                                objectFit={(vid as any).objectFit}
                             />
                         ))}
                     </div>
@@ -171,6 +173,7 @@ export default function VideosContent() {
                                 year="2024"
                                 tag="Audience"
                                 poster={(vid as any).poster}
+                                objectFit={(vid as any).objectFit}
                             />
                         ))}
                     </div>
