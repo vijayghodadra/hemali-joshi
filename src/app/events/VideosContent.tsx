@@ -135,7 +135,7 @@ export default function VideosContent() {
                     </div>
                 </div>
 
-                <div className="space-y-8 pt-12">
+                <div id="what-people-say" className="space-y-8 pt-12 scroll-mt-28">
                     <div className="flex items-end justify-between border-b border-white/10 pb-4">
                         <h3 className="text-3xl md:text-4xl font-serif text-white">What People <span className="italic text-gold">Say</span></h3>
                     </div>
