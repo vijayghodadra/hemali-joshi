@@ -303,7 +303,7 @@ export default function CinematicVideoCarousel() {
             <div className="absolute inset-0 z-0 bg-gradient-to-t from-black via-transparent to-black" />
 
             <div className="container mx-auto max-w-6xl relative z-10">
-                <Link href="/events#what-people-say" className="flex flex-col items-center mb-12 group cursor-pointer w-fit mx-auto">
+                <Link href="/events#what-celebrities-say" className="flex flex-col items-center mb-12 group cursor-pointer w-fit mx-auto">
                     <h2 className="font-serif text-5xl mb-4 text-center group-hover:text-gold transition-colors">Client <span className="text-gold group-hover:text-white transition-colors">Reviews</span></h2>
                     <div className="h-1 w-24 bg-gradient-to-r from-transparent via-gold to-transparent group-hover:scale-x-125 transition-transform duration-300" />
                 </Link>

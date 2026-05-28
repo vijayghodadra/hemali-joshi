@@ -135,9 +135,9 @@ export default function VideosContent() {
                     </div>
                 </div>
 
-                <div id="what-people-say" className="space-y-8 pt-12 scroll-mt-28">
+                <div id="what-celebrities-say" className="space-y-8 pt-12 scroll-mt-28">
                     <div className="flex items-end justify-between border-b border-white/10 pb-4">
-                        <h3 className="text-3xl md:text-4xl font-serif text-white">What People <span className="italic text-gold">Say</span></h3>
+                        <h3 className="text-3xl md:text-4xl font-serif text-white">What Celebrities <span className="italic text-gold">Say</span></h3>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {videos.filter((_, i) => i === 5).map((vid) => (
