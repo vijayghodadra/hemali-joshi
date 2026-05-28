@@ -34,11 +34,18 @@ export default function ThreeDAlbum({ coverImage, compact = false }: ThreeDAlbum
                 }}
                 transition={{ type: "spring", stiffness: 150, damping: 20 }}
             >
+                {/* Blurred Background to cover the box without cropping */}
+                <img
+                    src={coverImage}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover blur-xl scale-110 opacity-30 select-none pointer-events-none"
+                />
+
                 {/* Album Cover Image */}
                 <img
                     src={coverImage}
                     alt="Album Cover"
-                    className="w-full h-full object-contain select-none"
+                    className="relative z-10 w-full h-full object-contain select-none"
                 />
 
                 {/* Glossy Glass Reflection Overlay */}
