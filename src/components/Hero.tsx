@@ -123,9 +123,9 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, y: [0, 10, 0] }}
                 transition={{ delay: 2, duration: 2, repeat: Infinity }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 pointer-events-none"
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gold font-semibold tracking-[0.2em] pointer-events-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
             >
-                <span className="text-xs uppercase tracking-[0.2em]">Scroll</span>
+                <span className="text-xs uppercase">Scroll</span>
             </motion.div>
         </section>
     );

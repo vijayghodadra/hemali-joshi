@@ -9,6 +9,8 @@ const SPONSORS = [
     { id: 4, src: "/assets/sponsors/ba072700-f0ee-44ba-a025-d72b19fd9da1.JPG", alt: "Sponsor 4" },
     { id: 5, src: "/assets/sponsors/d9fc77ac-71dd-486a-9d88-e463c38a39cf.jpg", alt: "Sponsor 5" },
     { id: 6, src: "/assets/sponsors/ee0fafd6-846c-4741-810b-c54497b12619.JPG", alt: "Sponsor 6" },
+    { id: 7, src: "/assets/sponsors/yrf.svg", alt: "Yash Raj Films" },
+    { id: 8, src: "/assets/sponsors/dharma_events.jpg", alt: "Dharma Events" },
 ];
 
 export default function SponsorsSection() {

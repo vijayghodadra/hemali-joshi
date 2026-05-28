@@ -189,10 +189,10 @@ export default function MusicContent() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 2, duration: 1 }}
-                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20"
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gold font-semibold tracking-widest pointer-events-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
                 >
-                    <span className="text-[10px] uppercase tracking-widest">Scroll to Explore</span>
-                    <div className="w-px h-12 bg-gradient-to-b from-white/20 to-transparent" />
+                    <span className="text-[10px] uppercase">Scroll to Explore</span>
+                    <div className="w-px h-12 bg-gradient-to-b from-gold/50 to-transparent" />
                 </motion.div>
             </section>
 

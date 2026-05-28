@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { Play, ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { getDevicePower } from "@/utils/devicePower";
 
 const VIDEOS = [
@@ -26,16 +26,17 @@ const VIDEOS = [
     },
     {
         id: 4,
-        title: "Wedding Event Review",
+        title: "Media spot in UK",
         thumbnail: "/assets/News/sandesh.jpeg",
         videoUrl: "/assets/News.mp4",
     },
 ];
 
-const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position: string, onPrev: () => void, onNext: () => void }) => {
+const CinematicCard = ({ card, position, onPrev, onNext, onSelectVideo, isModalOpen }: { card: any, position: string, onPrev: () => void, onNext: () => void, onSelectVideo: (videoUrl: string, title: string) => void, isModalOpen: boolean }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isHovered, setIsHovered] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [cardMuted, setCardMuted] = useState(false);
     const [actualUrl, setActualUrl] = useState(card.videoUrl);
 
     const hasVideo = Boolean(card.videoUrl);
@@ -100,21 +101,32 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        if (isCenter && isHovered && videoRef.current && hasVideo) {
+        if (isCenter && isHovered && videoRef.current && hasVideo && !isModalOpen) {
             timeout = setTimeout(() => {
                 videoRef.current?.play()
                     .then(() => setIsPlaying(true))
-                    .catch(() => { });
+                    .catch((err) => {
+                        console.log("Playback failed, trying muted:", err);
+                        if (videoRef.current) {
+                            videoRef.current.muted = true;
+                            setCardMuted(true);
+                            videoRef.current.play()
+                                .then(() => setIsPlaying(true))
+                                .catch(() => {});
+                        }
+                    });
             }, 500);
         } else {
             if (videoRef.current) {
                 videoRef.current.pause();
                 videoRef.current.currentTime = 0;
+                videoRef.current.muted = false; // Reset to unmuted for the next play
+                setCardMuted(false);
                 setIsPlaying(false);
             }
         }
         return () => clearTimeout(timeout);
-    }, [isCenter, isHovered, hasVideo]);
+    }, [isCenter, isHovered, hasVideo, isModalOpen]);
 
     return (
         <motion.div
@@ -142,7 +154,13 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
             }}
             exit={{ opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            onClick={() => !isCenter && (isLeft ? onPrev() : onNext())}
+            onClick={() => {
+                if (!isCenter) {
+                    isLeft ? onPrev() : onNext();
+                } else if (hasVideo) {
+                    onSelectVideo(actualUrl, card.title);
+                }
+            }}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={handleMouseLeave}
@@ -180,11 +198,32 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
                         ref={videoRef}
                         src={actualUrl}
                         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? "opacity-100" : "opacity-0"}`}
-                        muted
                         playsInline
                         loop
                         preload="none" // Optimize loading
                     />
+                )}
+
+                {/* Volume Toggle Button */}
+                {isCenter && hasVideo && isPlaying && (
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            if (videoRef.current) {
+                                const nextMuted = !videoRef.current.muted;
+                                videoRef.current.muted = nextMuted;
+                                setCardMuted(nextMuted);
+                            }
+                        }}
+                        className="absolute top-4 right-4 z-40 p-3 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white/70 hover:text-white hover:bg-black/60 transition-all pointer-events-auto"
+                        aria-label={cardMuted ? "Unmute review video" : "Mute review video"}
+                    >
+                        {cardMuted ? (
+                            <VolumeX size={18} />
+                        ) : (
+                            <Volume2 size={18} />
+                        )}
+                    </button>
                 )}
 
                 {/* Spotlight/Sheen Effect on Hover */}
@@ -232,6 +271,7 @@ const CinematicCard = ({ card, position, onPrev, onNext }: { card: any, position
 
 export default function CinematicVideoCarousel() {
     const [activeIndex, setActiveIndex] = useState(0);
+    const [selectedVideo, setSelectedVideo] = useState<{ url: string, title: string } | null>(null);
 
     const handleNext = () => {
         setActiveIndex((prev) => (prev + 1) % VIDEOS.length);
@@ -276,6 +316,8 @@ export default function CinematicVideoCarousel() {
                                 position={card.position}
                                 onPrev={handlePrev}
                                 onNext={handleNext}
+                                onSelectVideo={(url, title) => setSelectedVideo({ url, title })}
+                                isModalOpen={selectedVideo !== null}
                             />
                         ))}
                     </AnimatePresence>
@@ -295,6 +337,48 @@ export default function CinematicVideoCarousel() {
                     </button>
                 </div>
             </div>
+
+            {/* Lightbox Modal */}
+            <AnimatePresence>
+                {selectedVideo && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl"
+                        onClick={() => setSelectedVideo(null)}
+                    >
+                        {/* Close button */}
+                        <button
+                            onClick={() => setSelectedVideo(null)}
+                            className="absolute top-6 right-6 z-[110] w-12 h-12 rounded-full bg-white/10 hover:bg-gold hover:text-black border border-white/20 text-white flex items-center justify-center text-xl transition-all shadow-[0_0_20px_rgba(0,0,0,0.8)]"
+                        >
+                            ✕
+                        </button>
+
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 120 }}
+                            className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.8)] bg-black"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <video
+                                src={selectedVideo.url}
+                                className="w-full h-full object-contain"
+                                controls
+                                autoPlay
+                                playsInline
+                            />
+                            {/* Title bar */}
+                            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none">
+                                <h3 className="font-serif text-white text-xl md:text-2xl drop-shadow-md">{selectedVideo.title}</h3>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
