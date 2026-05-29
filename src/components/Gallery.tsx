@@ -86,7 +86,7 @@ export default function Gallery({ initialCategory = null }: { initialCategory?: 
         { id: "concerts", title: "CONCERTS", image: "/Concert/con 1.jpeg" },
         { id: "celebrities", title: "CELEBRITIES", image: "/Celebrites/cel 2.jpeg" },
         { id: "brands", title: "BRAND SHOOT", image: "/Brand Collabration/DSC04684.jpg" },
-        { id: "albums", title: "ALBUMS", image: "/Own Album/Album 2.jpeg" },
+        { id: "albums", title: "COVER PAGE", image: "/Own Album/Album 2.jpeg" },
     ];
 
     return (
@@ -168,7 +168,7 @@ export default function Gallery({ initialCategory = null }: { initialCategory?: 
                                     </>
                                 ) : (
                                     <>
-                                        ALBUMS
+                                        COVER PAGE
                                     </>
                                 )}
                             </motion.h1>

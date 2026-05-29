@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Albums Gallery | Himali Joshi",
-    description: "Explore the exclusive own album gallery of Himali Joshi, featuring original music and performances.",
+    title: "Cover Page Gallery | Himali Joshi",
+    description: "Explore the exclusive own cover page gallery of Himali Joshi, featuring original music and performances.",
 };
 
 const albumImages = [
@@ -35,7 +35,7 @@ export default function AlbumsGalleryPage() {
                     </Link>
 
                     <h1 className="font-serif text-4xl md:text-6xl mb-6 tracking-tighter uppercase">
-                        ALBUMS
+                        COVER PAGE
                     </h1>
                     <div className="h-px w-24 bg-gradient-to-r from-transparent via-gold to-transparent" />
                 </div>

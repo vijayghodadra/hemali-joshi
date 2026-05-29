@@ -130,7 +130,7 @@ export default function VideosContent() {
                                 description={vid.desc}
                                 onClick={() => setSelectedVideo(getOptimalSrc(vid.src))}
                                 year="2024"
-                                tag="Cinematic"
+                                tag="Cover Page"
                                 poster={(vid as any).poster}
                                 objectFit={(vid as any).objectFit}
                             />
