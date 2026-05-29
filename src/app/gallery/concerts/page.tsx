@@ -13,7 +13,6 @@ const concertImages = [
     "/Concert/con 2.jpeg",
     "/Concert/con 3.jpeg",
     "/Concert/con 4.jpeg",
-    "/assets/concert.jpg",
     "/Concert/con 7.jpeg",
     "/Concert/con 8.jpeg"
 ];
