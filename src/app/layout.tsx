@@ -10,17 +10,22 @@ import "./globals.css";
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const greatVibes = Great_Vibes({
   weight: "400",
   variable: "--font-great-vibes",
   subsets: ["latin"],
+  display: "swap",
 });
 
 // Configure Allura (Halimun alternative)
@@ -28,13 +33,13 @@ const allura = Allura({
   weight: "400",
   variable: "--font-allura",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  // Note: allow user scaling for accessibility (Google mobile-friendly requirement)
 };
 
 export const metadata: Metadata = {
@@ -110,6 +115,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Preconnect for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
+      </head>
       <body
         suppressHydrationWarning
         className={`${playfair.variable} ${inter.variable} ${greatVibes.variable} ${allura.variable} antialiased font-sans bg-black text-white`}

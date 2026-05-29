@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* ===================== PERFORMANCE & SMOOTH SCROLL ===================== */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+
 :root {
   /* Core Colors - Vibrant Update */
   --color-black: #050203;
@@ -78,6 +86,9 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  /* Smooth momentum scroll on iOS */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
   /* Custom Mic cursor - Only hide default on desktop with mouse */
   @media (min-width: 768px) and (pointer: fine) {
     cursor: none;
@@ -145,6 +156,7 @@ button img {
 }
 
 /* Custom Animation Utilities */
+/* ===================== ANIMATION UTILITIES ===================== */
 @layer utilities {
   .animate-spin-slow {
     animation: spin 8s linear infinite;
@@ -155,6 +167,24 @@ button img {
     will-change: transform, opacity;
     backface-visibility: hidden;
     transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Reduce motion for low-power/accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Mobile: disable heavy fixed-position background */
+  @media (max-width: 767px) {
+    .mobile-no-fixed {
+      background-attachment: scroll !important;
+    }
   }
 }
 

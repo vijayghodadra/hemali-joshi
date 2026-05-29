@@ -101,13 +101,15 @@ export default function ArtisticVideoCard({ src, title, description, onClick, ye
                     <img 
                         src={poster}
                         alt={title}
+                        loading="lazy"
+                        decoding="async"
                         className={`h-full w-full ${objectFit === "contain" ? "object-contain bg-black" : `object-cover ${objectPosition}`} transition-transform duration-700 group-hover:scale-105 ${isPlaying ? "opacity-0" : "opacity-100"}`}
                     />
                 ) : (
                     <video
                         src={`${actualSrc}#t=1.0`}
                         className={`h-full w-full ${objectFit === "contain" ? "object-contain bg-black" : `object-cover ${objectPosition}`} transition-transform duration-700 group-hover:scale-105 ${isPlaying ? "opacity-0" : "opacity-100"}`}
-                        preload="metadata"
+                        preload="none"
                     />
                 )}
 
@@ -119,7 +121,7 @@ export default function ArtisticVideoCard({ src, title, description, onClick, ye
                     muted={isMuted}
                     playsInline
                     loop
-                    preload="metadata"
+                    preload="none"
                 />
             </div>
 

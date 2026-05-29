@@ -9,10 +9,12 @@ const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), { ss
 
 export default function ClientGlobalEffects() {
     const [power, setPower] = useState<DevicePower>("high");
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         const currentPower = getDevicePower();
         setPower(currentPower);
+        setMounted(true);
         if (currentPower === "low") {
             document.body.classList.add("low-power");
         } else {
@@ -20,8 +22,11 @@ export default function ClientGlobalEffects() {
         }
     }, []);
 
+    if (!mounted) return <WhatsAppButton />;
+
     return (
         <>
+            {/* Only render heavy effects on high-power (desktop) devices */}
             {power === "high" && <LiquidBackground />}
             {power === "high" && <SplashCursor />}
             <WhatsAppButton />
