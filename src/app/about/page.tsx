@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Award, Music, Star, User, Mic, Heart, Globe, Quote, Trophy, Crown } from "lucide-react";
 import Footer from "@/components/Footer";
 import DynamicPortrait from "@/components/DynamicPortrait";
@@ -153,6 +154,45 @@ export default function AboutPage() {
                             <p className="text-[10px] md:text-sm uppercase tracking-widest text-white font-semibold">{stat.label}</p>
                         </div>
                     ))}
+                </div>
+            </section>
+
+            {/* White Door Production House Section */}
+            <section className="container mx-auto px-6 py-16 md:py-24 border-b border-white/5 bg-gradient-to-b from-black to-[#050505]">
+                <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
+                    {/* Logo Side */}
+                    <div className="w-full md:w-5/12 flex justify-center">
+                        <div className="relative group">
+                            {/* Glowing gold background behind logo */}
+                            <div className="absolute -inset-2 bg-gradient-to-r from-gold via-amber-500 to-gold rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-300"></div>
+                            <div className="relative bg-white p-5 rounded-2xl border border-white/10 flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.8)] transform transition duration-500 group-hover:scale-105">
+                                <Image
+                                    src="/assets/white_door_logo.jpg"
+                                    alt="White Door Production House Logo"
+                                    width={280}
+                                    height={280}
+                                    className="object-contain rounded-xl"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    {/* Text Side */}
+                    <div className="w-full md:w-7/12 space-y-6">
+                        <div className="inline-block px-4 py-1 border border-gold/30 rounded-full text-[10px] uppercase tracking-widest text-gold bg-gold/5">
+                            Executive Producer & Founder
+                        </div>
+                        <h2 className="text-3xl md:text-5xl font-serif text-white leading-tight">
+                            White Door <br className="hidden md:inline" />
+                            <span className="text-gold italic">Production House</span>
+                        </h2>
+                        <p className="text-gray-300 text-lg leading-relaxed font-light text-justify">
+                            Beyond her renowned career as a premier performing artist, Himali Joshi is the proud visionary founder and owner of <strong>White Door Production House</strong>. 
+                            Under this major creative banner, she curates, records, and directs high-quality music albums, musical theatrical events, and cinematic releases.
+                        </p>
+                        <p className="text-gray-400 text-base font-light italic leading-relaxed">
+                            Through White Door Production House, she bridges traditional Gujarati folk heritage with state-of-the-art production values, curating unforgettable artistic experiences globally.
+                        </p>
+                    </div>
                 </div>
             </section>
 
