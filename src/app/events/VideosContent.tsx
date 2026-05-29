@@ -19,7 +19,7 @@ export default function VideosContent() {
         { id: 15, src: "/assets/hitu.mp4", poster: "/assets/hituu.jpeg", title: "Hitu Kanodia", desc: "Appreciation and blessings from the famous superstar actor.", category: "celebrity" },
         { id: 13, src: "/assets/kanodia.mp4", poster: "/assets/mona.jpeg", title: "Mona Thiba Kanodia", desc: "A beautiful review and appreciation from the renowned actress.", objectFit: "contain" as const, category: "celebrity" },
         { id: 14, src: "/assets/News.mp4", poster: "/assets/media_uk.jpg", title: "Media spot in UK", desc: "Featured in news media for her unique garba releases and musical achievements.", objectFit: "contain" as const, category: "celebrity" },
-        { id: 17, src: "/assets/au.mp4", poster: "/assets/Client1.png", title: "Audience Love", desc: "Unconditional love and support from our beautiful audience.", category: "audience" },
+        { id: 17, src: "/assets/au.mp4", poster: "/assets/cc.jpeg", title: "Audience Love", desc: "Unconditional love and support from our beautiful audience.", objectFit: "contain" as const, category: "audience" },
         { id: 16, src: "/assets/cli.mp4", poster: "/assets/Client.png", title: "Audience Energy", desc: "Amazing energy and love from our wonderful audience.", category: "audience" },
         { id: 11, src: "/assets/Audience.mp4", poster: "/assets/Client1.png", title: "Fan Moments", desc: "A glimpse of the love and support from amazing fans.", category: "audience" },
         { id: 12, src: "/assets/vid2.mp4", poster: "/assets/splash-full.jpg", title: "Fan Moments", desc: "Pure joy and unmatched support from our lovely audience during the live show.", category: "audience" },
