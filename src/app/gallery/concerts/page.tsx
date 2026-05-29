@@ -14,7 +14,9 @@ const concertImages = [
     "/Concert/con 3.jpeg",
     "/Concert/con 4.jpeg",
     "/Concert/con 7.jpeg",
-    "/Concert/con 8.jpeg"
+    "/Concert/con 8.jpeg",
+    "/Concert/con 9.jpeg",
+    "/Concert/con 10.jpeg"
 ];
 
 export default function ConcertsGalleryPage() {
