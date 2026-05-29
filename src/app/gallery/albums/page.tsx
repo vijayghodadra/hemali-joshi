@@ -9,12 +9,10 @@ export const metadata: Metadata = {
 };
 
 const albumImages = [
-    { src: "/Own Album/Album 2.jpeg", title: "Portrait Session" },
     { src: "/Own Album/Album 3.jpeg", title: "Musical Harmony" },
     { src: "/Own Album/Album 4.jpeg", title: "Vocal Essence" },
     { src: "/Own Album/Album 5.jpeg", title: "Studio Vibe" },
     { src: "/Own Album/Album 6.jpeg", title: "Soulful Melody" },
-    { src: "/Own Album/Album 7.jpeg", title: "Elegant Performance" },
     { src: "/Own Album/Album 8.jpeg", title: "Artist Spotlight" },
     { src: "/Own Album/Album 9.jpeg", title: "Backstage Magic" },
     { src: "/Own Album/Album 10.jpeg", title: "Rhythm & Blues" },
