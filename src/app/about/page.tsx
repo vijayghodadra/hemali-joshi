@@ -322,7 +322,7 @@ export default function AboutPage() {
                     <p className="text-gray-400 mb-8 font-light italic">"Music is the soundtrack of your life!"</p>
 
                     <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-xl w-full px-4">
-                        <a href="mailto:whitedoorproductionhouse14@gmail.com" className="hover:text-gold transition-colors text-sm sm:text-base md:text-xl break-all text-center">whitedoorproductionhouse14@gmail.com</a>
+                        <a href="mailto:inquiry.himalijoshi@gmail.com" className="hover:text-gold transition-colors text-sm sm:text-base md:text-xl break-all text-center">inquiry.himalijoshi@gmail.com</a>
                         <span className="hidden md:block text-gold">•</span>
                         <a href="tel:+916359012805" className="hover:text-gold transition-colors text-base md:text-xl">+91 6359 012 805</a>
                     </div>
