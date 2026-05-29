@@ -16,7 +16,7 @@ export default function VideosContent() {
         { id: 3, src: "/assets/Rehearsal.mp4", poster: "/assets/Poster10.png", title: "Album Launch", desc: "Behind the scenes access to the artist's life.", category: "performance" },
         { id: 4, src: "/assets/Gal/videos/WEDDING REEL (19-12-2024)-1.MP4", poster: "/assets/wedding_vibes.jpg", title: "Wedding Vibes", desc: "Magical musical moments from recent weddings.", objectFit: "contain" as const, category: "performance" },
         { id: 7, src: "/assets/Gal/videos/DRFT 4 .MP4", poster: "/assets/Poster11.png", title: "Musical Journey", desc: "Our mission is simple: to transform every event into a unique musical journey that leaves lasting impressions and cherished memories.", category: "performance" },
-        { id: 15, src: "/assets/hitu.mp4", title: "Hitu Kanodia", desc: "Appreciation and blessings from the famous superstar actor.", category: "celebrity" },
+        { id: 15, src: "/assets/hitu.mp4", poster: "/assets/hituu.jpeg", title: "Hitu Kanodia", desc: "Appreciation and blessings from the famous superstar actor.", category: "celebrity" },
         { id: 13, src: "/assets/kanodia.mp4", poster: "/assets/Client.png", title: "Mona Thiba Kanodia", desc: "A beautiful review and appreciation from the renowned actress.", category: "celebrity" },
         { id: 14, src: "/assets/News.mp4", poster: "/assets/media_uk.jpg", title: "Media spot in UK", desc: "Featured in news media for her unique garba releases and musical achievements.", objectFit: "contain" as const, category: "celebrity" },
         { id: 11, src: "/assets/Audience.mp4", poster: "/assets/Client1.png", title: "Fan Moments", desc: "A glimpse of the love and support from amazing fans.", category: "audience" },
