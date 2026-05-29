@@ -11,15 +11,16 @@ export default function VideosContent() {
     const [isMuted, setIsMuted] = useState(true);
 
     const videos = [
-        { id: 1, src: "/assets/Gal/videos/319267f0-a223-4356-b981-c6d6cd42cedf.MP4", poster: "/assets/concert.jpg", title: "Live Concert in UK", desc: "Experience the energy of the live stage performance." },
-        { id: 2, src: "/assets/Gal/videos/cbbb1f8b-f7fa-4624-9382-f8d163932229.MP4", poster: "/assets/splash-poster.jpg", title: "Bollywood Night", desc: "A raw, acoustic rendition of classic hits." },
-        { id: 3, src: "/assets/Rehearsal.mp4", poster: "/assets/Poster10.png", title: "Album Launch", desc: "Behind the scenes access to the artist's life." },
-        { id: 4, src: "/assets/Gal/videos/WEDDING REEL (19-12-2024)-1.MP4", poster: "/assets/wedding_vibes.jpg", title: "Wedding Vibes", desc: "Magical musical moments from recent weddings.", objectFit: "contain" },
-        { id: 7, src: "/assets/Gal/videos/DRFT 4 .MP4", poster: "/assets/Poster11.png", title: "Musical Journey", desc: "Our mission is simple: to transform every event into a unique musical journey that leaves lasting impressions and cherished memories." },
-        { id: 13, src: "/assets/kanodia.mp4", poster: "/assets/Client.png", title: "Mona Thiba Kanodia", desc: "A beautiful review and appreciation from the renowned actress." },
-        { id: 14, src: "/assets/News.mp4", poster: "/assets/media_uk.jpg", title: "Media spot in UK", desc: "Featured in news media for her unique garba releases and musical achievements.", objectFit: "contain" },
-        { id: 11, src: "/assets/Audience.mp4", poster: "/assets/Client1.png", title: "Fan Moments", desc: "A glimpse of the love and support from amazing fans." },
-        { id: 12, src: "/assets/vid2.mp4", poster: "/assets/splash-full.jpg", title: "Fan Moments", desc: "Pure joy and unmatched support from our lovely audience during the live show." },
+        { id: 1, src: "/assets/Gal/videos/319267f0-a223-4356-b981-c6d6cd42cedf.MP4", poster: "/assets/concert.jpg", title: "Live Concert in UK", desc: "Experience the energy of the live stage performance.", category: "performance" },
+        { id: 2, src: "/assets/Gal/videos/cbbb1f8b-f7fa-4624-9382-f8d163932229.MP4", poster: "/assets/splash-poster.jpg", title: "Bollywood Night", desc: "A raw, acoustic rendition of classic hits.", category: "performance" },
+        { id: 3, src: "/assets/Rehearsal.mp4", poster: "/assets/Poster10.png", title: "Album Launch", desc: "Behind the scenes access to the artist's life.", category: "performance" },
+        { id: 4, src: "/assets/Gal/videos/WEDDING REEL (19-12-2024)-1.MP4", poster: "/assets/wedding_vibes.jpg", title: "Wedding Vibes", desc: "Magical musical moments from recent weddings.", objectFit: "contain" as const, category: "performance" },
+        { id: 7, src: "/assets/Gal/videos/DRFT 4 .MP4", poster: "/assets/Poster11.png", title: "Musical Journey", desc: "Our mission is simple: to transform every event into a unique musical journey that leaves lasting impressions and cherished memories.", category: "performance" },
+        { id: 15, src: "/assets/hitu.mp4", title: "Hitu Kanodia", desc: "Appreciation and blessings from the famous superstar actor.", category: "celebrity" },
+        { id: 13, src: "/assets/kanodia.mp4", poster: "/assets/Client.png", title: "Mona Thiba Kanodia", desc: "A beautiful review and appreciation from the renowned actress.", category: "celebrity" },
+        { id: 14, src: "/assets/News.mp4", poster: "/assets/media_uk.jpg", title: "Media spot in UK", desc: "Featured in news media for her unique garba releases and musical achievements.", objectFit: "contain" as const, category: "celebrity" },
+        { id: 11, src: "/assets/Audience.mp4", poster: "/assets/Client1.png", title: "Fan Moments", desc: "A glimpse of the love and support from amazing fans.", category: "audience" },
+        { id: 12, src: "/assets/vid2.mp4", poster: "/assets/splash-full.jpg", title: "Fan Moments", desc: "Pure joy and unmatched support from our lovely audience during the live show.", category: "audience" },
     ];
 
     // Featured video logic
@@ -121,7 +122,7 @@ export default function VideosContent() {
                         <span className="text-xs uppercase tracking-widest text-white/40 hidden md:block">Highlights from Live Shows</span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {videos.filter((_, i) => i < 4).map((vid) => (
+                        {videos.filter((vid) => vid.category === "performance" && vid.id !== featuredVideo.id).map((vid) => (
                             <ArtisticVideoCard
                                 key={vid.id}
                                 src={vid.src}
@@ -142,7 +143,7 @@ export default function VideosContent() {
                         <h3 className="text-3xl md:text-4xl font-serif text-white">What Celebrities <span className="italic text-gold">Say</span></h3>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {videos.filter((_, i) => i === 5 || i === 6).map((vid) => (
+                        {videos.filter((vid) => vid.category === "celebrity").map((vid) => (
                             <ArtisticVideoCard
                                 key={vid.id}
                                 src={vid.src}
@@ -163,7 +164,7 @@ export default function VideosContent() {
                         <h3 className="text-3xl md:text-4xl font-serif text-white">Audience <span className="italic text-gold">Love</span></h3>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {videos.filter((_, i) => i >= 7).map((vid) => (
+                        {videos.filter((vid) => vid.category === "audience").map((vid) => (
                             <ArtisticVideoCard
                                 key={vid.id}
                                 src={vid.src}
