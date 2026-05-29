@@ -25,7 +25,7 @@ export default function ConcertsGalleryPage() {
             <div className="w-full px-4 md:px-8 max-w-[1600px] mx-auto">
                 {/* Header Section */}
                 <div className="mb-16 text-center relative flex flex-col items-center">
-                    <Link href="/gallery" className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-2 text-gold/60 hover:text-gold transition-colors group">
+                    <Link href="/gallery" className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 flex items-center gap-2 text-gold/60 hover:text-gold transition-colors group">
                         <span className="group-hover:-translate-x-1 transition-transform">←</span>
                         <span className="hidden md:inline tracking-widest text-sm font-bold uppercase">Back to Hub</span>
                     </Link>

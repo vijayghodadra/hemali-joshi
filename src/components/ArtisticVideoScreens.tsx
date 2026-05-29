@@ -70,6 +70,12 @@ export default function ArtisticVideoScreens() {
     const vintageTvX = useTransform(smoothProgress, [0.3, 0.6], [50, 0]);
     const vintageTvRotate = useTransform(smoothProgress, [0.3, 0.6], [-5, 2]);
 
+    const vintageTvFilter = useTransform(
+        [vintageTvSepia, vintageTvBrightness, vintageTvOpacity],
+        ([sepiaVal, brightnessVal, opacityVal]) =>
+            `contrast(1.25) sepia(${sepiaVal}) brightness(${brightnessVal}) opacity(${opacityVal})`
+    );
+
     return (
         <section ref={containerRef} className="py-24 bg-black relative overflow-hidden">
             {/* Ambient Background Glows */}
@@ -223,7 +229,7 @@ export default function ArtisticVideoScreens() {
                                     <div className="relative pt-[75%] bg-black rounded-xl overflow-hidden border border-white/5 z-10 box-shadow-[inset_0_0_20px_rgba(255,255,255,0.2)]">
                                         <motion.img
                                             style={isMobile ? {} : {
-                                                filter: useTransform(vintageTvSepia, s => `contrast(1.25) sepia(${s}) brightness(${vintageTvBrightness.get()}) opacity(${vintageTvOpacity.get()})`),
+                                                filter: vintageTvFilter,
                                             }}
                                             src="/assets/img1.png"
                                             alt="Vintage TV Video"
